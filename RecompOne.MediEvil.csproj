@@ -17,7 +17,7 @@
     <EmbeddedResource Include="assets/languages.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../RecompOne/RecompOne.Runtime/RecompOne.Runtime.csproj" UndefineProperties="OutputType" />
+    <ProjectReference Include="/RecompOne/RecompOne.Runtime/RecompOne.Runtime.csproj" UndefineProperties="OutputType" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />

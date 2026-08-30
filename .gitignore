@@ -1,0 +1,13 @@
+bin/
+obj/
+publish/
+generated/
+disc/
+*.sav
+settings.json
+interface.ini
+.idea/
+.vs/
+debug_dump/
+disc/
+mods/.cache

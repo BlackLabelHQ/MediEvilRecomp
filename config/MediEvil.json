@@ -1,0 +1,282 @@
+{
+    "game": {
+        "id": "SCUS-942.27",
+        "name": "MediEvil",
+        "output": "../generated"
+    },
+    "cue": "../disc/MediEvil (USA).cue",
+    "funcMap": "funcmaps/main.json",
+    "debug": false,
+    "pointerScan": true,
+    "disableHle": [],
+    "overlays": [
+        {
+            "name": "game",
+            "file": "MEDIEVIL.EXE",
+            "funcMap": "funcmaps/game.json",
+            "skip": 2048,
+            "base": "0x80021CA4",
+            "functions": [
+                {
+                    "address": "80099A54",
+                    "name": "func_80099A54"
+                }
+            ]
+        },
+        {
+            "name": "ac",
+            "file": "OVERLAYS/AC.BIN",
+            "funcMap": "funcmaps/ac.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "ag",
+            "file": "OVERLAYS/AG.BIN",
+            "funcMap": "funcmaps/ag.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "cc",
+            "file": "OVERLAYS/CC.BIN",
+            "funcMap": "funcmaps/cc.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "ch",
+            "file": "OVERLAYS/CH.BIN",
+            "funcMap": "funcmaps/ch.json",
+            "base": "0x80010000",
+            "functions": [
+                {
+                    "address": "0x800100E0"
+                }
+            ]
+        },
+        {
+            "name": "cr",
+            "file": "OVERLAYS/CR.BIN",
+            "funcMap": "funcmaps/cr.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "credits",
+            "file": "OVERLAYS/CREDITS.BIN",
+            "funcMap": "funcmaps/credits.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "dc",
+            "file": "OVERLAYS/DC.BIN",
+            "funcMap": "funcmaps/dc.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "ee",
+            "file": "OVERLAYS/EE.BIN",
+            "funcMap": "funcmaps/ee.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "eh",
+            "file": "OVERLAYS/EH.BIN",
+            "funcMap": "funcmaps/eh.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "gg",
+            "file": "OVERLAYS/GG.BIN",
+            "funcMap": "funcmaps/gg.json",
+            "base": "0x80010000",
+            "functions": [
+                {
+                    "address": "0x80010078"
+                }
+            ]
+        },
+        {
+            "name": "gs",
+            "file": "OVERLAYS/GS.BIN",
+            "funcMap": "funcmaps/gs.json",
+            "base": "0x80010000",
+            "functions": [
+                {
+                    "address": "0x80010148"
+                }
+            ]
+        },
+        {
+            "name": "gy1",
+            "file": "OVERLAYS/GY1.BIN",
+            "funcMap": "funcmaps/gy1.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "gy2",
+            "file": "OVERLAYS/GY2.BIN",
+            "funcMap": "funcmaps/gy2.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "hh",
+            "file": "OVERLAYS/HH.BIN",
+            "funcMap": "funcmaps/hh.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "hr",
+            "file": "OVERLAYS/HR.BIN",
+            "funcMap": "funcmaps/hr.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "ia",
+            "file": "OVERLAYS/IA.BIN",
+            "funcMap": "funcmaps/ia.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "la",
+            "file": "OVERLAYS/LA.BIN",
+            "funcMap": "funcmaps/la.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "landmap",
+            "file": "OVERLAYS/LANDMAP.BIN",
+            "funcMap": "funcmaps/landmap.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "pd",
+            "file": "OVERLAYS/PD.BIN",
+            "funcMap": "funcmaps/pd.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "pg",
+            "file": "OVERLAYS/PG.BIN",
+            "funcMap": "funcmaps/pg.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "ps",
+            "file": "OVERLAYS/PS.BIN",
+            "funcMap": "funcmaps/ps.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "sf",
+            "file": "OVERLAYS/SF.BIN",
+            "funcMap": "funcmaps/sf.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "sv",
+            "file": "OVERLAYS/SV.BIN",
+            "funcMap": "funcmaps/sv.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "td",
+            "file": "OVERLAYS/TD.BIN",
+            "funcMap": "funcmaps/td.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "tl",
+            "file": "OVERLAYS/TL.BIN",
+            "funcMap": "funcmaps/tl.json",
+            "base": "0x80010000",
+            "functions": []
+        },
+        {
+            "name": "zl",
+            "file": "OVERLAYS/ZL.BIN",
+            "funcMap": "funcmaps/zl.json",
+            "base": "0x80010000",
+            "functions": []
+        }
+    ],
+    "patches": [
+        {
+            "overlay": "game",
+            "address": "8005176C",
+            "target": "Recompiled.TerrainPatch.Capture",
+            "mode": "pre"
+        },
+        {
+            "overlay": "game",
+            "address": "80021CEC",
+            "target": "Recompiled.CullPatch.func_80021CEC",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "80021DEC",
+            "target": "Recompiled.CullPatch.func_80021DEC",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "80022000",
+            "target": "Recompiled.CullPatch.func_80022000",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "800223F0",
+            "target": "Recompiled.CullPatch.func_800223F0",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "80024A90",
+            "target": "Recompiled.CullPatch.func_80024A90",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "80025260",
+            "target": "Recompiled.CullPatch.func_80025260",
+            "mode": "replace"
+        },
+        {
+            "overlay": "tl",
+            "address": "80010808",
+            "target": "Recompiled.CullPatch.func_80010808_tl",
+            "mode": "replace"
+        }
+    ],
+    "functions": [],
+    "relocations": [
+        {
+            "overlay": "game",
+            "comment": "the game uses a fixed table of 100 grid units, and there is an array right after it that wont let me expand it for widescreen, this will put it on another location so i can increase the size",
+            "name": "gapsPolySquaresCaptured",
+            "address": "800EEA24",
+            "size": "0x194",
+            "to": "80300000"
+        }
+    ]
+}

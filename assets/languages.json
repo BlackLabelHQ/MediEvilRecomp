@@ -1,0 +1,29 @@
+{
+    "strings": {
+        "widescreen.aspect": {
+            "en": "Aspect ratio",
+            "pt-BR": "Proporção de tela",
+            "es-419": "Relación de aspecto"
+        },
+        "widescreen.original": {
+            "en": "Original",
+            "pt-BR": "Original",
+            "es-419": "Original"
+        },
+        "widescreen.custom": {
+            "en": "Custom",
+            "pt-BR": "Personalizada",
+            "es-419": "Personalizado"
+        },
+        "render.draw_distance": {
+            "en": "Draw distance",
+            "pt-BR": "Distancia de desenho",
+            "es-419": "Distancia de dibujado"
+        },
+        "render.draw_distance_hint": {
+            "en": "Increases the terrain view distance",
+            "pt-BR": "Aumenta a distancia de visao do terreno",
+            "es-419": "Aumenta la distancia de vision del terreno"
+        }
+    }
+}

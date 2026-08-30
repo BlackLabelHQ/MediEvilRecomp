@@ -9,5 +9,5 @@ interface.ini
 .idea/
 .vs/
 debug_dump/
-disc/
 mods/.cache
+recordings/

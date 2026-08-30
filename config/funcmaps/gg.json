@@ -1,138 +1,138 @@
 {
   "functions": [
     {
-      "address": "0x800A0040",
-      "name": "func_800A0040",
+      "address": "0x80010040",
+      "name": "func_80010040",
       "size": 100
     },
     {
-      "address": "0x800A00A4",
-      "name": "func_800A00A4",
+      "address": "0x800100A4",
+      "name": "func_800100A4",
       "size": 316
     },
     {
-      "address": "0x800A01E0",
-      "name": "func_800A01E0",
+      "address": "0x800101E0",
+      "name": "func_800101E0",
       "size": 352
     },
     {
-      "address": "0x800A0340",
-      "name": "func_800A0340",
+      "address": "0x80010340",
+      "name": "func_80010340",
       "size": 164
     },
     {
-      "address": "0x800A03E4",
-      "name": "func_800A03E4",
+      "address": "0x800103E4",
+      "name": "func_800103E4",
       "size": 836
     },
     {
-      "address": "0x800A0728",
-      "name": "func_800A0728",
+      "address": "0x80010728",
+      "name": "func_80010728",
       "size": 72
     },
     {
-      "address": "0x800A0770",
-      "name": "func_800A0770",
+      "address": "0x80010770",
+      "name": "func_80010770",
       "size": 256
     },
     {
-      "address": "0x800A0870",
-      "name": "func_800A0870",
+      "address": "0x80010870",
+      "name": "func_80010870",
       "size": 92
     },
     {
-      "address": "0x800A08CC",
-      "name": "func_800A08CC",
+      "address": "0x800108CC",
+      "name": "func_800108CC",
       "size": 476
     },
     {
-      "address": "0x800A0AA8",
-      "name": "func_800A0AA8",
+      "address": "0x80010AA8",
+      "name": "func_80010AA8",
       "size": 156
     },
     {
-      "address": "0x800A0B44",
-      "name": "func_800A0B44",
+      "address": "0x80010B44",
+      "name": "func_80010B44",
       "size": 132
     },
     {
-      "address": "0x800A0BC8",
-      "name": "func_800A0BC8",
+      "address": "0x80010BC8",
+      "name": "func_80010BC8",
       "size": 140
     },
     {
-      "address": "0x800A0C54",
-      "name": "func_800A0C54",
+      "address": "0x80010C54",
+      "name": "func_80010C54",
       "size": 152
     },
     {
-      "address": "0x800A0CEC",
-      "name": "func_800A0CEC",
+      "address": "0x80010CEC",
+      "name": "func_80010CEC",
       "size": 64
     },
     {
-      "address": "0x800A0D2C",
-      "name": "func_800A0D2C",
+      "address": "0x80010D2C",
+      "name": "func_80010D2C",
       "size": 344
     },
     {
-      "address": "0x800A0E84",
-      "name": "func_800A0E84",
+      "address": "0x80010E84",
+      "name": "func_80010E84",
       "size": 524
     },
     {
-      "address": "0x800A1090",
-      "name": "func_800A1090",
+      "address": "0x80011090",
+      "name": "func_80011090",
       "size": 72
     },
     {
-      "address": "0x800A10D8",
-      "name": "func_800A10D8",
+      "address": "0x800110D8",
+      "name": "func_800110D8",
       "size": 376
     },
     {
-      "address": "0x800A1250",
-      "name": "func_800A1250",
+      "address": "0x80011250",
+      "name": "func_80011250",
       "size": 392
     },
     {
-      "address": "0x800A13D8",
-      "name": "func_800A13D8",
+      "address": "0x800113D8",
+      "name": "func_800113D8",
       "size": 64
     },
     {
-      "address": "0x800A1418",
-      "name": "func_800A1418",
+      "address": "0x80011418",
+      "name": "func_80011418",
       "size": 188
     },
     {
-      "address": "0x800A14D4",
-      "name": "func_800A14D4",
+      "address": "0x800114D4",
+      "name": "func_800114D4",
       "size": 108
     },
     {
-      "address": "0x800A1540",
-      "name": "func_800A1540",
+      "address": "0x80011540",
+      "name": "func_80011540",
       "size": 628
     },
     {
-      "address": "0x800A17B4",
-      "name": "func_800A17B4",
+      "address": "0x800117B4",
+      "name": "func_800117B4",
       "size": 252
     },
     {
-      "address": "0x800A18B0",
-      "name": "func_800A18B0",
+      "address": "0x800118B0",
+      "name": "func_800118B0",
       "size": 76
     },
     {
-      "address": "0x800A18FC",
-      "name": "func_800A18FC",
+      "address": "0x800118FC",
+      "name": "func_800118FC",
       "size": 264
     },
     {
-      "address": "0x800A1A04",
-      "name": "func_800A1A04",
+      "address": "0x80011A04",
+      "name": "func_80011A04",
       "size": 68
     }
   ],

@@ -7,7 +7,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
-APP="$DIR/MediEvil"
+APP="$DIR/medievil"
 CHANNEL="10.0"
 NEEDED="Microsoft.NETCore.App 10."
 LOCAL_ROOT="${DOTNET_INSTALL_DIR:-$HOME/.dotnet}"
@@ -75,6 +75,6 @@ export DOTNET_ROOT="$ROOT"
 export PATH="$ROOT:$PATH"
 
 [ -x "$APP" ] || chmod +x "$APP" 2>/dev/null || true
-[ -x "$APP" ] || die "MediEvil not found next to this script"
+[ -x "$APP" ] || die "medievil not found next to this script"
 
 exec "$APP" "$@"

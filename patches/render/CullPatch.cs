@@ -381,10 +381,10 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 2000 ? 1u : 0u;
         if (c.T2 != 0u) {
-            c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+            c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
             goto L80022110;
         }
-        c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+        c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T9 = c.A0 & c.FP;
             goto L80022160;
@@ -858,10 +858,10 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
-            c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+            c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
             goto L800227A4;
         }
-        c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+        c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T9 = c.A0 & c.FP;
             goto L800227CC;
@@ -1340,10 +1340,10 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 2000 ? 1u : 0u;
         if (c.T2 != 0u) {
-            c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+            c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
             goto L80022110;
         }
-        c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+        c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T9 = c.A0 & c.FP;
             goto L80022160;
@@ -1823,10 +1823,10 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
-            c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+            c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
             goto L800227A4;
         }
-        c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+        c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T9 = c.A0 & c.FP;
             goto L800227CC;
@@ -2337,10 +2337,10 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
-            c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+            c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
             goto L800227A4;
         }
-        c.T2 = (int)c.T0 < 4096 ? 1u : 0u;
+        c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T9 = c.A0 & c.FP;
             goto L800227CC;

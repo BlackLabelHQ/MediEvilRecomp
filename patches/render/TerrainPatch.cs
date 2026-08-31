@@ -19,9 +19,16 @@ public static class TerrainPatch
     const uint OldViewDistance = FreeTerrData + 0x26u;
     
     const uint MainViewPortSlot = 0x5E0u;
+    const uint VpOtSize = 0x68u;
     const uint VpOtSizeBits = 0x6Au;
     const uint VpOtzShift = 0x6Cu;
     const uint VpViewDistance = 0x6Eu;
+    const uint VpOt0 = 0x70u;
+    const uint VpOt1 = 0x74u;
+    const uint VpWorkOt = 0x78u;
+
+    const uint OtBase = 0x80380000u;
+    const uint OtStride = 0x10000u;
     
     const uint TerrainFog = 0x800F17B8u;
     const uint FogTablePtr = TerrainFog + 0x00u;
@@ -47,15 +54,25 @@ public static class TerrainPatch
     const uint PrimSlack = 128u;
     
     public static float DrawDistanceScale = 1f;
+    public static bool GrowOt;
     
     static short _baseDistance;
     static int _baseReach;
+    static int _baseOtBits;
+    static int _shiftDelta;
+
+    public const int BaseSubdivOtz = 4096;
+
+    public static int SubdivOtz => BaseSubdivOtz >> _shiftDelta;
     
     public static void Register()
     {
         Event.AddListener<RuntimeReadyEvent>(_ =>
-            DrawDistanceScale = RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f));
-        Event.AddListener<OverlayLoadedEvent>(_ => { _baseDistance = 0; _baseReach = 0; });
+        {
+            DrawDistanceScale = RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f);
+            GrowOt = RecompOne.Runtime.Runtime.View.GetBool("DrawDistanceGrowOt");
+        });
+        Event.AddListener<OverlayLoadedEvent>(_ => { _baseDistance = 0; _baseReach = 0; _baseOtBits = 0; _shiftDelta = 0; });
     }
     
     public static void Capture(CpuContext c, IMemory m)
@@ -111,14 +128,48 @@ public static class TerrainPatch
         int wanted = _baseReach;
         while (wanted < 0x8000 && wanted * 2 <= _baseReach * DrawDistanceScale) wanted *= 2;
 
+        if (_baseOtBits == 0) _baseOtBits = m.ReadU16(viewport + VpOtSizeBits);
+
         if (wanted != reach)
         {
-            int bits = m.ReadU16(viewport + VpOtSizeBits);
+            int delta = Log2(wanted) - Log2(_baseReach);
+
+            if (GrowOt && TryGrowOt(m, viewport, delta))
+            {
+                _shiftDelta = 0;
+            }
+            else
+            {
+                m.WriteU16(viewport + VpOtzShift, (ushort)(Log2(wanted) - _baseOtBits));
+                _shiftDelta = delta;
+            }
+
             m.WriteU16(viewport + VpViewDistance, (ushort)wanted);
-            m.WriteU16(viewport + VpOtzShift, (ushort)(Log2(wanted) - bits));
             reach = wanted;
         }
+
         return reach;
+    }
+
+    static bool TryGrowOt(IMemory m, uint viewport, int delta)
+    {
+        if (delta <= 0 || _baseOtBits <= 0) return false;
+
+        int bits = _baseOtBits + delta;
+        uint size = 1u << bits;
+        if (size * 4u > OtStride) return false;
+
+        uint work = m.ReadU32(viewport + VpWorkOt);
+        uint ot0 = m.ReadU32(viewport + VpOt0);
+        uint ot1 = m.ReadU32(viewport + VpOt1);
+        if (work != ot0 && work != ot1) return false;
+
+        m.WriteU16(viewport + VpOtSizeBits, (ushort)bits);
+        m.WriteU16(viewport + VpOtSize, (ushort)size);
+        m.WriteU32(viewport + VpOt0, OtBase);
+        m.WriteU32(viewport + VpOt1, OtBase + OtStride);
+        m.WriteU32(viewport + VpWorkOt, work == ot0 ? OtBase : OtBase + OtStride);
+        return true;
     }
 
     static void Fog(IMemory m, int distance)

@@ -71,14 +71,23 @@ public static class CullPatch
         mem.WriteU32(RenderPolyPtr, RenderPtrBase);
         c.SP = c.SP - 0xB0u;
         mem.WriteU32((c.SP + 0x10u), c.S0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(16, (c.SP + 0x10u), c.S0);
         mem.WriteU32((c.SP + 0x14u), c.S1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(17, (c.SP + 0x14u), c.S1);
         mem.WriteU32((c.SP + 0x18u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.SP + 0x18u), c.S2);
         mem.WriteU32((c.SP + 0x1Cu), c.S3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(19, (c.SP + 0x1Cu), c.S3);
         mem.WriteU32((c.SP + 0x20u), c.S4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(20, (c.SP + 0x20u), c.S4);
         mem.WriteU32((c.SP + 0x24u), c.S5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(21, (c.SP + 0x24u), c.S5);
         mem.WriteU32((c.SP + 0x28u), c.S6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(22, (c.SP + 0x28u), c.S6);
         mem.WriteU32((c.SP + 0x2Cu), c.S7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(23, (c.SP + 0x2Cu), c.S7);
         mem.WriteU32((c.SP + 0x30u), c.FP);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(30, (c.SP + 0x30u), c.FP);
         c.V0 = 0x800E0000u;
         c.T0 = 0x1F800000u;
         c.T1 = 0x800E0000u;
@@ -112,9 +121,13 @@ public static class CullPatch
         c.T3 = mem.ReadU32((c.V0 + 0x30u));
         c.S2 = 0u;
         mem.WriteU32((c.SP + 0x34u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x34u), c.T1);
         mem.WriteU32((c.SP + 0x40u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.SP + 0x40u), c.T4);
         mem.WriteU32((c.SP + 0x38u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x38u), c.T2);
         mem.WriteU32((c.SP + 0x3Cu), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.SP + 0x3Cu), c.T3);
         c.S6 = 0x09000000u;
         c.S7 = 0x0C000000u;
         c.FP = 0x00FF0000u;
@@ -122,7 +135,9 @@ public static class CullPatch
         c.T6 = mem.ReadU32((c.V0 + 0x14u));
         c.T7 = mem.ReadU32((c.V0 + 0x10u));
         mem.WriteU32((c.SP + 0x58u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.SP + 0x58u), c.T6);
         mem.WriteU32((c.SP + 0x5Cu), c.T7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(15, (c.SP + 0x5Cu), c.T7);
         L80021DC4: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
         c.T0 = mem.ReadU32((c.SP + 0x3Cu));
@@ -135,7 +150,9 @@ public static class CullPatch
         c.A3 = mem.ReadU32((c.T1 + 0x4u));
         c.T1 = c.T1 + 0x8u;
         mem.WriteU32((c.SP + 0x3Cu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x3Cu), c.T0);
         mem.WriteU32((c.SP + 0x38u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x38u), c.T1);
         L80021DEC: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
         if ((int)c.S1 <= 0) {
@@ -179,8 +196,11 @@ public static class CullPatch
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x44u), c.T0);
         mem.WriteU32((c.SP + 0x4Cu), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x4Cu), c.T2);
         mem.WriteU32((c.SP + 0x48u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x48u), c.T1);
         RecompOne.Runtime.Gte.Nclip();
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
@@ -191,20 +211,27 @@ public static class CullPatch
         c.T1 = (int)c.S2 < (int)c.T2 ? 1u : 0u;
         if (c.T1 == 0u) {
             c.T0 = RecompOne.Runtime.Gte.Read(24);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
             goto L80022A80;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         c.T5 = 0xFF000000u;
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
         c.T5 = c.T5 | CullMaskX;
         if ((int)c.T0 <= 0) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80021DEC;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(12);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 12, c.T1);
         c.T2 = RecompOne.Runtime.Gte.Read(13);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 13, c.T2);
         c.T3 = RecompOne.Runtime.Gte.Read(14);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(11, 14, c.T3);
         c.T7 = CullBias(c.T1) & c.T5;
         c.T7 = CullBias(c.T2) & c.T7;
         c.T7 = CullBias(c.T3) & c.T7;
@@ -212,10 +239,15 @@ public static class CullPatch
             goto L80021DEC;
         }
         mem.WriteU32((c.A0 + 0x8u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.A0 + 0x8u), c.T1);
         mem.WriteU32((c.A0 + 0x14u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.A0 + 0x14u), c.T2);
         mem.WriteU32((c.A0 + 0x20u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.A0 + 0x20u), c.T3);
         c.T0 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 17, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 18, c.T1);
         c.At = (int)c.T0 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -225,6 +257,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80021EFC: ;
         c.T1 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 19, c.T1);
         c.At = (int)c.T1 < (int)c.T2 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -248,7 +281,9 @@ public static class CullPatch
             goto L80021F78;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 17, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 18, c.T1);
         c.At = (int)c.T1 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -258,6 +293,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80021F58: ;
         c.T1 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 19, c.T1);
         c.At = (int)c.T2 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -274,6 +310,7 @@ public static class CullPatch
         L80021F80: ;
         RecompOne.Runtime.Gte.Avsz3();
         c.T0 = RecompOne.Runtime.Gte.Read(7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 7, c.T0);
         c.T0 = (uint)((int)c.T0 >> (int)(c.S3 & 31u));
         L80021F90: ;
         c.T1 = c.S4 - 0x3u;
@@ -291,9 +328,11 @@ public static class CullPatch
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
         mem.WriteU32(c.T1, c.A1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(5, c.T1, c.A1);
         mem.WriteU16((c.A1 + 0xAu), (ushort)c.T9);
         c.T1 = c.T1 + 0x4u;
         mem.WriteU32((c.SP + 0x5Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x5Cu), c.T1);
         c.S2 = c.S2 + 0x1u;
         c.T6 = mem.ReadU16((c.A1 + 0x8u));
         c.T5 = mem.ReadU32((c.SP + 0x34u));
@@ -326,6 +365,7 @@ public static class CullPatch
         c.T3 = c.T3 << 13;
         c.T4 = c.T4 << 19;
         c.T2 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 17, c.T2);
         c.At = c.At | c.T1;
         c.T2 = (uint)((int)c.T2 >> 5);
         c.At = c.At | c.T3;
@@ -345,6 +385,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 18, c.T2);
         mem.WriteU32((c.A0 + 0x4u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -362,6 +403,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         mem.WriteU32((c.A0 + 0x10u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -379,6 +421,7 @@ public static class CullPatch
         L800220F8: ;
         RecompOne.Runtime.Gte.Execute(0x4A780010u);
         mem.WriteU32((c.SP + 0xACu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 2000 ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
@@ -395,8 +438,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x28u;
         goto L80021DEC;
@@ -405,8 +450,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x28u;
         goto L80021DEC;
@@ -415,8 +462,11 @@ public static class CullPatch
         c.T1 = c.T0 + 0x28u;
         c.T2 = c.T1 + 0x28u;
         mem.WriteU32((c.SP + 0x98u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x98u), c.T0);
         mem.WriteU32((c.SP + 0x9Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x9Cu), c.T1);
         mem.WriteU32((c.SP + 0xA0u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0xA0u), c.T2);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.T3 = (uint)(short)mem.ReadU16((c.A0 + 0x8u));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x14u));
@@ -442,8 +492,11 @@ public static class CullPatch
         c.T6 = c.T6 & 0xFFFFu;
         c.T6 = c.T6 | c.T9;
         mem.WriteU32((c.T0 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x20u), c.T6);
         mem.WriteU32((c.T1 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x20u), c.T6);
         mem.WriteU32((c.T2 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x20u), c.T6);
         c.T3 = mem.ReadU8((c.A0 + 0x6u));
         c.T4 = mem.ReadU8((c.A0 + 0x12u));
         c.T5 = mem.ReadU8((c.A0 + 0x1Eu));
@@ -479,8 +532,11 @@ public static class CullPatch
         c.T6 = c.T6 | c.T9;
         c.T6 = c.T6 | c.T3;
         mem.WriteU32((c.T0 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x1Cu), c.T6);
         mem.WriteU32((c.T1 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x1Cu), c.T6);
         mem.WriteU32((c.T2 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x1Cu), c.T6);
         c.T3 = mem.ReadU8((c.A0 + 0xCu));
         c.T4 = mem.ReadU8((c.A0 + 0x18u));
         c.T5 = mem.ReadU8((c.A0 + 0x24u));
@@ -518,13 +574,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T0 + 0x8u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T0 + 0x8u), c.T3);
         mem.WriteU32((c.T0 + 0x14u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x14u), c.T4);
         mem.WriteU32((c.T0 + 0x4u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T0 + 0x4u), c.T5);
         mem.WriteU32((c.T0 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x10u), c.T6);
         mem.WriteU32((c.T1 + 0x8u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x8u), c.T4);
         mem.WriteU32((c.T1 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x4u), c.T6);
         mem.WriteU32((c.T2 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T2 + 0x14u), c.T3);
         mem.WriteU32((c.T2 + 0x10u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T2 + 0x10u), c.T5);
         c.T3 = (uint)(short)mem.ReadU16((c.A0 + 0xCu));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x18u));
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x1Au));
@@ -550,10 +614,14 @@ public static class CullPatch
         c.T4 = c.T7 | c.T4;
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x24u));
         mem.WriteU32((c.T1 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T1 + 0x14u), c.T3);
         mem.WriteU32((c.T1 + 0x10u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x10u), c.T4);
         mem.WriteU16((c.T1 + 0x18u), (ushort)c.T5);
         mem.WriteU32((c.T2 + 0x8u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T2 + 0x8u), c.T3);
         mem.WriteU32((c.T2 + 0x4u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x4u), c.T4);
         mem.WriteU16((c.T2 + 0xCu), (ushort)c.T5);
         c.T8 = mem.ReadU32((c.SP + 0xACu));
         c.T9 = c.T0 & c.FP;
@@ -561,18 +629,24 @@ public static class CullPatch
         c.T8 = c.T8 + c.S5;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T1 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T2 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.A0 = c.T2 + 0x28u;
         goto L80021DEC;
         L800223F0: ;
@@ -602,9 +676,13 @@ public static class CullPatch
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
         c.T3 = mem.ReadU16((c.T3 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x44u), c.T0);
         mem.WriteU32((c.SP + 0x48u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x48u), c.T1);
         mem.WriteU32((c.SP + 0x4Cu), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x4Cu), c.T2);
         mem.WriteU32((c.SP + 0x50u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.SP + 0x50u), c.T3);
         RecompOne.Runtime.Gte.Nclip();
         RecompOne.Runtime.Gte.Write(0, c.T4);
         RecompOne.Runtime.Gte.Write(1, c.T5);
@@ -612,6 +690,7 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0x54u), RecompOne.Runtime.Gte.Read(12));
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         RecompOne.Runtime.Gte.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
@@ -622,9 +701,11 @@ public static class CullPatch
         c.T1 = (int)c.S2 < (int)c.T2 ? 1u : 0u;
         if (c.T1 == 0u) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80022A80;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         if ((int)c.T0 > 0) {
             c.At = c.T9 & 0x0018u;
             goto L800224B8;
@@ -632,14 +713,19 @@ public static class CullPatch
         c.At = c.T9 & 0x0018u;
         RecompOne.Runtime.Gte.Nclip();
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         if ((int)c.T0 >= 0) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80021DEC;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         L800224B8: ;
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.T3 = (int)c.T0 < (int)c.T1 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T2 = c.T1 + 0u;
@@ -649,6 +735,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L800224D4: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.T3 = (int)c.T0 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T1 = c.T2 + 0u;
@@ -658,6 +745,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L800224EC: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.T3 = (int)c.T1 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T0 = c.T2 + 0u;
@@ -681,7 +769,9 @@ public static class CullPatch
             goto L80022580;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.At = (int)c.T1 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -691,6 +781,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80022548: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.At = (int)c.T2 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T1 = c.T2 + 0u;
@@ -700,6 +791,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L80022560: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.At = (int)c.T2 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -717,6 +809,7 @@ public static class CullPatch
         L8002258C: ;
         RecompOne.Runtime.Gte.Avsz4();
         c.T0 = RecompOne.Runtime.Gte.Read(7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 7, c.T0);
         c.T0 = (uint)((int)c.T0 >> (int)(c.S3 & 31u));
         L8002259C: ;
         c.T1 = c.S4 - 0x3u;
@@ -733,8 +826,11 @@ public static class CullPatch
         }
         c.T1 = mem.ReadU32((c.SP + 0x54u));
         c.T3 = RecompOne.Runtime.Gte.Read(12);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(11, 12, c.T3);
         c.T4 = RecompOne.Runtime.Gte.Read(13);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 13, c.T4);
         c.T6 = RecompOne.Runtime.Gte.Read(14);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 14, c.T6);
         c.T7 = CullBias(c.T1) & c.T5;
         c.T7 = CullBias(c.T3) & c.T7;
         c.T7 = CullBias(c.T4) & c.T7;
@@ -743,15 +839,21 @@ public static class CullPatch
             goto L80021DEC;
         }
         mem.WriteU32((c.A0 + 0x8u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.A0 + 0x8u), c.T1);
         mem.WriteU32((c.A0 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.A0 + 0x14u), c.T3);
         mem.WriteU32((c.A0 + 0x20u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.A0 + 0x20u), c.T4);
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.A0 + 0x2Cu), c.T6);
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
         mem.WriteU32(c.T1, c.A1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(5, c.T1, c.A1);
         mem.WriteU16((c.A1 + 0xAu), (ushort)c.T9);
         c.T1 = c.T1 + 0x4u;
         mem.WriteU32((c.SP + 0x5Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x5Cu), c.T1);
         c.S2 = c.S2 + 0x1u;
         c.T6 = mem.ReadU16((c.A1 + 0x8u));
         c.T5 = mem.ReadU32((c.SP + 0x34u));
@@ -786,6 +888,7 @@ public static class CullPatch
         c.T3 = c.T3 << 13;
         c.T4 = c.T4 << 19;
         c.T2 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 16, c.T2);
         c.At = c.At | c.T1;
         c.T2 = (uint)((int)c.T2 >> 5);
         c.At = c.At | c.T3;
@@ -805,6 +908,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 17, c.T2);
         mem.WriteU32((c.A0 + 0x4u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -822,6 +926,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 18, c.T2);
         mem.WriteU32((c.A0 + 0x10u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -839,6 +944,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -856,6 +962,7 @@ public static class CullPatch
         L8002278C: ;
         RecompOne.Runtime.Gte.Execute(0x4A780010u);
         mem.WriteU32((c.SP + 0xACu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
@@ -872,8 +979,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S7;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x28u), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x34u;
         goto L80021DEC;
@@ -903,9 +1012,13 @@ public static class CullPatch
         c.T8 = c.T8 & 0xFFFFu;
         c.T8 = c.T8 | c.T9;
         mem.WriteU32((c.T0 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T0 + 0x20u), c.T8);
         mem.WriteU32((c.T1 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T1 + 0x20u), c.T8);
         mem.WriteU32((c.T2 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T2 + 0x20u), c.T8);
         mem.WriteU32((c.T3 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T3 + 0x20u), c.T8);
         c.T4 = mem.ReadU8((c.A0 + 0x12u));
         c.T5 = mem.ReadU8((c.A0 + 0x1Eu));
         c.T6 = mem.ReadU8((c.A0 + 0x11u));
@@ -923,9 +1036,13 @@ public static class CullPatch
         c.T4 = c.T4 | c.T8;
         c.T4 = c.T4 | c.T9;
         mem.WriteU32((c.T0 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x1Cu), c.T4);
         mem.WriteU32((c.T1 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x1Cu), c.T4);
         mem.WriteU32((c.T2 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x1Cu), c.T4);
         mem.WriteU32((c.T3 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x1Cu), c.T4);
         c.T4 = mem.ReadU8((c.A0 + 0xCu));
         c.T5 = mem.ReadU8((c.A0 + 0x18u));
         c.T6 = mem.ReadU8((c.A0 + 0x24u));
@@ -969,13 +1086,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T0 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T0 + 0x8u), c.T9);
         mem.WriteU32((c.T0 + 0x14u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x14u), c.T4);
         mem.WriteU32((c.T0 + 0x4u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T0 + 0x4u), c.T5);
         mem.WriteU32((c.T0 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x10u), c.T6);
         mem.WriteU32((c.T1 + 0x8u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x8u), c.T4);
         mem.WriteU32((c.T1 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x4u), c.T6);
         mem.WriteU32((c.T3 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x14u), c.T9);
         mem.WriteU32((c.T3 + 0x10u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T3 + 0x10u), c.T5);
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0xCu));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x18u));
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x1Au));
@@ -1013,13 +1138,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T1 + 0x14u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T1 + 0x14u), c.T5);
         mem.WriteU32((c.T1 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x10u), c.T6);
         mem.WriteU32((c.T2 + 0x8u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T2 + 0x8u), c.T5);
         mem.WriteU32((c.T2 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T2 + 0x14u), c.T9);
         mem.WriteU32((c.T2 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x4u), c.T6);
         mem.WriteU32((c.T2 + 0x10u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x10u), c.T4);
         mem.WriteU32((c.T3 + 0x4u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x4u), c.T4);
         mem.WriteU32((c.T3 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x8u), c.T9);
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x30u));
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0x24u));
         mem.WriteU16((c.T1 + 0x18u), (ushort)c.T4);
@@ -1032,29 +1165,38 @@ public static class CullPatch
         c.T8 = c.T8 + c.S5;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T1 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T2 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T3 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.A0 = c.T3 + 0x28u;
         goto L80021DEC;
         L80022A80: ;
         L80022A88: ;
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         mem.WriteU32((c.V0 + 0x34u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.V0 + 0x34u), c.S2);
         L80022A90: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
         if ((int)c.S2 <= 0) {
@@ -1069,6 +1211,7 @@ public static class CullPatch
         goto L80022A90;
         L80022AB8: ;
         mem.WriteU32((c.V0 + 0x10u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.V0 + 0x10u), c.T1);
         c.S0 = mem.ReadU32((c.SP + 0x10u));
         c.S1 = mem.ReadU32((c.SP + 0x14u));
         c.S2 = mem.ReadU32((c.SP + 0x18u));
@@ -1130,8 +1273,11 @@ public static class CullPatch
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x44u), c.T0);
         mem.WriteU32((c.SP + 0x4Cu), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x4Cu), c.T2);
         mem.WriteU32((c.SP + 0x48u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x48u), c.T1);
         RecompOne.Runtime.Gte.Nclip();
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
@@ -1143,21 +1289,28 @@ public static class CullPatch
         c.T1 = (int)c.S2 < (int)c.T2 ? 1u : 0u;
         if (c.T1 == 0u) {
             c.T0 = RecompOne.Runtime.Gte.Read(24);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
             MediEvil.func_80022A80(c, m);
             return;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         c.T5 = 0xFF000000u;
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
         c.T5 = c.T5 | CullMaskX;
         if ((int)c.T0 <= 0) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80021DEC;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(12);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 12, c.T1);
         c.T2 = RecompOne.Runtime.Gte.Read(13);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 13, c.T2);
         c.T3 = RecompOne.Runtime.Gte.Read(14);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(11, 14, c.T3);
         c.T7 = CullBias(c.T1) & c.T5;
         c.T7 = CullBias(c.T2) & c.T7;
         c.T7 = CullBias(c.T3) & c.T7;
@@ -1165,10 +1318,15 @@ public static class CullPatch
             goto L80021DEC;
         }
         mem.WriteU32((c.A0 + 0x8u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.A0 + 0x8u), c.T1);
         mem.WriteU32((c.A0 + 0x14u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.A0 + 0x14u), c.T2);
         mem.WriteU32((c.A0 + 0x20u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.A0 + 0x20u), c.T3);
         c.T0 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 17, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 18, c.T1);
         c.At = (int)c.T0 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -1178,6 +1336,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80021EFC: ;
         c.T1 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 19, c.T1);
         c.At = (int)c.T1 < (int)c.T2 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -1201,7 +1360,9 @@ public static class CullPatch
             goto L80021F78;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 17, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 18, c.T1);
         c.At = (int)c.T1 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -1211,6 +1372,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80021F58: ;
         c.T1 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 19, c.T1);
         c.At = (int)c.T2 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -1227,6 +1389,7 @@ public static class CullPatch
         L80021F80: ;
         RecompOne.Runtime.Gte.Avsz3();
         c.T0 = RecompOne.Runtime.Gte.Read(7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 7, c.T0);
         c.T0 = (uint)((int)c.T0 >> (int)(c.S3 & 31u));
         L80021F90: ;
         c.T1 = c.S4 - 0x3u;
@@ -1244,9 +1407,11 @@ public static class CullPatch
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
         mem.WriteU32(c.T1, c.A1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(5, c.T1, c.A1);
         mem.WriteU16((c.A1 + 0xAu), (ushort)c.T9);
         c.T1 = c.T1 + 0x4u;
         mem.WriteU32((c.SP + 0x5Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x5Cu), c.T1);
         c.S2 = c.S2 + 0x1u;
         c.T6 = mem.ReadU16((c.A1 + 0x8u));
         c.T5 = mem.ReadU32((c.SP + 0x34u));
@@ -1285,6 +1450,7 @@ public static class CullPatch
         c.T3 = c.T3 << 13;
         c.T4 = c.T4 << 19;
         c.T2 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 17, c.T2);
         c.At = c.At | c.T1;
         c.T2 = (uint)((int)c.T2 >> 5);
         c.At = c.At | c.T3;
@@ -1304,6 +1470,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 18, c.T2);
         mem.WriteU32((c.A0 + 0x4u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -1321,6 +1488,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         mem.WriteU32((c.A0 + 0x10u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -1338,6 +1506,7 @@ public static class CullPatch
         L800220F8: ;
         RecompOne.Runtime.Gte.Execute(0x4A780010u);
         mem.WriteU32((c.SP + 0xACu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 2000 ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
@@ -1354,8 +1523,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x28u;
         MediEvil.func_80021DEC(c, m);
@@ -1365,8 +1536,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x28u;
         MediEvil.func_80021DEC(c, m);
@@ -1376,8 +1549,11 @@ public static class CullPatch
         c.T1 = c.T0 + 0x28u;
         c.T2 = c.T1 + 0x28u;
         mem.WriteU32((c.SP + 0x98u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x98u), c.T0);
         mem.WriteU32((c.SP + 0x9Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x9Cu), c.T1);
         mem.WriteU32((c.SP + 0xA0u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0xA0u), c.T2);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.T3 = (uint)(short)mem.ReadU16((c.A0 + 0x8u));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x14u));
@@ -1403,8 +1579,11 @@ public static class CullPatch
         c.T6 = c.T6 & 0xFFFFu;
         c.T6 = c.T6 | c.T9;
         mem.WriteU32((c.T0 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x20u), c.T6);
         mem.WriteU32((c.T1 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x20u), c.T6);
         mem.WriteU32((c.T2 + 0x20u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x20u), c.T6);
         c.T3 = mem.ReadU8((c.A0 + 0x6u));
         c.T4 = mem.ReadU8((c.A0 + 0x12u));
         c.T5 = mem.ReadU8((c.A0 + 0x1Eu));
@@ -1440,8 +1619,11 @@ public static class CullPatch
         c.T6 = c.T6 | c.T9;
         c.T6 = c.T6 | c.T3;
         mem.WriteU32((c.T0 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x1Cu), c.T6);
         mem.WriteU32((c.T1 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x1Cu), c.T6);
         mem.WriteU32((c.T2 + 0x1Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x1Cu), c.T6);
         c.T3 = mem.ReadU8((c.A0 + 0xCu));
         c.T4 = mem.ReadU8((c.A0 + 0x18u));
         c.T5 = mem.ReadU8((c.A0 + 0x24u));
@@ -1479,13 +1661,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T0 + 0x8u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T0 + 0x8u), c.T3);
         mem.WriteU32((c.T0 + 0x14u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x14u), c.T4);
         mem.WriteU32((c.T0 + 0x4u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T0 + 0x4u), c.T5);
         mem.WriteU32((c.T0 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x10u), c.T6);
         mem.WriteU32((c.T1 + 0x8u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x8u), c.T4);
         mem.WriteU32((c.T1 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x4u), c.T6);
         mem.WriteU32((c.T2 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T2 + 0x14u), c.T3);
         mem.WriteU32((c.T2 + 0x10u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T2 + 0x10u), c.T5);
         c.T3 = (uint)(short)mem.ReadU16((c.A0 + 0xCu));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x18u));
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x1Au));
@@ -1511,10 +1701,14 @@ public static class CullPatch
         c.T4 = c.T7 | c.T4;
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x24u));
         mem.WriteU32((c.T1 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T1 + 0x14u), c.T3);
         mem.WriteU32((c.T1 + 0x10u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x10u), c.T4);
         mem.WriteU16((c.T1 + 0x18u), (ushort)c.T5);
         mem.WriteU32((c.T2 + 0x8u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.T2 + 0x8u), c.T3);
         mem.WriteU32((c.T2 + 0x4u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x4u), c.T4);
         mem.WriteU16((c.T2 + 0xCu), (ushort)c.T5);
         c.T8 = mem.ReadU32((c.SP + 0xACu));
         c.T9 = c.T0 & c.FP;
@@ -1522,18 +1716,24 @@ public static class CullPatch
         c.T8 = c.T8 + c.S5;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T1 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T2 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.A0 = c.T2 + 0x28u;
         MediEvil.func_80021DEC(c, m);
         return;
@@ -1563,9 +1763,13 @@ public static class CullPatch
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
         c.T3 = mem.ReadU16((c.T3 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x44u), c.T0);
         mem.WriteU32((c.SP + 0x48u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x48u), c.T1);
         mem.WriteU32((c.SP + 0x4Cu), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x4Cu), c.T2);
         mem.WriteU32((c.SP + 0x50u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.SP + 0x50u), c.T3);
         RecompOne.Runtime.Gte.Nclip();
         RecompOne.Runtime.Gte.Write(0, c.T4);
         RecompOne.Runtime.Gte.Write(1, c.T5);
@@ -1573,6 +1777,7 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0x54u), RecompOne.Runtime.Gte.Read(12));
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         RecompOne.Runtime.Gte.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
@@ -1583,9 +1788,11 @@ public static class CullPatch
         c.T1 = (int)c.S2 < (int)c.T2 ? 1u : 0u;
         if (c.T1 == 0u) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80022A80;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         if ((int)c.T0 > 0) {
             c.At = c.T9 & 0x0018u;
             goto L800224B8;
@@ -1593,15 +1800,20 @@ public static class CullPatch
         c.At = c.T9 & 0x0018u;
         RecompOne.Runtime.Gte.Nclip();
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         if ((int)c.T0 >= 0) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             MediEvil.func_80021DEC(c, m);
             return;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         L800224B8: ;
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.T3 = (int)c.T0 < (int)c.T1 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T2 = c.T1 + 0u;
@@ -1611,6 +1823,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L800224D4: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.T3 = (int)c.T0 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T1 = c.T2 + 0u;
@@ -1620,6 +1833,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L800224EC: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.T3 = (int)c.T1 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T0 = c.T2 + 0u;
@@ -1644,7 +1858,9 @@ public static class CullPatch
             goto L80022580;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.At = (int)c.T1 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -1654,6 +1870,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80022548: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.At = (int)c.T2 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T1 = c.T2 + 0u;
@@ -1663,6 +1880,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L80022560: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.At = (int)c.T2 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -1680,6 +1898,7 @@ public static class CullPatch
         L8002258C: ;
         RecompOne.Runtime.Gte.Avsz4();
         c.T0 = RecompOne.Runtime.Gte.Read(7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 7, c.T0);
         c.T0 = (uint)((int)c.T0 >> (int)(c.S3 & 31u));
         L8002259C: ;
         c.T1 = c.S4 - 0x3u;
@@ -1697,8 +1916,11 @@ public static class CullPatch
         }
         c.T1 = mem.ReadU32((c.SP + 0x54u));
         c.T3 = RecompOne.Runtime.Gte.Read(12);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(11, 12, c.T3);
         c.T4 = RecompOne.Runtime.Gte.Read(13);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 13, c.T4);
         c.T6 = RecompOne.Runtime.Gte.Read(14);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 14, c.T6);
         c.T7 = CullBias(c.T1) & c.T5;
         c.T7 = CullBias(c.T3) & c.T7;
         c.T7 = CullBias(c.T4) & c.T7;
@@ -1708,15 +1930,21 @@ public static class CullPatch
             return;
         }
         mem.WriteU32((c.A0 + 0x8u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.A0 + 0x8u), c.T1);
         mem.WriteU32((c.A0 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.A0 + 0x14u), c.T3);
         mem.WriteU32((c.A0 + 0x20u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.A0 + 0x20u), c.T4);
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.A0 + 0x2Cu), c.T6);
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
         mem.WriteU32(c.T1, c.A1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(5, c.T1, c.A1);
         mem.WriteU16((c.A1 + 0xAu), (ushort)c.T9);
         c.T1 = c.T1 + 0x4u;
         mem.WriteU32((c.SP + 0x5Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x5Cu), c.T1);
         c.S2 = c.S2 + 0x1u;
         c.T6 = mem.ReadU16((c.A1 + 0x8u));
         c.T5 = mem.ReadU32((c.SP + 0x34u));
@@ -1751,6 +1979,7 @@ public static class CullPatch
         c.T3 = c.T3 << 13;
         c.T4 = c.T4 << 19;
         c.T2 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 16, c.T2);
         c.At = c.At | c.T1;
         c.T2 = (uint)((int)c.T2 >> 5);
         c.At = c.At | c.T3;
@@ -1770,6 +1999,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 17, c.T2);
         mem.WriteU32((c.A0 + 0x4u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -1787,6 +2017,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 18, c.T2);
         mem.WriteU32((c.A0 + 0x10u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -1804,6 +2035,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -1821,6 +2053,7 @@ public static class CullPatch
         L8002278C: ;
         RecompOne.Runtime.Gte.Execute(0x4A780010u);
         mem.WriteU32((c.SP + 0xACu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
@@ -1837,8 +2070,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S7;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x28u), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x34u;
         MediEvil.func_80021DEC(c, m);
@@ -1869,9 +2104,13 @@ public static class CullPatch
         c.T8 = c.T8 & 0xFFFFu;
         c.T8 = c.T8 | c.T9;
         mem.WriteU32((c.T0 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T0 + 0x20u), c.T8);
         mem.WriteU32((c.T1 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T1 + 0x20u), c.T8);
         mem.WriteU32((c.T2 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T2 + 0x20u), c.T8);
         mem.WriteU32((c.T3 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T3 + 0x20u), c.T8);
         c.T4 = mem.ReadU8((c.A0 + 0x12u));
         c.T5 = mem.ReadU8((c.A0 + 0x1Eu));
         c.T6 = mem.ReadU8((c.A0 + 0x11u));
@@ -1889,9 +2128,13 @@ public static class CullPatch
         c.T4 = c.T4 | c.T8;
         c.T4 = c.T4 | c.T9;
         mem.WriteU32((c.T0 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x1Cu), c.T4);
         mem.WriteU32((c.T1 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x1Cu), c.T4);
         mem.WriteU32((c.T2 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x1Cu), c.T4);
         mem.WriteU32((c.T3 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x1Cu), c.T4);
         c.T4 = mem.ReadU8((c.A0 + 0xCu));
         c.T5 = mem.ReadU8((c.A0 + 0x18u));
         c.T6 = mem.ReadU8((c.A0 + 0x24u));
@@ -1935,13 +2178,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T0 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T0 + 0x8u), c.T9);
         mem.WriteU32((c.T0 + 0x14u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x14u), c.T4);
         mem.WriteU32((c.T0 + 0x4u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T0 + 0x4u), c.T5);
         mem.WriteU32((c.T0 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x10u), c.T6);
         mem.WriteU32((c.T1 + 0x8u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x8u), c.T4);
         mem.WriteU32((c.T1 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x4u), c.T6);
         mem.WriteU32((c.T3 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x14u), c.T9);
         mem.WriteU32((c.T3 + 0x10u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T3 + 0x10u), c.T5);
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0xCu));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x18u));
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x1Au));
@@ -1979,13 +2230,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T1 + 0x14u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T1 + 0x14u), c.T5);
         mem.WriteU32((c.T1 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x10u), c.T6);
         mem.WriteU32((c.T2 + 0x8u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T2 + 0x8u), c.T5);
         mem.WriteU32((c.T2 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T2 + 0x14u), c.T9);
         mem.WriteU32((c.T2 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x4u), c.T6);
         mem.WriteU32((c.T2 + 0x10u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x10u), c.T4);
         mem.WriteU32((c.T3 + 0x4u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x4u), c.T4);
         mem.WriteU32((c.T3 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x8u), c.T9);
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x30u));
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0x24u));
         mem.WriteU16((c.T1 + 0x18u), (ushort)c.T4);
@@ -1998,29 +2257,38 @@ public static class CullPatch
         c.T8 = c.T8 + c.S5;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T1 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T2 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T3 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.A0 = c.T3 + 0x28u;
         MediEvil.func_80021DEC(c, m);
         return;
         L80022A80: ;
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         mem.WriteU32((c.V0 + 0x34u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.V0 + 0x34u), c.S2);
         L80022A90: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
         if ((int)c.S2 <= 0) {
@@ -2035,6 +2303,7 @@ public static class CullPatch
         goto L80022A90;
         L80022AB8: ;
         mem.WriteU32((c.V0 + 0x10u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.V0 + 0x10u), c.T1);
         c.S0 = mem.ReadU32((c.SP + 0x10u));
         c.S1 = mem.ReadU32((c.SP + 0x14u));
         c.S2 = mem.ReadU32((c.SP + 0x18u));
@@ -2077,9 +2346,13 @@ public static class CullPatch
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
         c.T3 = mem.ReadU16((c.T3 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0x44u), c.T0);
         mem.WriteU32((c.SP + 0x48u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x48u), c.T1);
         mem.WriteU32((c.SP + 0x4Cu), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0x4Cu), c.T2);
         mem.WriteU32((c.SP + 0x50u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.SP + 0x50u), c.T3);
         RecompOne.Runtime.Gte.Nclip();
         RecompOne.Runtime.Gte.Write(0, c.T4);
         RecompOne.Runtime.Gte.Write(1, c.T5);
@@ -2087,6 +2360,7 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0x54u), RecompOne.Runtime.Gte.Read(12));
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         RecompOne.Runtime.Gte.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
@@ -2097,9 +2371,11 @@ public static class CullPatch
         c.T1 = (int)c.S2 < (int)c.T2 ? 1u : 0u;
         if (c.T1 == 0u) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             goto L80022A80;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         if ((int)c.T0 > 0) {
             c.At = c.T9 & 0x0018u;
             goto L800224B8;
@@ -2107,15 +2383,20 @@ public static class CullPatch
         c.At = c.T9 & 0x0018u;
         RecompOne.Runtime.Gte.Nclip();
         c.T0 = RecompOne.Runtime.Gte.Read(24);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 24, c.T0);
         if ((int)c.T0 >= 0) {
             mem.WriteU32((c.SP + 0xA8u), c.T0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
             MediEvil.func_80021DEC(c, m);
             return;
         }
         mem.WriteU32((c.SP + 0xA8u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xA8u), c.T0);
         L800224B8: ;
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.T3 = (int)c.T0 < (int)c.T1 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T2 = c.T1 + 0u;
@@ -2125,6 +2406,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L800224D4: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.T3 = (int)c.T0 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T1 = c.T2 + 0u;
@@ -2134,6 +2416,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L800224EC: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.T3 = (int)c.T1 < (int)c.T2 ? 1u : 0u;
         if (c.T3 == 0u) {
             c.T0 = c.T2 + 0u;
@@ -2158,7 +2441,9 @@ public static class CullPatch
             goto L80022580;
         }
         c.T0 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 16, c.T0);
         c.T1 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(9, 17, c.T1);
         c.At = (int)c.T1 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T2 = c.T1 + 0u;
@@ -2168,6 +2453,7 @@ public static class CullPatch
         c.T2 = c.T0 + 0u;
         L80022548: ;
         c.T0 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 18, c.T0);
         c.At = (int)c.T2 < (int)c.T0 ? 1u : 0u;
         if (c.At == 0u) {
             c.T1 = c.T2 + 0u;
@@ -2177,6 +2463,7 @@ public static class CullPatch
         c.T1 = c.T0 + 0u;
         L80022560: ;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         c.At = (int)c.T2 < (int)c.T1 ? 1u : 0u;
         if (c.At == 0u) {
             c.T0 = c.T2 + 0u;
@@ -2194,6 +2481,7 @@ public static class CullPatch
         L8002258C: ;
         RecompOne.Runtime.Gte.Avsz4();
         c.T0 = RecompOne.Runtime.Gte.Read(7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(8, 7, c.T0);
         c.T0 = (uint)((int)c.T0 >> (int)(c.S3 & 31u));
         L8002259C: ;
         c.T1 = c.S4 - 0x3u;
@@ -2211,8 +2499,11 @@ public static class CullPatch
         }
         c.T1 = mem.ReadU32((c.SP + 0x54u));
         c.T3 = RecompOne.Runtime.Gte.Read(12);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(11, 12, c.T3);
         c.T4 = RecompOne.Runtime.Gte.Read(13);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 13, c.T4);
         c.T6 = RecompOne.Runtime.Gte.Read(14);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 14, c.T6);
         c.T7 = CullBias(c.T1) & c.T5;
         c.T7 = CullBias(c.T3) & c.T7;
         c.T7 = CullBias(c.T4) & c.T7;
@@ -2222,15 +2513,21 @@ public static class CullPatch
             return;
         }
         mem.WriteU32((c.A0 + 0x8u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.A0 + 0x8u), c.T1);
         mem.WriteU32((c.A0 + 0x14u), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.A0 + 0x14u), c.T3);
         mem.WriteU32((c.A0 + 0x20u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.A0 + 0x20u), c.T4);
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.A0 + 0x2Cu), c.T6);
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
         mem.WriteU32(c.T1, c.A1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(5, c.T1, c.A1);
         mem.WriteU16((c.A1 + 0xAu), (ushort)c.T9);
         c.T1 = c.T1 + 0x4u;
         mem.WriteU32((c.SP + 0x5Cu), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0x5Cu), c.T1);
         c.S2 = c.S2 + 0x1u;
         c.T6 = mem.ReadU16((c.A1 + 0x8u));
         c.T5 = mem.ReadU32((c.SP + 0x34u));
@@ -2265,6 +2562,7 @@ public static class CullPatch
         c.T3 = c.T3 << 13;
         c.T4 = c.T4 << 19;
         c.T2 = RecompOne.Runtime.Gte.Read(16);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 16, c.T2);
         c.At = c.At | c.T1;
         c.T2 = (uint)((int)c.T2 >> 5);
         c.At = c.At | c.T3;
@@ -2284,6 +2582,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(17);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 17, c.T2);
         mem.WriteU32((c.A0 + 0x4u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -2301,6 +2600,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(18);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 18, c.T2);
         mem.WriteU32((c.A0 + 0x10u), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -2318,6 +2618,7 @@ public static class CullPatch
         c.At = c.At | c.T3;
         c.At = c.At | c.T4;
         c.T2 = RecompOne.Runtime.Gte.Read(19);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(10, 19, c.T2);
         mem.WriteU32((c.A0 + 0x1Cu), RecompOne.Runtime.Gte.Read(22));
         c.T2 = (uint)((int)c.T2 >> 5);
         c.T2 = c.T2 << 1;
@@ -2335,6 +2636,7 @@ public static class CullPatch
         L8002278C: ;
         RecompOne.Runtime.Gte.Execute(0x4A780010u);
         mem.WriteU32((c.SP + 0xACu), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xACu), c.T0);
         c.T2 = (int)c.T3 < 1000 ? 1u : 0u;
         if (c.T2 != 0u) {
             c.T2 = (int)c.T0 < TerrainPatch.SubdivOtz ? 1u : 0u;
@@ -2351,8 +2653,10 @@ public static class CullPatch
         c.T0 = c.T0 + c.S5;
         c.At = mem.ReadU32(c.T0);
         mem.WriteU32(c.T0, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T0, c.T9);
         c.At = c.At | c.S7;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         mem.WriteU32((c.A0 + 0x28u), RecompOne.Runtime.Gte.Read(22));
         c.A0 = c.A0 + 0x34u;
         MediEvil.func_80021DEC(c, m);
@@ -2383,9 +2687,13 @@ public static class CullPatch
         c.T8 = c.T8 & 0xFFFFu;
         c.T8 = c.T8 | c.T9;
         mem.WriteU32((c.T0 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T0 + 0x20u), c.T8);
         mem.WriteU32((c.T1 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T1 + 0x20u), c.T8);
         mem.WriteU32((c.T2 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T2 + 0x20u), c.T8);
         mem.WriteU32((c.T3 + 0x20u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.T3 + 0x20u), c.T8);
         c.T4 = mem.ReadU8((c.A0 + 0x12u));
         c.T5 = mem.ReadU8((c.A0 + 0x1Eu));
         c.T6 = mem.ReadU8((c.A0 + 0x11u));
@@ -2403,9 +2711,13 @@ public static class CullPatch
         c.T4 = c.T4 | c.T8;
         c.T4 = c.T4 | c.T9;
         mem.WriteU32((c.T0 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x1Cu), c.T4);
         mem.WriteU32((c.T1 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x1Cu), c.T4);
         mem.WriteU32((c.T2 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x1Cu), c.T4);
         mem.WriteU32((c.T3 + 0x1Cu), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x1Cu), c.T4);
         c.T4 = mem.ReadU8((c.A0 + 0xCu));
         c.T5 = mem.ReadU8((c.A0 + 0x18u));
         c.T6 = mem.ReadU8((c.A0 + 0x24u));
@@ -2449,13 +2761,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T0 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T0 + 0x8u), c.T9);
         mem.WriteU32((c.T0 + 0x14u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T0 + 0x14u), c.T4);
         mem.WriteU32((c.T0 + 0x4u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T0 + 0x4u), c.T5);
         mem.WriteU32((c.T0 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T0 + 0x10u), c.T6);
         mem.WriteU32((c.T1 + 0x8u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T1 + 0x8u), c.T4);
         mem.WriteU32((c.T1 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x4u), c.T6);
         mem.WriteU32((c.T3 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x14u), c.T9);
         mem.WriteU32((c.T3 + 0x10u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T3 + 0x10u), c.T5);
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0xCu));
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x18u));
         c.T5 = (uint)(short)mem.ReadU16((c.A0 + 0x1Au));
@@ -2493,13 +2813,21 @@ public static class CullPatch
         c.T7 = c.T7 << 16;
         c.T6 = c.T7 | c.T6;
         mem.WriteU32((c.T1 + 0x14u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T1 + 0x14u), c.T5);
         mem.WriteU32((c.T1 + 0x10u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T1 + 0x10u), c.T6);
         mem.WriteU32((c.T2 + 0x8u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.T2 + 0x8u), c.T5);
         mem.WriteU32((c.T2 + 0x14u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T2 + 0x14u), c.T9);
         mem.WriteU32((c.T2 + 0x4u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.T2 + 0x4u), c.T6);
         mem.WriteU32((c.T2 + 0x10u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T2 + 0x10u), c.T4);
         mem.WriteU32((c.T3 + 0x4u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.T3 + 0x4u), c.T4);
         mem.WriteU32((c.T3 + 0x8u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.T3 + 0x8u), c.T9);
         c.T4 = (uint)(short)mem.ReadU16((c.A0 + 0x30u));
         c.T9 = (uint)(short)mem.ReadU16((c.A0 + 0x24u));
         mem.WriteU16((c.T1 + 0x18u), (ushort)c.T4);
@@ -2512,29 +2840,38 @@ public static class CullPatch
         c.T8 = c.T8 + c.S5;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T1 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T2 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.T9 = c.T3 & c.FP;
         c.At = mem.ReadU32(c.T8);
         mem.WriteU32(c.T8, c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, c.T8, c.T9);
         c.At = c.At | c.S6;
         mem.WriteU32(c.T9, c.At);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(1, c.T9, c.At);
         c.A0 = c.T3 + 0x28u;
         MediEvil.func_80021DEC(c, m);
         return;
         L80022A80: ;
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         mem.WriteU32((c.V0 + 0x34u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.V0 + 0x34u), c.S2);
         L80022A90: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
         if ((int)c.S2 <= 0) {
@@ -2549,6 +2886,7 @@ public static class CullPatch
         goto L80022A90;
         L80022AB8: ;
         mem.WriteU32((c.V0 + 0x10u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.V0 + 0x10u), c.T1);
         c.S0 = mem.ReadU32((c.SP + 0x10u));
         c.S1 = mem.ReadU32((c.SP + 0x14u));
         c.S2 = mem.ReadU32((c.SP + 0x18u));
@@ -2567,16 +2905,24 @@ public static class CullPatch
         var mem = (PSMemory)m;
         c.SP = c.SP - 0x88u;
         mem.WriteU32((c.SP + 0x6Cu), c.S1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(17, (c.SP + 0x6Cu), c.S1);
         c.S1 = mem.ReadU32((c.GP + 0x460u));
         c.A2 = 0x1F800000u;
         c.A2 = mem.ReadU32((c.A2 + 0x34u));
         mem.WriteU32((c.SP + 0x68u), c.S0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(16, (c.SP + 0x68u), c.S0);
         mem.WriteU32((c.SP + 0x84u), c.RA);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(31, (c.SP + 0x84u), c.RA);
         mem.WriteU32((c.SP + 0x80u), c.S6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(22, (c.SP + 0x80u), c.S6);
         mem.WriteU32((c.SP + 0x7Cu), c.S5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(21, (c.SP + 0x7Cu), c.S5);
         mem.WriteU32((c.SP + 0x78u), c.S4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(20, (c.SP + 0x78u), c.S4);
         mem.WriteU32((c.SP + 0x74u), c.S3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(19, (c.SP + 0x74u), c.S3);
         mem.WriteU32((c.SP + 0x70u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.SP + 0x70u), c.S2);
         c.A1 = mem.ReadU32((c.S1 + 0xCu));
         c.S0 = c.A0 + 0u;
         c.RA = 0x80024ACCu;
@@ -2649,6 +2995,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x48u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x48u), c.V0);
         c.V0 = mem.ReadU32((c.S1 + 0x30u));
         c.V1 = mem.ReadU8((c.V0 + 0x1u));
         c.V0 = mem.ReadU16((c.S1 + 0x8u));
@@ -2656,6 +3003,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x4Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x4Cu), c.V0);
         c.V0 = mem.ReadU32((c.S1 + 0x30u));
         c.V1 = mem.ReadU8((c.V0 + 0x2u));
         c.V0 = mem.ReadU16((c.S1 + 0x8u));
@@ -2663,6 +3011,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x50u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x50u), c.V0);
         L80024C14: ;
         c.V0 = mem.ReadU32((c.S1 + 0x4u));
         c.V0 = c.V0 & 0x0004u;
@@ -2676,6 +3025,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x58u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x58u), c.V0);
         c.V0 = mem.ReadU32((c.S1 + 0x34u));
         c.V1 = mem.ReadU8((c.V0 + 0x1u));
         c.V0 = mem.ReadU16((c.S1 + 0x8u));
@@ -2683,6 +3033,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x5Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x5Cu), c.V0);
         c.V0 = mem.ReadU32((c.S1 + 0x34u));
         c.V1 = mem.ReadU8((c.V0 + 0x2u));
         c.V0 = mem.ReadU16((c.S1 + 0x8u));
@@ -2690,6 +3041,7 @@ public static class CullPatch
         c.S4 = c.LO;
         c.V0 = (uint)((int)c.S4 >> 8);
         mem.WriteU32((c.SP + 0x60u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x60u), c.V0);
         L80024C94: ;
         c.T5 = mem.ReadU16((c.S1 + 0x28u));
         if ((int)c.T5 <= 0) {
@@ -2739,10 +3091,13 @@ public static class CullPatch
         c.S3 = c.T0 + 0u;
         c.V0 = c.T0 + 0x8u;
         mem.WriteU32((c.SP + 0x18u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x18u), c.V0);
         c.V0 = c.T0 + 0x14u;
         mem.WriteU32((c.SP + 0x1Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x1Cu), c.V0);
         c.V0 = c.T0 + 0x20u;
         mem.WriteU32((c.SP + 0x20u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x20u), c.V0);
         c.V0 = c.T0 + 0x2Cu;
         goto L80024DAC;
         L80024D64: ;
@@ -2758,13 +3113,17 @@ public static class CullPatch
         c.S2 = c.T0 + 0u;
         c.V0 = c.T0 + 0x10u;
         mem.WriteU32((c.SP + 0x18u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x18u), c.V0);
         c.V0 = c.T0 + 0x18u;
         mem.WriteU32((c.SP + 0x1Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x1Cu), c.V0);
         c.V0 = c.T0 + 0x20u;
         mem.WriteU32((c.SP + 0x20u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x20u), c.V0);
         c.V0 = c.T0 + 0x28u;
         L80024DAC: ;
         mem.WriteU32((c.SP + 0x24u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x24u), c.V0);
         c.S5 = mem.ReadU32((c.SP + 0x18u));
         mem.WriteU32(c.S5, RecompOne.Runtime.Gte.Read(12));
         c.V0 = (uint)(short)mem.ReadU16(c.T1);
@@ -2788,42 +3147,53 @@ public static class CullPatch
         c.A0 = c.SP + 0x48u;
         c.V0 = c.S3 + 0x4u;
         mem.WriteU32((c.SP + 0x28u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x28u), c.V0);
         c.V0 = c.S3 + 0x10u;
         mem.WriteU32((c.SP + 0x2Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x2Cu), c.V0);
         c.V0 = c.S3 + 0x1Cu;
         mem.WriteU32((c.SP + 0x30u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x30u), c.V0);
         c.V0 = c.S3 + 0x28u;
         goto L80024E3C;
         L80024E20: ;
         c.V0 = c.S2 + 0xCu;
         mem.WriteU32((c.SP + 0x28u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x28u), c.V0);
         c.V0 = c.S2 + 0x14u;
         mem.WriteU32((c.SP + 0x2Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x2Cu), c.V0);
         c.V0 = c.S2 + 0x1Cu;
         mem.WriteU32((c.SP + 0x30u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x30u), c.V0);
         c.V0 = c.S2 + 0x24u;
         L80024E3C: ;
         mem.WriteU32((c.SP + 0x34u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x34u), c.V0);
         c.V0 = (uint)(short)mem.ReadU16((c.T1 - 0x6u));
         c.V0 = c.V0 << 3;
         c.V0 = c.V0 + c.T2;
         c.V1 = mem.ReadU16((c.V0 + 0x6u));
         mem.WriteU32((c.SP + 0x38u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.SP + 0x38u), c.V1);
         c.V0 = (uint)(short)mem.ReadU16((c.T1 - 0x4u));
         c.V0 = c.V0 << 3;
         c.V0 = c.V0 + c.T2;
         c.V0 = mem.ReadU16((c.V0 + 0x6u));
         mem.WriteU32((c.SP + 0x3Cu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x3Cu), c.V0);
         c.V0 = (uint)(short)mem.ReadU16((c.T1 - 0x2u));
         c.V0 = c.V0 << 3;
         c.V0 = c.V0 + c.T2;
         c.V0 = mem.ReadU16((c.V0 + 0x6u));
         mem.WriteU32((c.SP + 0x40u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x40u), c.V0);
         c.V0 = (uint)(short)mem.ReadU16(c.T1);
         c.V0 = c.V0 << 3;
         c.V0 = c.V0 + c.T2;
         c.V0 = mem.ReadU16((c.V0 + 0x6u));
         mem.WriteU32((c.SP + 0x44u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x44u), c.V0);
         c.V0 = mem.ReadU32(c.A0);
         { var _r = (long)(int)c.V1 * (int)c.V0; c.LO = (uint)_r; c.HI = (uint)(_r >> 32); }
         c.V1 = mem.ReadU32((c.SP + 0x28u));
@@ -3015,11 +3385,13 @@ public static class CullPatch
         c.V0 = c.V0 & c.T7;
         c.V1 = c.V1 | c.V0;
         mem.WriteU32(c.T0, c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, c.T0, c.V1);
         c.V0 = mem.ReadU32(c.A0);
         c.V1 = c.T0 & c.T7;
         c.V0 = c.V0 & c.T6;
         c.V0 = c.V0 | c.V1;
         mem.WriteU32(c.A0, c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, c.A0, c.V0);
         goto L80025214;
         L800251C0: ;
         c.A3 = 0x00000003u;
@@ -3083,14 +3455,22 @@ public static class CullPatch
         var mem = (PSMemory)m;
         c.SP = c.SP - 0x78u;
         mem.WriteU32((c.SP + 0x5Cu), c.S1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(17, (c.SP + 0x5Cu), c.S1);
         c.S1 = mem.ReadU32((c.GP + 0x460u));
         mem.WriteU32((c.SP + 0x70u), c.S6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(22, (c.SP + 0x70u), c.S6);
         mem.WriteU32((c.SP + 0x74u), c.RA);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(31, (c.SP + 0x74u), c.RA);
         mem.WriteU32((c.SP + 0x6Cu), c.S5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(21, (c.SP + 0x6Cu), c.S5);
         mem.WriteU32((c.SP + 0x68u), c.S4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(20, (c.SP + 0x68u), c.S4);
         mem.WriteU32((c.SP + 0x64u), c.S3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(19, (c.SP + 0x64u), c.S3);
         mem.WriteU32((c.SP + 0x60u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.SP + 0x60u), c.S2);
         mem.WriteU32((c.SP + 0x58u), c.S0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(16, (c.SP + 0x58u), c.S0);
         c.V0 = mem.ReadU32((c.S1 + 0x30u));
         c.S4 = mem.ReadU32((c.S1 + 0x20u));
         c.T3 = c.V0 + 0xCu;
@@ -3251,8 +3631,10 @@ public static class CullPatch
         c.S3 = mem.ReadU32((c.S1 + 0x2Cu));
         c.S0 = c.S5 + 0x60u;
         mem.WriteU32((c.S5 + 0x60u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S5 + 0x60u), c.V0);
         mem.WriteU32((c.S0 + 0x4u), 0u);
         mem.WriteU32((c.S0 + 0x8u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S0 + 0x8u), c.V0);
         mem.WriteU32((c.S0 + 0xCu), 0u);
         mem.WriteU16((c.S0 + 0x10u), (ushort)c.V0);
         c.V1 = mem.ReadU32((c.S1 + 0x4u));
@@ -3365,9 +3747,11 @@ public static class CullPatch
         c.V0 = (int)c.V1 < (int)c.V0 ? 1u : 0u;
         if (c.V0 == 0u) {
             mem.WriteU32((c.SP + 0x50u), c.V1);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.SP + 0x50u), c.V1);
             goto L80025BB0;
         }
         mem.WriteU32((c.SP + 0x50u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.SP + 0x50u), c.V1);
         c.V0 = (int)c.V1 < 2 ? 1u : 0u;
         if (c.V0 != 0u) {
             goto L80025BB0;
@@ -3410,6 +3794,7 @@ public static class CullPatch
         c.V1 = mem.ReadU16((c.S1 + 0x1Au));
         c.V0 = 0x00000005u;
         mem.WriteU32((c.SP + 0x50u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x50u), c.V0);
         mem.WriteU16((c.SP + 0x1Au), (ushort)c.V1);
         L800257F4: ;
         c.V0 = mem.ReadU32((c.S1 + 0x4u));
@@ -3421,8 +3806,10 @@ public static class CullPatch
         c.V0 = 0x00001000u;
         c.S0 = c.SP + 0x30u;
         mem.WriteU32((c.SP + 0x30u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x30u), c.V0);
         mem.WriteU32((c.SP + 0x34u), 0u);
         mem.WriteU32((c.SP + 0x38u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x38u), c.V0);
         mem.WriteU32((c.SP + 0x3Cu), 0u);
         mem.WriteU16((c.SP + 0x40u), (ushort)c.V0);
         c.A0 = (uint)(short)mem.ReadU16((c.S1 + 0x3Au));
@@ -3508,13 +3895,17 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(2, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.V0 + 0x4u)));
         c.T4 = RecompOne.Runtime.Gte.Read(9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 9, c.T4);
         c.T5 = RecompOne.Runtime.Gte.Read(10);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(13, 10, c.T5);
         c.T6 = RecompOne.Runtime.Gte.Read(11);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 11, c.T6);
         mem.WriteU16(c.T1, (ushort)c.T4);
         mem.WriteU16((c.T1 + 0x2u), (ushort)c.T5);
         mem.WriteU16((c.T1 + 0x4u), (ushort)c.T6);
         c.V0 = mem.ReadU32((c.SP + 0x10u));
         mem.WriteU32((c.A2 + 0x10u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A2 + 0x10u), c.V0);
         RecompOne.Runtime.Gte.MvmvaOp(12, false, 0, 1, 0);
         c.V0 = (uint)(short)mem.ReadU16(c.T3);
         c.V0 = c.V0 << 3;
@@ -3522,17 +3913,24 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.V0 + 0x4u)));
         c.T4 = RecompOne.Runtime.Gte.Read(9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 9, c.T4);
         c.T5 = RecompOne.Runtime.Gte.Read(10);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(13, 10, c.T5);
         c.T6 = RecompOne.Runtime.Gte.Read(11);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 11, c.T6);
         mem.WriteU16(c.T1, (ushort)c.T4);
         mem.WriteU16((c.T1 + 0x2u), (ushort)c.T5);
         mem.WriteU16((c.T1 + 0x4u), (ushort)c.T6);
         c.V0 = mem.ReadU32((c.SP + 0x10u));
         mem.WriteU32((c.A2 + 0x18u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A2 + 0x18u), c.V0);
         RecompOne.Runtime.Gte.MvmvaOp(12, false, 0, 2, 0);
         c.T4 = RecompOne.Runtime.Gte.Read(9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 9, c.T4);
         c.T5 = RecompOne.Runtime.Gte.Read(10);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(13, 10, c.T5);
         c.T6 = RecompOne.Runtime.Gte.Read(11);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 11, c.T6);
         mem.WriteU16(c.T1, (ushort)c.T4);
         mem.WriteU16((c.T1 + 0x2u), (ushort)c.T5);
         mem.WriteU16((c.T1 + 0x4u), (ushort)c.T6);
@@ -3541,9 +3939,11 @@ public static class CullPatch
         c.V0 = CullBias(c.V0) & c.A3;
         if (c.V0 == 0u) {
             mem.WriteU32((c.A2 + 0x20u), c.V1);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.A2 + 0x20u), c.V1);
             goto L80025A24;
         }
         mem.WriteU32((c.A2 + 0x20u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.A2 + 0x20u), c.V1);
         c.V0 = (uint)(short)mem.ReadU16((c.A2 + 0x18u));
         c.V0 = CullBias(c.V0) & c.A3;
         if (c.V0 == 0u) {
@@ -3566,11 +3966,13 @@ public static class CullPatch
         c.V0 = c.V0 & c.T0;
         c.V1 = c.V1 | c.V0;
         mem.WriteU32(c.A2, c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, c.A2, c.V1);
         c.V0 = mem.ReadU32(c.A0);
         c.V1 = c.A2 & c.T0;
         c.V0 = c.V0 & c.T7;
         c.V0 = c.V0 | c.V1;
         mem.WriteU32(c.A0, c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, c.A0, c.V0);
         L80025A64: ;
         c.V0 = (uint)(short)mem.ReadU16(c.S3);
         c.V0 = c.V0 << 3;
@@ -3584,32 +3986,43 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(2, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.V0 + 0x4u)));
         c.T4 = RecompOne.Runtime.Gte.Read(9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 9, c.T4);
         c.T5 = RecompOne.Runtime.Gte.Read(10);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(13, 10, c.T5);
         c.T6 = RecompOne.Runtime.Gte.Read(11);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 11, c.T6);
         mem.WriteU16(c.T1, (ushort)c.T4);
         mem.WriteU16((c.T1 + 0x2u), (ushort)c.T5);
         mem.WriteU16((c.T1 + 0x4u), (ushort)c.T6);
         c.V0 = mem.ReadU32((c.SP + 0x10u));
         mem.WriteU32((c.A1 + 0x10u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A1 + 0x10u), c.V0);
         RecompOne.Runtime.Gte.MvmvaOp(12, false, 0, 1, 0);
         c.T4 = RecompOne.Runtime.Gte.Read(9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(12, 9, c.T4);
         c.T5 = RecompOne.Runtime.Gte.Read(10);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(13, 10, c.T5);
         c.T6 = RecompOne.Runtime.Gte.Read(11);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Mfc2(14, 11, c.T6);
         mem.WriteU16(c.T1, (ushort)c.T4);
         mem.WriteU16((c.T1 + 0x2u), (ushort)c.T5);
         mem.WriteU16((c.T1 + 0x4u), (ushort)c.T6);
         c.V0 = mem.ReadU32((c.SP + 0x10u));
         mem.WriteU32((c.A1 + 0x18u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A1 + 0x18u), c.V0);
         c.V0 = mem.ReadU32((c.A2 + 0x18u));
         mem.WriteU32((c.A1 + 0x20u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A1 + 0x20u), c.V0);
         c.V0 = (uint)(short)mem.ReadU16((c.A1 + 0x10u));
         c.V1 = mem.ReadU32((c.A2 + 0x20u));
         c.V0 = CullBias(c.V0) & c.A3;
         if (c.V0 == 0u) {
             mem.WriteU32((c.A1 + 0x28u), c.V1);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.A1 + 0x28u), c.V1);
             goto L80025B50;
         }
         mem.WriteU32((c.A1 + 0x28u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.A1 + 0x28u), c.V1);
         c.V0 = (uint)(short)mem.ReadU16((c.A1 + 0x18u));
         c.V0 = CullBias(c.V0) & c.A3;
         if (c.V0 == 0u) {
@@ -3637,11 +4050,13 @@ public static class CullPatch
         c.V0 = c.V0 & c.T0;
         c.V1 = c.V1 | c.V0;
         mem.WriteU32(c.A1, c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, c.A1, c.V1);
         c.V0 = mem.ReadU32(c.A0);
         c.V1 = c.A1 & c.T0;
         c.V0 = c.V0 & c.T7;
         c.V0 = c.V0 | c.V1;
         mem.WriteU32(c.A0, c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, c.A0, c.V0);
         L80025B90: ;
         c.T2 = c.T2 + 0x1u;
         c.T3 = c.T3 + 0x50u;
@@ -3671,18 +4086,28 @@ public static class CullPatch
         var mem = (PSMemory)m;
         c.SP = c.SP - 0x148u;
         mem.WriteU32((c.SP + 0x130u), c.S4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(20, (c.SP + 0x130u), c.S4);
         c.S4 = c.A0 + 0u;
         mem.WriteU32((c.SP + 0x124u), c.S1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(17, (c.SP + 0x124u), c.S1);
         c.S1 = 0x1F800000u;
         mem.WriteU32((c.SP + 0x120u), c.S0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(16, (c.SP + 0x120u), c.S0);
         c.S0 = 0x1F800000u;
         mem.WriteU32((c.SP + 0x144u), c.RA);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(31, (c.SP + 0x144u), c.RA);
         mem.WriteU32((c.SP + 0x140u), c.FP);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(30, (c.SP + 0x140u), c.FP);
         mem.WriteU32((c.SP + 0x13Cu), c.S7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(23, (c.SP + 0x13Cu), c.S7);
         mem.WriteU32((c.SP + 0x138u), c.S6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(22, (c.SP + 0x138u), c.S6);
         mem.WriteU32((c.SP + 0x134u), c.S5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(21, (c.SP + 0x134u), c.S5);
         mem.WriteU32((c.SP + 0x12Cu), c.S3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(19, (c.SP + 0x12Cu), c.S3);
         mem.WriteU32((c.SP + 0x128u), c.S2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(18, (c.SP + 0x128u), c.S2);
         c.A1 = mem.ReadU32((c.S4 + 0x4u));
         c.A0 = mem.ReadU32((c.S1 + 0x88u));
         c.A2 = mem.ReadU32((c.S0 + 0x34u));
@@ -3819,11 +4244,14 @@ public static class CullPatch
         c.A0 = (uint)((int)c.A2 >> (int)(c.A1 & 31u));
         c.V0 = (int)c.A0 < (int)c.V0 ? 1u : 0u;
         mem.WriteU32((c.SP + 0xE8u), c.A0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(4, (c.SP + 0xE8u), c.A0);
         if (c.V0 != 0u) {
             mem.WriteU32((c.S4 + 0x9Cu), c.V1);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.S4 + 0x9Cu), c.V1);
             goto L8001107C;
         }
         mem.WriteU32((c.S4 + 0x9Cu), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.S4 + 0x9Cu), c.V1);
         c.V0 = 0x1F800000u;
         c.V0 = mem.ReadU32((c.V0 + 0x88u));
         c.V0 = mem.ReadU16((c.V0 + 0x68u));
@@ -3839,9 +4267,11 @@ public static class CullPatch
         c.V0 = c.V0 & 0x0001u;
         if (c.V0 == 0u) {
             mem.WriteU32((c.S4 + 0x98u), c.V1);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.S4 + 0x98u), c.V1);
             goto L80010A80;
         }
         mem.WriteU32((c.S4 + 0x98u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.S4 + 0x98u), c.V1);
         c.A0 = c.S4 + 0u;
         c.RA = 0x80010A80u;
         MediEvil.func_800104C4(c, m);
@@ -3870,6 +4300,7 @@ public static class CullPatch
         c.V0 = (uint)((int)c.V0 >> 5);
         c.V0 = c.V1 + c.V0;
         mem.WriteU32((c.S4 + 0xACu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S4 + 0xACu), c.V0);
         c.V0 = (int)c.V0 < (int)c.A0 ? 1u : 0u;
         if (c.V0 != 0u) {
             c.V1 = 0xFFFFFFFBu;
@@ -3878,8 +4309,10 @@ public static class CullPatch
         c.V1 = 0xFFFFFFFBu;
         c.V0 = mem.ReadU32(c.S4);
         mem.WriteU32((c.S4 + 0xACu), c.A0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(4, (c.S4 + 0xACu), c.A0);
         c.V0 = CullBias(c.V0) & c.V1;
         mem.WriteU32(c.S4, c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, c.S4, c.V0);
         goto L80010B40;
         L80010AF4: ;
         c.V0 = mem.ReadU32((c.S4 + 0xA8u));
@@ -3887,9 +4320,11 @@ public static class CullPatch
         c.V0 = c.V1 - c.V0;
         if ((int)c.V0 > 0) {
             mem.WriteU32((c.S4 + 0xACu), c.V0);
+            RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S4 + 0xACu), c.V0);
             goto L80010B40;
         }
         mem.WriteU32((c.S4 + 0xACu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S4 + 0xACu), c.V0);
         mem.WriteU32((c.S4 + 0xACu), 0u);
         goto L80010B40;
         L80010B14: ;
@@ -3904,7 +4339,9 @@ public static class CullPatch
         c.V0 = (uint)((int)c.V0 >> 5);
         c.V1 = c.V1 | 0x0004u;
         mem.WriteU32((c.S4 + 0xACu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.S4 + 0xACu), c.V0);
         mem.WriteU32(c.S4, c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, c.S4, c.V1);
         L80010B40: ;
         c.V1 = mem.ReadU32((c.S4 + 0x8Cu));
         c.V0 = mem.ReadU32((c.S4 + 0x90u));
@@ -3937,6 +4374,7 @@ public static class CullPatch
         c.V0 = c.V0 & c.T0;
         c.V1 = c.V1 | c.V0;
         mem.WriteU32((c.A0 - 0x20u), c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, (c.A0 - 0x20u), c.V1);
         c.V1 = mem.ReadU32((c.S4 + 0x98u));
         c.V0 = mem.ReadU32((c.T1 + 0x78u));
         c.V1 = c.V1 << 2;
@@ -3946,11 +4384,13 @@ public static class CullPatch
         c.V0 = c.V0 & c.A3;
         c.V0 = c.V0 | c.A1;
         mem.WriteU32(c.V1, c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, c.V1, c.V0);
         c.T4 = mem.ReadU32((c.S4 + 0x28u));
         c.S7 = mem.ReadU32((c.S4 + 0x2Cu));
         c.T7 = mem.ReadU32((c.A2 + 0x34u));
         c.T0 = c.T4 + 0x8u;
         mem.WriteU32((c.SP + 0x118u), c.T7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(15, (c.SP + 0x118u), c.T7);
         c.V0 = mem.ReadU32((c.S4 + 0x94u));
         c.T3 = mem.ReadU32((c.A2 + 0x3Cu));
         c.V0 = (int)c.V0 < 4096 ? 1u : 0u;
@@ -3962,10 +4402,12 @@ public static class CullPatch
         c.V0 = mem.ReadU32((c.S4 + 0x8Cu));
         c.V0 = c.V0 + 0x1u;
         mem.WriteU32((c.SP + 0x114u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x114u), c.V0);
         goto L80010C2C;
         L80010C20: ;
         c.T8 = mem.ReadU32((c.S4 + 0x8Cu));
         mem.WriteU32((c.SP + 0x114u), c.T8);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(24, (c.SP + 0x114u), c.T8);
         L80010C2C: ;
         c.T7 = mem.ReadU32((c.SP + 0x114u));
         if ((int)c.T7 <= 0) {
@@ -4066,6 +4508,7 @@ public static class CullPatch
         { var _r = (long)(int)c.V1 * (int)c.V0; c.LO = (uint)_r; c.HI = (uint)(_r >> 32); }
         c.T7 = c.LO;
         mem.WriteU32((c.SP + 0x11Cu), c.T7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(15, (c.SP + 0x11Cu), c.T7);
         c.V0 = mem.ReadU32((c.S4 + 0xA4u));
         { var _r = (long)(int)c.V1 * (int)c.V0; c.LO = (uint)_r; c.HI = (uint)(_r >> 32); }
         c.V0 = (uint)(short)mem.ReadU16(c.S5);
@@ -4095,6 +4538,7 @@ public static class CullPatch
         { var _r = (long)(int)c.V1 * (int)c.V0; c.LO = (uint)_r; c.HI = (uint)(_r >> 32); }
         c.T7 = c.LO;
         mem.WriteU32((c.SP + 0x11Cu), c.T7);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(15, (c.SP + 0x11Cu), c.T7);
         c.V0 = mem.ReadU32((c.S4 + 0xA4u));
         { var _r = (long)(int)c.V1 * (int)c.V0; c.LO = (uint)_r; c.HI = (uint)(_r >> 32); }
         c.V0 = (uint)(short)mem.ReadU16(c.S3);
@@ -4132,6 +4576,7 @@ public static class CullPatch
         c.V1 = c.LO;
         c.A3 = (uint)((int)c.V1 >> 16);
         mem.WriteU32(c.V0, c.A3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(7, c.V0, c.A3);
         c.V0 = mem.ReadU32((c.S4 + 0x8Cu));
         c.V0 = (int)c.T5 < (int)c.V0 ? 1u : 0u;
         if (c.V0 == 0u) {
@@ -4142,16 +4587,25 @@ public static class CullPatch
         c.A2 = mem.ReadU32((c.SP + 0x118u));
         c.A1 = c.S3 + 0u;
         mem.WriteU32((c.SP + 0xF0u), c.T0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(8, (c.SP + 0xF0u), c.T0);
         mem.WriteU32((c.SP + 0xF4u), c.T1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(9, (c.SP + 0xF4u), c.T1);
         mem.WriteU32((c.SP + 0xF8u), c.T2);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(10, (c.SP + 0xF8u), c.T2);
         mem.WriteU32((c.SP + 0xFCu), c.T3);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(11, (c.SP + 0xFCu), c.T3);
         mem.WriteU32((c.SP + 0x100u), c.T4);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(12, (c.SP + 0x100u), c.T4);
         mem.WriteU32((c.SP + 0x104u), c.T5);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(13, (c.SP + 0x104u), c.T5);
         mem.WriteU32((c.SP + 0x108u), c.T6);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(14, (c.SP + 0x108u), c.T6);
         mem.WriteU32((c.SP + 0x110u), c.T9);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(25, (c.SP + 0x110u), c.T9);
         c.RA = 0x80010F08u;
         MediEvil.func_800105C0(c, m);
         mem.WriteU32((c.SP + 0x118u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x118u), c.V0);
         c.T9 = mem.ReadU32((c.SP + 0x110u));
         c.T6 = mem.ReadU32((c.SP + 0x108u));
         c.T5 = mem.ReadU32((c.SP + 0x104u));
@@ -4178,10 +4632,12 @@ public static class CullPatch
         c.V0 = mem.ReadU32(c.T4);
         c.S5 = c.SP + 0x30u;
         mem.WriteU32((c.SP + 0x30u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0x30u), c.V0);
         c.V0 = mem.ReadU16(c.T1);
         mem.WriteU16((c.S5 + 0x4u), (ushort)c.V0);
         c.V0 = 0x52000000u;
         mem.WriteU32((c.SP + 0xC0u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.SP + 0xC0u), c.V0);
         c.V0 = mem.ReadU32((c.S4 + 0x90u));
         c.S0 = 0x00000001u;
         c.V0 = c.V0 + c.S0;
@@ -4203,6 +4659,7 @@ public static class CullPatch
         c.V1 = c.V1 + c.V0;
         c.V1 = c.V1 + c.A1;
         mem.WriteU32(c.A0, c.V1);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(3, c.A0, c.V1);
         c.V0 = mem.ReadU32((c.S4 + 0x90u));
         c.V0 = c.V0 + 0x1u;
         c.V0 = (int)c.S0 < (int)c.V0 ? 1u : 0u;
@@ -4233,10 +4690,12 @@ public static class CullPatch
         c.V0 = mem.ReadU32(c.V0);
         c.V1 = c.S0 + 0x1u;
         mem.WriteU32((c.A0 - 0xCu), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A0 - 0xCu), c.V0);
         c.V0 = c.V1 << 2;
         c.V0 = c.T2 + c.V0;
         c.V0 = mem.ReadU32(c.V0);
         mem.WriteU32((c.A0 - 0x4u), c.V0);
+        RecompOne.Runtime.Pgxp.PgxpCpu.Sw(2, (c.A0 - 0x4u), c.V0);
         c.V0 = c.T3 + 0x8u;
         mem.WriteU32(c.V0, RecompOne.Runtime.Gte.Read(12));
         mem.WriteU32(c.A0, RecompOne.Runtime.Gte.Read(13));

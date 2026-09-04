@@ -2,7 +2,9 @@ bin/
 obj/
 publish/
 generated/
-disc/
+disc/MediEvil (USA) (Track 1).bin
+disc/MediEvil (USA) (Track 2).bin
+disc/MediEvil (USA).cue
 *.sav
 settings.json
 interface.ini

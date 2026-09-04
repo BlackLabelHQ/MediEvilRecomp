@@ -20,6 +20,7 @@ if /I not "%~1"=="nocredits" (
 	echo.
     echo	BlackLabelHQ:
 	echo	- Derp Princess
+	echo	- flaffymg
 	echo.
 )
 REM ===================================================================================================
@@ -117,8 +118,8 @@ if not exist "%DISC%\MediEvil (USA) (Track 2)" (
     set "MISSING=1"
 )
 
-if not exist "%DISC%\MediEvil.cue" (
-    echo Missing: MediEvil.cue
+if not exist "%DISC%\MediEvil (USA).cue" (
+    echo Missing: MediEvil ^(USA^).cue
     set "MISSING=1"
 )
 

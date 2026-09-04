@@ -8,8 +8,9 @@ REM ============================================= Credits ======================
 	echo.
 	echo This project was made possible by:
 	echo.
-	echo	BlackLabelHQ:
+    echo	BlackLabelHQ:
 	echo	- Derp Princess
+	echo	- flaffymg
 	echo.
 REM =================================================================================================
 
@@ -36,3 +37,4 @@ dotnet run
 
 echo.
 REM =================================================================================================
+pause

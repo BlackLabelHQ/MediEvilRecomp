@@ -262,6 +262,18 @@
             "mode": "replace"
         },
         {
+            "overlay": "game",
+            "address": "8009A4C8",
+            "target": "Recompiled.CullPatch.func_8009A4C8",
+            "mode": "replace"
+        },
+        {
+            "overlay": "game",
+            "address": "8009A61C",
+            "target": "Recompiled.CullPatch.func_8009A61C",
+            "mode": "replace"
+        },
+        {
             "overlay": "tl",
             "address": "80010808",
             "target": "Recompiled.CullPatch.func_80010808_tl",

@@ -16,6 +16,7 @@ public static class TerrainPatch
     const uint BufferLimit0 = FreeTerrData + 0x18u;
     const uint BufferLimit1 = FreeTerrData + 0x1Cu;
     const uint ViewDistance = FreeTerrData + 0x24u;
+    const uint BackOfOt = FreeTerrData + 0x2Cu;
     const uint OldViewDistance = FreeTerrData + 0x26u;
     
     const uint MainViewPortSlot = 0x5E0u;
@@ -27,14 +28,14 @@ public static class TerrainPatch
     const uint VpOt1 = 0x74u;
     const uint VpWorkOt = 0x78u;
 
-    const uint OtBase = 0x80380000u;
-    const uint OtStride = 0x20000u;
+    const uint OtBase = 0x803F0000u;
+    const uint OtStride = 0x8000u;
     
     const uint TerrainFog = 0x800F17B8u;
     const uint FogTablePtr = TerrainFog + 0x00u;
     const uint FogEntries = TerrainFog + 0x04u;
 
-    const uint FogBase = 0x80370000u;
+    const uint FogBase = 0x80308000u;
     const int FogShift = 5;
     const int FogPadEntries = 64;
     const int FogFull = 0xFFF;
@@ -43,18 +44,42 @@ public static class TerrainPatch
     const int PlaneHalfWidth = 160;
     const int PlaneHalfHeight = 120;
     const float CaptureOvershoot = 1.25f;
+    const float NearOvershoot = 1.6f;
     
-    public const int MaxCapture = 512;
+    public const int MaxCapture = 2048;
     const uint CaptureBase = 0x80301000u;
+    
+    public const uint CaptureListAddress = CaptureListPtr;
     const uint RenderPtrBase = 0x80310000u;
 
-    const int PrimCap = 2400;
+    public const int PrimCapacity = 8192;
+    const int PrimCap = PrimCapacity;
     const uint PrimBase = 0x80320000u;
-    const uint PrimStride = 0x20000u;
+    const uint PrimStride = 0x68000u;
     const uint PrimSlack = 128u;
     
-    public static float DrawDistanceScale = 1f;
+    public const uint NearClip = 4u;
     
+    public static float DrawDistanceScale = 1f;
+    public static bool BetterTerrain = true;
+    
+    public static bool NearClamp => BetterTerrain;
+
+    public static uint NearOtz(uint otz)
+    {
+        if (!NearClamp) return otz;
+
+        int near = (short)RecompOne.Runtime.Gte.ReadControl(26) / 2;
+
+        for (int z = 17; z <= 19; z++)
+            if ((int)RecompOne.Runtime.Gte.Read(z) < near)
+                return otz;
+
+        return (int)otz < NearClip ? NearClip : otz;
+    }
+
+    const bool GrowTable = true;
+
     static short _baseDistance;
     static int _baseReach;
     static int _baseOtBits;
@@ -64,21 +89,20 @@ public static class TerrainPatch
 
     public const int BaseSubdivOtz = 4096;
 
-    public static int SubdivOtz => BaseSubdivOtz >> _shiftDelta;
+    public static int SubdivOtz => BetterTerrain ? 0 : BaseSubdivOtz >> _shiftDelta;
     
     public static void Register()
     {
         Event.AddListener<RuntimeReadyEvent>(_ =>
         {
-            DrawDistanceScale = RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f);
+            DrawDistanceScale = Math.Clamp(RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f), 1f, 3f);
+            BetterTerrain = RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", true);
         });
-        Event.AddListener<OverlayLoadedEvent>(_ => { _baseDistance = 0; _baseReach = 0; _baseOtBits = 0; _baseOtSize = 0; _baseShift = 0; _shiftDelta = 0; });
+        Event.AddListener<OverlayLoadedEvent>(_ => { TerrainCapture.Forget(); _baseDistance = 0; _baseReach = 0; _baseOtBits = 0; _baseOtSize = 0; _baseShift = 0; _shiftDelta = 0; });
     }
     
-    public static void Capture(CpuContext c, IMemory m)
+    public static bool Capture(CpuContext c, IMemory m)
     {
-
-
         m.WriteU32(CaptureListPtr, CaptureBase);
         c.A1 = MaxCapture;
         c.A2 = CaptureBase;
@@ -91,6 +115,9 @@ public static class TerrainPatch
         
         FrustumCorners(m);
         DrawDistance(c, m);
+        ClampBackOfOt(c, m);
+        
+        return TerrainCapture.Capture(c, m);
     }
     
     static void FrustumCorners(IMemory m)
@@ -100,11 +127,12 @@ public static class TerrainPatch
         float scale = wide > 0f ? wide / source : 1f;
         
         short half = (short)Math.Clamp((int)MathF.Round(PlaneHalfWidth * scale * CaptureOvershoot), PlaneHalfWidth, 1024);
+        short tall = (short)Math.Clamp((int)MathF.Round(PlaneHalfHeight * NearOvershoot), PlaneHalfHeight, 1024);
         
-        Write(m, 0, (short)-half, PlaneHalfHeight);
-        Write(m, 1, (short)-half, -PlaneHalfHeight);
-        Write(m, 2, half, -PlaneHalfHeight);
-        Write(m, 3, half, PlaneHalfHeight);
+        Write(m, 0, (short)-half, tall);
+        Write(m, 1, (short)-half, (short)-tall);
+        Write(m, 2, half, (short)-tall);
+        Write(m, 3, half, tall);
     }
     
     static void Write(IMemory m, int index, short x, short y)
@@ -122,7 +150,6 @@ public static class TerrainPatch
         int reach = m.ReadU16(viewport + VpViewDistance);
         if (reach <= 0) return 0;
 
-
         if (_baseReach == 0) _baseReach = reach;
 
         int wanted = _baseReach;
@@ -133,12 +160,7 @@ public static class TerrainPatch
 
         if (wanted != reach)
         {
-            int delta = Log2(wanted) - Log2(_baseReach);
-
-            delta -= GrowOt2(m, viewport, delta);
-
-            m.WriteU16(viewport + VpOtzShift, (ushort)(_baseShift + delta));
-            _shiftDelta = delta;
+            _shiftDelta = 0;
 
             m.WriteU16(viewport + VpViewDistance, (ushort)wanted);
             reach = wanted;
@@ -174,8 +196,28 @@ public static class TerrainPatch
         m.WriteU32(viewport + VpOt1, OtBase + OtStride);
         m.WriteU32(viewport + VpWorkOt, work == ot0 ? OtBase : OtBase + OtStride);
 
+        Blank(m, OtBase, size);
+        Blank(m, OtBase + OtStride, size);
 
         return grow;
+    }
+
+    static void Blank(IMemory m, uint ot, uint size)
+    {
+        m.WriteU32(ot, 0x00FFFFFFu);
+        for (uint i = 1; i < size; i++) m.WriteU32(ot + i * 4u, (ot + (i - 1) * 4u) & 0x00FFFFFFu);
+    }
+
+    static void ClampBackOfOt(CpuContext c, IMemory m)
+    {
+        uint viewport = m.ReadU32(c.GP + MainViewPortSlot);
+        if (viewport == 0u) return;
+
+        int size = m.ReadU16(viewport + VpOtSize);
+        if (size <= 0) return;
+
+        int back = (int)m.ReadU32(BackOfOt);
+        if (back > size) m.WriteU32(BackOfOt, (uint)size);
     }
 
     static void Fog(IMemory m, int distance)

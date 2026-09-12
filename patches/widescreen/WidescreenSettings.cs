@@ -52,7 +52,7 @@ public static class WidescreenSettings
         
         ImGui.TextUnformatted(Localization.T("render.draw_distance"));
         float distance = TerrainPatch.DrawDistanceScale;
-        if (ImGui.SliderFloat("##draw-distance", ref distance, 1.0f, 4.0f, "%.2fx"))
+        if (ImGui.SliderFloat("##draw-distance", ref distance, 1.0f, 3.0f, "%.2fx"))
         {
             TerrainPatch.DrawDistanceScale = distance;
             RecompOne.Runtime.Runtime.View.SetFloat("DrawDistanceScale", distance);
@@ -61,6 +61,20 @@ public static class WidescreenSettings
         
         ImGui.PushStyleColor(ImGuiCol.Text, ImGui.GetStyle().Colors[(int)ImGuiCol.TextDisabled]);
         ImGui.TextWrapped(Localization.T("render.draw_distance_hint"));
+        ImGui.PopStyleColor();
+        
+        ImGui.Spacing();
+        
+        bool better = TerrainPatch.BetterTerrain;
+        if (ImGui.Checkbox(Localization.T("render.better_terrain"), ref better))
+        {
+            TerrainPatch.BetterTerrain = better;
+            RecompOne.Runtime.Runtime.View.SetBool("BetterTerrain", better);
+            RecompOne.Runtime.Runtime.SaveView();
+        }
+        
+        ImGui.PushStyleColor(ImGuiCol.Text, ImGui.GetStyle().Colors[(int)ImGuiCol.TextDisabled]);
+        ImGui.TextWrapped(Localization.T("render.better_terrain_hint"));
         ImGui.PopStyleColor();
     }
     

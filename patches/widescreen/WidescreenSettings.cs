@@ -65,11 +65,11 @@ public static class WidescreenSettings
         
         ImGui.Spacing();
         
-        bool better = TerrainPatch.BetterTerrain;
-        if (ImGui.Checkbox(Localization.T("render.better_terrain"), ref better))
+        bool noSubdivision = TerrainPatch.NoTriangleSubdivision;
+        if (ImGui.Checkbox(Localization.T("render.better_terrain"), ref noSubdivision))
         {
-            TerrainPatch.BetterTerrain = better;
-            RecompOne.Runtime.Runtime.View.SetBool("BetterTerrain", better);
+            TerrainPatch.NoTriangleSubdivision = noSubdivision;
+            RecompOne.Runtime.Runtime.View.SetBool("NoTriangleSubdivision", noSubdivision);
             RecompOne.Runtime.Runtime.SaveView();
         }
         

@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout MediEvilRecomp
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          submodules: recursive
+
+      - name: Checkout disc source
+        uses: actions/checkout@v4
+        with:
+          repository: BlackLabelHQ/MediEvilDiscSource
+          token: ${{ secrets.DISC_SOURCE_PAT }}
+          path: disc
+          lfs: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build recompiler
+        run: dotnet build RecompOne/RecompOne.Recompiler/RecompOne.Recompiler.csproj -c Release
+
+      - name: Run recompilation
+        run: dotnet run --project RecompOne/RecompOne.Recompiler -c Release --no-build -- config/MediEvil.json
+
+      - name: Build MediEvilRecomp
+        run: dotnet build RecompOne.MediEvil.csproj -c Release -p:NoWarn=0162
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: medievil-recomp-build
+          path: bin/Release/net10.0/

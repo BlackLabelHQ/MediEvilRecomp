@@ -8,6 +8,7 @@
     <NoWarn>0162</NoWarn>
     <DefaultItemExcludes>$(DefaultItemExcludes);RecompOne/**</DefaultItemExcludes>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+     <ApplicationIcon>assets/icon/MediEvilRecomp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>none</DebugType>
@@ -15,6 +16,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="assets/languages.json" />
+     <EmbeddedResource Include="assets/icon/*.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="RecompOne/RecompOne.Runtime/RecompOne.Runtime.csproj" UndefineProperties="OutputType" />

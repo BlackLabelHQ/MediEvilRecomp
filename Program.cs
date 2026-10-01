@@ -20,7 +20,7 @@ if (Array.Find(asm.GetManifestResourceNames(), n => n.EndsWith(".MediEvilRecomp.
 
 RecompOne.Runtime.Runtime.Defaults(cfg =>
 {
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyEnable, true);
+    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyEnable, false);
     cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyCulling, true);
     cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyTextureCorrection, true);
     cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyCpu, true);

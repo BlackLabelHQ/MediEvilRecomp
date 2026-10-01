@@ -221,6 +221,18 @@
     "patches": [
         {
             "overlay": "game",
+            "function": "func_8004F2B0",
+            "target": "Recompiled.WidescreenPatch.BeginScreenFadeRender",
+            "mode": "pre"
+        },
+        {
+            "overlay": "game",
+            "function": "func_8004F2B0",
+            "target": "Recompiled.WidescreenPatch.EndScreenFadeRender",
+            "mode": "post"
+        },
+        {
+            "overlay": "game",
             "address": "8005176C",
             "target": "Recompiled.TerrainPatch.Capture",
             "mode": "pre"

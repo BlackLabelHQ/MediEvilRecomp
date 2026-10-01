@@ -61,9 +61,9 @@ public static class TerrainPatch
     public const uint NearClip = 4u;
     
     public static float DrawDistanceScale = 1f;
-    public static bool BetterTerrain = true;
+    public static bool NoTriangleSubdivision = true;
     
-    public static bool NearClamp => BetterTerrain;
+    public static bool NearClamp => NoTriangleSubdivision;
 
     public static uint NearOtz(uint otz)
     {
@@ -89,14 +89,15 @@ public static class TerrainPatch
 
     public const int BaseSubdivOtz = 4096;
 
-    public static int SubdivOtz => BetterTerrain ? 0 : BaseSubdivOtz >> _shiftDelta;
+    public static int SubdivOtz => NoTriangleSubdivision ? 0 : BaseSubdivOtz >> _shiftDelta;
     
     public static void Register()
     {
         Event.AddListener<RuntimeReadyEvent>(_ =>
         {
             DrawDistanceScale = Math.Clamp(RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f), 1f, 3f);
-            BetterTerrain = RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", true);
+            NoTriangleSubdivision = RecompOne.Runtime.Runtime.View.GetBool("NoTriangleSubdivision",
+                RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", false));
         });
         Event.AddListener<OverlayLoadedEvent>(_ => { TerrainCapture.Forget(); _baseDistance = 0; _baseReach = 0; _baseOtBits = 0; _baseOtSize = 0; _baseShift = 0; _shiftDelta = 0; });
     }

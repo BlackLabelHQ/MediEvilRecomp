@@ -1,0 +1,159 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout MediEvilRecomp
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          submodules: recursive
+
+      - name: Checkout disc source
+        uses: actions/checkout@v4
+        with:
+          repository: BlackLabelHQ/MediEvilDiscSource
+          token: ${{ secrets.DISC_SOURCE_PAT }}
+          path: disc
+          lfs: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build recompiler
+        run: dotnet build RecompOne/RecompOne.Recompiler/RecompOne.Recompiler.csproj -c Release
+
+      - name: Run recompilation
+        run: dotnet run --project RecompOne/RecompOne.Recompiler -c Release --no-build -- config/MediEvil.json
+
+      - name: Upload generated source
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-source
+          path: generated/
+
+  build:
+    needs: [generate]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - rid: win-x64
+            asset: windows-x64
+            archive: zip
+            outputType: WinExe
+          - rid: win-arm64
+            asset: windows-arm64
+            archive: zip
+            outputType: WinExe
+          - rid: linux-x64
+            asset: linux-x64
+            archive: tar
+            outputType: Exe
+          - rid: osx-x64
+            asset: macos-x64
+            archive: zip
+            outputType: Exe
+          - rid: osx-arm64
+            asset: macos-arm64
+            archive: zip
+            outputType: Exe
+    steps:
+      - name: Checkout MediEvilRecomp
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Download generated source
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-source
+          path: generated
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Publish (framework-dependent, ReadyToRun)
+        run: >
+          dotnet publish RecompOne.MediEvil.csproj -c Release
+          -r ${{ matrix.rid }}
+          --self-contained false
+          -p:PublishSingleFile=false
+          -p:PublishReadyToRun=true
+          -p:OutputType=${{ matrix.outputType }}
+          -p:UseRidGraph=true
+          -p:InformationalVersion=${{ github.ref_name }}
+          -p:NoWarn=0162
+          -o publish/${{ matrix.rid }}
+
+      - name: Bundle Linux launcher
+        if: startsWith(matrix.rid, 'linux')
+        run: |
+          cp run.sh "publish/${{ matrix.rid }}/run.sh"
+          chmod +x "publish/${{ matrix.rid }}/run.sh"
+          chmod +x "publish/${{ matrix.rid }}/medievil"
+
+      - name: Bundle first party mods
+        run: |
+          if [ -d mods ]; then
+            rsync -a --exclude '.git*' --exclude '.cache' mods/ "publish/${{ matrix.rid }}/mods/"
+          fi
+
+      - name: Package (zip)
+        if: matrix.archive == 'zip'
+        run: |
+          cd publish/${{ matrix.rid }}
+          zip -r "../../MediEvilRecomp-${{ github.ref_name }}-${{ matrix.asset }}.zip" .
+
+      - name: Package (tar.gz)
+        if: matrix.archive == 'tar'
+        run: |
+          cd publish/${{ matrix.rid }}
+          tar -czf "../../MediEvilRecomp-${{ github.ref_name }}-${{ matrix.asset }}.tar.gz" .
+
+      - name: Upload packaged build
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.asset }}
+          path: MediEvilRecomp-${{ github.ref_name }}-${{ matrix.asset }}.*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout MediEvilRecomp
+        uses: actions/checkout@v4
+
+      - name: Download packaged builds
+        uses: actions/download-artifact@v4
+        with:
+          pattern: package-*
+          path: dist
+          merge-multiple: true
+
+      - name: Build release notes
+        run: |
+          if [ -s CHANGELOG.md ]; then
+            tail -n +2 CHANGELOG.md > release_notes.md
+          else
+            printf 'MediEvilRecomp %s\n' "$GITHUB_REF_NAME" > release_notes.md
+          fi
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          body_path: release_notes.md
+          files: dist/*

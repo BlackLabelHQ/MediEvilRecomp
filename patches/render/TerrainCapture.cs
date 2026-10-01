@@ -3,6 +3,7 @@ using RecompOne.Runtime.Memory;
 
 namespace Recompiled;
 
+//todo: when using no triangle subdivision fix the culling, i havent fixed that yet
 public static class TerrainCapture
 {
     const uint ViewPlaneSvecs = 0x800EEA04u;
@@ -33,7 +34,6 @@ public static class TerrainCapture
 
     const int SquareStride = 8;
     const uint SquarePolyCount = 0u;
-    const uint SquareMinVertexY = 2u;
     const uint SquarePolyIds = 4u;
 
     const ushort CapturedBit = 0x8000;
@@ -43,7 +43,7 @@ public static class TerrainCapture
     static readonly short[] _low = new short[MaxGridRows];
     static readonly short[] _high = new short[MaxGridRows];
 
-    readonly record struct Square(uint Address, int Distance, int Polys);
+    readonly record struct Square(uint Address, long Distance, int Polys);
 
     static readonly List<Square> _found = [];
     static readonly List<uint> _flagged = [];
@@ -54,11 +54,6 @@ public static class TerrainCapture
     static uint _xnum;
     static uint _znum;
     static uint _ymax;
-
-    static long _stepXy;
-    static long _stepXz;
-    static long _stepZy;
-    static long _stepZz;
 
     public static int Captured { get; private set; }
 
@@ -173,11 +168,12 @@ public static class TerrainCapture
     static bool Project(CpuContext c, IMemory m, uint matrix, Span<int> gridX, Span<int> gridZ)
     {
         int planeY = (short)m.ReadU16(ViewPlaneSvecs + 2u);
+        int planeX = (short)m.ReadU16(ViewPlaneSvecs);
         int planeZ = (short)m.ReadU16(ViewPlaneSvecs + 4u);
         if (planeZ == 0) return false;
 
         int distance = (short)m.ReadU16(ViewDistance);
-        long radius = distance * Root((long)planeY * planeY + (long)planeZ * planeZ) / planeZ;
+        long radius = distance * Root((long)planeX * planeX + (long)planeY * planeY + (long)planeZ * planeZ) / planeZ; //fixx the cull
         if (radius <= 0) return false;
 
         int camX = (int)m.ReadU32(matrix + MatrixTranslation);
@@ -259,14 +255,6 @@ public static class TerrainCapture
               Cell(m, matrix, 2, 2) * (long)z) >> 12;
     }
 
-    static void RotateTransposed(IMemory m, uint matrix, int x, int y, int z, out long oy, out long oz)
-    {
-        oy = (Cell(m, matrix, 0, 1) * (long)x + Cell(m, matrix, 1, 1) * (long)y +
-              Cell(m, matrix, 2, 1) * (long)z) >> 12;
-        oz = (Cell(m, matrix, 0, 2) * (long)x + Cell(m, matrix, 1, 2) * (long)y +
-              Cell(m, matrix, 2, 2) * (long)z) >> 12;
-    }
-
     static long Root(long value)
     {
         return value <= 0 ? 0 : (long)Math.Sqrt(value);
@@ -294,6 +282,7 @@ public static class TerrainCapture
     {
         int first = MaxGridRows;
         int last = -1;
+        const int margin = 2;
 
         for (int row = 0; row < MaxGridRows; row++)
         {
@@ -302,14 +291,14 @@ public static class TerrainCapture
             if (row < first) first = row;
             last = row;
 
-            if (_low[row] > short.MinValue + 1) _low[row]--;
-            if (_high[row] < short.MaxValue - 1) _high[row]++;
+            _low[row] = (short)Math.Max(short.MinValue, _low[row] - margin);
+            _high[row] = (short)Math.Min(short.MaxValue, _high[row] + margin);
         }
 
         if (last < 0) return;
 
-        if (first > 0) Carry(first, first - 1);
-        if (last < MaxGridRows - 1) Carry(last, last + 1);
+        for (int row = Math.Max(0, first - margin); row < first; row++) Carry(first, row);
+        for (int row = last + 1; row <= Math.Min(MaxGridRows - 1, last + margin); row++) Carry(last, row);
     }
 
     static void Carry(int from, int to)
@@ -359,12 +348,6 @@ public static class TerrainCapture
         int camY = (int)m.ReadU32(matrix + MatrixTranslation + 4u);
         int camZ = (int)m.ReadU32(matrix + MatrixTranslation + 8u);
 
-        int planeY = (short)m.ReadU16(ViewPlaneSvecs + 2u);
-        int planeZ = (short)m.ReadU16(ViewPlaneSvecs + 4u);
-
-        RotateTransposed(m, matrix, length, 0, 0, out _stepXy, out _stepXz);
-        RotateTransposed(m, matrix, 0, 0, length, out _stepZy, out _stepZz);
-
         uint list = m.ReadU32(TerrainPatch.CaptureListAddress);
         int room = TerrainPatch.MaxCapture;
         int budget = TerrainPatch.PrimCapacity;
@@ -393,12 +376,8 @@ public static class TerrainCapture
                 if (!Ram(m.ReadU32(square + SquarePolyIds))) continue;
 
                 int worldX = (x << shift) + baseX - camX;
-                int lift = (short)m.ReadU16(square + SquareMinVertexY) - camY;
-
-                if (lift > 0 && !Visible(matrix, m, worldX, lift, worldZ, planeY, planeZ)) continue;
-
-                int middleX = worldX + (length >> 1);
-                int middleZ = worldZ + (length >> 1);
+                long middleX = worldX + (length >> 1);
+                long middleZ = worldZ + (length >> 1);
 
                 _found.Add(new Square(square, middleX * middleX + middleZ * middleZ, polys));
             }
@@ -413,7 +392,8 @@ public static class TerrainCapture
 
         foreach (var square in _found)
         {
-            if (Captured >= room || spent + square.Polys > budget) break;
+            if (Captured >= room) break;
+            if (spent + square.Polys > budget) continue;
 
             ushort count = m.ReadU16(square.Address + SquarePolyCount);
             uint entry = list + (uint)Captured * SquareStride;
@@ -429,18 +409,4 @@ public static class TerrainCapture
 
     }
 
-    static bool Visible(uint matrix, IMemory m, int x, int y, int z, int planeY, int planeZ)
-    {
-        RotateTransposed(m, matrix, x, y, z, out long baseY, out long baseZ);
-
-        return Inside(baseY, baseZ, planeY, planeZ) ||
-               Inside(baseY + _stepZy, baseZ + _stepZz, planeY, planeZ) ||
-               Inside(baseY + _stepXy + _stepZy, baseZ + _stepXz + _stepZz, planeY, planeZ) ||
-               Inside(baseY + _stepXy, baseZ + _stepXz, planeY, planeZ);
-    }
-
-    static bool Inside(long vy, long vz, int planeY, int planeZ)
-    {
-        return vy * planeZ <= vz * planeY;
-    }
 }

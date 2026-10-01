@@ -2,6 +2,8 @@
 
 The MediEvil Recomp is proudly brought to you by the BlackLabelHQ team!
 
+Be aware that this Recomp is still in beta, things WILL break and some of the features may not be fully functional!
+
 # Please Read This
 
 Before we get started on the README - This project is a "RE"comp. It is NOT a "DE"comp.

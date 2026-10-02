@@ -1,4 +1,5 @@
 # MediEvil Recomp
+<img width="1919" height="1079" alt="Screenshot taken from medievil wiki!" src="https://github.com/user-attachments/assets/b0a0e61f-6251-40c8-b186-549844bce776" />
 
 The MediEvil Recomp is proudly brought to you by the BlackLabelHQ team!
 

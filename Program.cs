@@ -2,6 +2,8 @@ using RecompOne.Runtime.Memory;
 using Recompiled;
 using RecompOne.Runtime.Dispatch;
 
+if (AutoUpdater.HandleRelaunch(args)) return 0;
+
 var title = "MediEvilRecomp";
 
 var asm = System.Reflection.Assembly.GetExecutingAssembly();
@@ -30,6 +32,7 @@ Dispatcher.Tolerant = true;
 TerrainPatch.Register();
 WidescreenPatch.Register();
 WidescreenSettings.Register();
+AutoUpdater.Register();
 
 RecompOne.Runtime.Runtime.Run(() => Entry.Run(new PSMemory(0x00400000), args.Length > 0 ? args[0] : null, title));
 return 0;

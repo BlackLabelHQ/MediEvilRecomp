@@ -1,6 +1,6 @@
 # 
 
-v0.2b is not a massive update, just something that i wanted to fix way before the first release but havent had time! the rendering now should be fairly decent looking!
+v0.2b* is not a massive update, just something that i wanted to fix way before the first release but havent had time! the rendering now should be fairly decent looking!
 
 thanks for the support on the initial release! i hope you guys enjoy it!
 
@@ -9,7 +9,8 @@ thanks for the support on the initial release! i hope you guys enjoy it!
 - fixed overworld map not rendering properly on 16:9
 - fixed an issue with the clear buffer not covering 16:9
 - added a "better rendering" option to improve the terrain/entity rendering and camera, interpolation is also improved
-
+- added automatic updater
+- included shadermod
 
 # Dependencies
 

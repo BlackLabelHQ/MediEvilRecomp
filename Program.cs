@@ -20,15 +20,10 @@ if (Array.Find(asm.GetManifestResourceNames(), n => n.EndsWith(".MediEvilRecomp.
 
 RecompOne.Runtime.Runtime.Defaults(cfg =>
 {
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyEnable, false);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyCulling, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyTextureCorrection, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyCpu, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyMemory, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyVertexCache, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyCacheW, true);
-    cfg.Default(RecompOne.Runtime.Pgxp.Pgxp.KeyTolerance, RecompOne.Runtime.Pgxp.Pgxp.DefaultTolerance);
+    cfg.Default("BetterRendering", true);
 });
+RecompOne.Runtime.Pgxp.Pgxp.Supported = false;
+RecompOne.Runtime.Hle.NativeGeometry.Enabled = false;
 
 Dispatcher.Tolerant = true;
 

@@ -2,7 +2,6 @@ using RecompOne.Runtime.Context;
 using RecompOne.Runtime.Events;
 using RecompOne.Runtime.Hle;
 using RecompOne.Runtime.Memory;
-using RecompOne.Runtime.Pgxp;
 
 namespace Recompiled;
 
@@ -41,8 +40,6 @@ public static class WidescreenPatch
     {
         uint packed = unchecked((uint)(ushort)x | ((uint)(ushort)y << 16));
         m.WriteU32(address, packed);
-        var vertex = new PgxpValue { X = x, Y = y, Flags = PgxpFlags.ValidLow };
-        PgxpMemory.Store(address, in vertex, packed);
     }
 
     static void OnRuntimeReady(RuntimeReadyEvent e)

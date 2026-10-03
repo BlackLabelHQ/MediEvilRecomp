@@ -213,12 +213,14 @@ public static class TerrainCapture
                 z = dz * radius / flat;
             }
 
-            gridX[corner] = (int)(camX + x - baseX) >> shift;
-            gridZ[corner] = (int)(camZ + z - baseZ) >> shift;
+            var cellX = (camX + (float)x - baseX) / (1 << shift);
+            var cellZ = (camZ + (float)z - baseZ) / (1 << shift);
+            gridX[corner] = (int)MathF.Floor(cellX);
+            gridZ[corner] = (int)MathF.Floor(cellZ);
         }
 
-        gridX[4] = (camX - baseX) >> shift;
-        gridZ[4] = (camZ - baseZ) >> shift;
+        gridX[4] = (int)MathF.Floor((camX - baseX) / (float)(1 << shift));
+        gridZ[4] = (int)MathF.Floor((camZ - baseZ) / (float)(1 << shift));
 
         return true;
     }

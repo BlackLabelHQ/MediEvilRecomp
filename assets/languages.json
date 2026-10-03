@@ -26,14 +26,14 @@
             "es-419": "Aumenta la distancia de vision del terreno"
         },
         "render.better_terrain": {
-            "en": "No triangle subdivision on terrain",
-            "pt-BR": "Sem subdivisao de triangulos no terreno",
-            "es-419": "Sin subdivision de triangulos en el terreno"
+            "en": "Better rendering",
+            "pt-BR": "Melhor renderizacao",
+            "es-419": "Mejor renderizado"
         },
         "render.better_terrain_hint": {
-            "en": "Best with PGXP on. Use this when using frame interpolation.",
-            "pt-BR": "Melhor com o PGXP ligado. Use esta opcao ao usar interpolacao de quadros.",
-            "es-419": "Mejor con PGXP activado. Usa esta opcion al usar interpolacion de cuadros!"
+            "en": "Uses smooth terrain rendering with floating point precision and depth buffering.",
+            "pt-BR": "Usa renderizacao suave do terreno com precisao em ponto flutuante e buffer de profundidade.",
+            "es-419": "Usa renderizado suave del terreno con precision de punto flotante y buffer de profundidad."
         }
     }
 }

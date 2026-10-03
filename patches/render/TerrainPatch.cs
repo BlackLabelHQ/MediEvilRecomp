@@ -61,7 +61,21 @@ public static class TerrainPatch
     public const uint NearClip = 4u;
     
     public static float DrawDistanceScale = 1f;
-    public static bool NoTriangleSubdivision = true;
+    private static bool _betterRendering;
+
+    public static bool NoTriangleSubdivision
+    {
+        get => _betterRendering;
+        set
+        {
+            _betterRendering = value;
+            RecompOne.Runtime.Hle.NativeGeometry.Enabled = false;
+            TerrainFloatProjection.Reset();
+            EntityFloatProjection.Reset();
+            RecompOne.Runtime.Hle.NativeGeometry.DepthBuffer = value;
+            RecompOne.Runtime.Hle.NativeGeometry.Enabled = value;
+        }
+    }
     
     public static bool NearClamp => NoTriangleSubdivision;
 
@@ -78,28 +92,30 @@ public static class TerrainPatch
         return (int)otz < NearClip ? NearClip : otz;
     }
 
-    const bool GrowTable = true;
-
     static short _baseDistance;
     static int _baseReach;
     static int _baseOtBits;
     static int _baseOtSize;
     static int _baseShift;
-    static int _shiftDelta;
+    static uint _viewport;
+    static uint _originalOt0;
+    static uint _originalOt1;
+    static int _lastDistance;
 
     public const int BaseSubdivOtz = 4096;
 
-    public static int SubdivOtz => NoTriangleSubdivision ? 0 : BaseSubdivOtz >> _shiftDelta;
+    public static int SubdivOtz => NoTriangleSubdivision ? 0 : BaseSubdivOtz;
     
     public static void Register()
     {
         Event.AddListener<RuntimeReadyEvent>(_ =>
         {
             DrawDistanceScale = Math.Clamp(RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f), 1f, 3f);
-            NoTriangleSubdivision = RecompOne.Runtime.Runtime.View.GetBool("NoTriangleSubdivision",
-                RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", false));
+            NoTriangleSubdivision = RecompOne.Runtime.Runtime.View.GetBool("BetterRendering",
+                RecompOne.Runtime.Runtime.View.GetBool("NoTriangleSubdivision",
+                    RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", false)));
         });
-        Event.AddListener<OverlayLoadedEvent>(_ => { TerrainCapture.Forget(); _baseDistance = 0; _baseReach = 0; _baseOtBits = 0; _baseOtSize = 0; _baseShift = 0; _shiftDelta = 0; });
+        Event.AddListener<OverlayLoadedEvent>(_ => TerrainCapture.Forget());
     }
     
     public static bool Capture(CpuContext c, IMemory m)
@@ -116,8 +132,7 @@ public static class TerrainPatch
         
         FrustumCorners(m);
         DrawDistance(c, m);
-        ClampBackOfOt(c, m);
-        
+
         return TerrainCapture.Capture(c, m);
     }
     
@@ -143,82 +158,83 @@ public static class TerrainPatch
         m.WriteU16(p + 2u, (ushort)y);
     }
     
-    static int Reach(CpuContext c, IMemory m)
+    public static void PrepareFrame(CpuContext c, IMemory m)
     {
         uint viewport = m.ReadU32(c.GP + MainViewPortSlot);
-        if (viewport == 0u) return 0;
-
-        int reach = m.ReadU16(viewport + VpViewDistance);
-        if (reach <= 0) return 0;
-
-        if (_baseReach == 0) _baseReach = reach;
-
-        int wanted = _baseReach;
-        while (wanted < 0x8000 && wanted * 2 <= _baseReach * DrawDistanceScale) wanted *= 2;
-
-        if (_baseOtBits == 0) _baseOtBits = m.ReadU16(viewport + VpOtSizeBits);
-        if (_baseShift == 0) _baseShift = m.ReadU16(viewport + VpOtzShift);
-
-        if (wanted != reach)
+        if (viewport == 0u || c.A0 != viewport) return;
+        if (_viewport != viewport)
         {
-            _shiftDelta = 0;
-
-            m.WriteU16(viewport + VpViewDistance, (ushort)wanted);
-            reach = wanted;
+            if (_viewport != 0u) RestoreViewport(m);
+            _viewport = viewport;
+            _baseReach = m.ReadU16(viewport + VpViewDistance);
+            _baseOtSize = m.ReadU16(viewport + VpOtSize);
+            _baseOtBits = m.ReadU16(viewport + VpOtSizeBits);
+            _baseShift = m.ReadU16(viewport + VpOtzShift);
+            _originalOt0 = m.ReadU32(viewport + VpOt0);
+            _originalOt1 = m.ReadU32(viewport + VpOt1);
+            _baseDistance = 0;
+            _lastDistance = 0;
         }
+        if (_baseReach <= 0 || _baseOtSize <= 0 || _baseShift > 15) return;
 
-        return reach;
+        int wanted = Math.Clamp((int)MathF.Ceiling(_baseReach * DrawDistanceScale), _baseReach, 32768);
+        int size = _baseOtSize;
+        while ((long)size << _baseShift < wanted && size * 8 <= OtStride) size *= 2;
+        int reach = (int)Math.Min(wanted, (long)size << _baseShift);
+        uint ot0 = size > _baseOtSize ? OtBase : _originalOt0;
+        uint ot1 = size > _baseOtSize ? OtBase + OtStride : _originalOt1;
+        uint old0 = m.ReadU32(viewport + VpOt0);
+        uint old1 = m.ReadU32(viewport + VpOt1);
+        uint work = m.ReadU32(viewport + VpWorkOt);
+        if (work != old0 && work != old1) return;
+        if (old0 != ot0 || m.ReadU16(viewport + VpOtSize) != size)
+        {
+            Blank(m, ot0, (uint)size);
+            Blank(m, ot1, (uint)size);
+            m.WriteU32(viewport + VpOt0, ot0);
+            m.WriteU32(viewport + VpOt1, ot1);
+            m.WriteU32(viewport + VpWorkOt, work == old0 ? ot0 : ot1);
+            m.WriteU16(viewport + VpOtSize, (ushort)size);
+            m.WriteU16(viewport + VpOtSizeBits, (ushort)Log2(size));
+            if (m.ReadU32(0x1F800008u) == viewport)
+                m.WriteU32(0x1F80000Cu, work == old0 ? ot0 : ot1);
+        }
+        m.WriteU16(viewport + VpViewDistance, (ushort)reach);
     }
 
-    static int GrowOt2(IMemory m, uint viewport, int delta)
+    public static void ReleaseViewport(CpuContext c, IMemory m)
     {
-        if (delta <= 0) return 0;
+        if (c.A0 != _viewport || _viewport == 0u) return;
+        RestoreViewport(m);
+        _viewport = 0;
+        _baseDistance = 0;
+        _lastDistance = 0;
+    }
 
-        uint oldSize = _baseOtSize != 0 ? (uint)_baseOtSize : m.ReadU16(viewport + VpOtSize);
-        if (oldSize == 0) return 0;
+    static void RestoreViewport(IMemory m)
+    {
+        uint work = m.ReadU32(_viewport + VpWorkOt);
+        uint ot0 = m.ReadU32(_viewport + VpOt0);
+        m.WriteU32(_viewport + VpWorkOt, work == ot0 ? _originalOt0 : _originalOt1);
+        m.WriteU32(_viewport + VpOt0, _originalOt0);
+        m.WriteU32(_viewport + VpOt1, _originalOt1);
+        m.WriteU16(_viewport + VpOtSize, (ushort)_baseOtSize);
+        m.WriteU16(_viewport + VpOtSizeBits, (ushort)_baseOtBits);
+        m.WriteU16(_viewport + VpOtzShift, (ushort)_baseShift);
+        m.WriteU16(_viewport + VpViewDistance, (ushort)_baseReach);
+    }
 
-        _baseOtSize = (int)oldSize;
-
-        uint work = m.ReadU32(viewport + VpWorkOt);
-        uint ot0 = m.ReadU32(viewport + VpOt0);
-        uint ot1 = m.ReadU32(viewport + VpOt1);
-        if (work != ot0 && work != ot1) return 0;
-
-        int grow = 0;
-        while (grow < delta && (oldSize << (grow + 1)) <= 0xFFFFu && (oldSize << (grow + 1)) * 4u <= OtStride) grow++;
-
-        if (grow == 0) return 0;
-        
-        uint size = oldSize << grow;
-
-        m.WriteU16(viewport + VpOtSizeBits, (ushort)(_baseOtBits + grow));
-        m.WriteU16(viewport + VpOtSize, (ushort)size);
-        m.WriteU32(viewport + VpOt0, OtBase);
-        m.WriteU32(viewport + VpOt1, OtBase + OtStride);
-        m.WriteU32(viewport + VpWorkOt, work == ot0 ? OtBase : OtBase + OtStride);
-
-        Blank(m, OtBase, size);
-        Blank(m, OtBase + OtStride, size);
-
-        return grow;
+    public static uint MeshClipDistance(uint distance, IMemory m)
+    {
+        if (_viewport == 0u || m.ReadU32(0x1F800088u) != _viewport || distance == 0u)
+            return distance;
+        return (uint)Math.Min(65535, Math.Ceiling(distance * DrawDistanceScale));
     }
 
     static void Blank(IMemory m, uint ot, uint size)
     {
         m.WriteU32(ot, 0x00FFFFFFu);
         for (uint i = 1; i < size; i++) m.WriteU32(ot + i * 4u, (ot + (i - 1) * 4u) & 0x00FFFFFFu);
-    }
-
-    static void ClampBackOfOt(CpuContext c, IMemory m)
-    {
-        uint viewport = m.ReadU32(c.GP + MainViewPortSlot);
-        if (viewport == 0u) return;
-
-        int size = m.ReadU16(viewport + VpOtSize);
-        if (size <= 0) return;
-
-        int back = (int)m.ReadU32(BackOfOt);
-        if (back > size) m.WriteU32(BackOfOt, (uint)size);
     }
 
     static void Fog(IMemory m, int distance)
@@ -241,14 +257,16 @@ public static class TerrainPatch
     }
     static void DrawDistance(CpuContext c, IMemory m)
     {
+        if (_viewport == 0u) return;
         short current = (short)m.ReadU16(ViewDistance);
         if (current <= 0) return;
-        if (_baseDistance == 0) _baseDistance = current;
+        if (_baseDistance == 0 || current != _lastDistance) _baseDistance = current;
         
-        int ceiling = Reach(c, m);
+        int ceiling = Math.Min(32767, (int)m.ReadU16(_viewport + VpViewDistance));
         if (ceiling <= 0) return;
         
         int scaled = Math.Clamp((int)MathF.Round(_baseDistance * DrawDistanceScale), _baseDistance, ceiling);
+        _lastDistance = scaled;
         if (scaled == current) return;
         
         m.WriteU16(ViewDistance, (ushort)(short)scaled);

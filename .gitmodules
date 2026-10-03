@@ -1,3 +1,6 @@
 [submodule "RecompOne"]
 	path = RecompOne
 	url = https://github.com/BlackLabelHQ/RecompOne.git
+[submodule "mods/ShaderMod"]
+	path = mods/ShaderMod
+	url = https://github.com/BlackLabelHQ/ShaderMod

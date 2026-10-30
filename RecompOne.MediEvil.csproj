@@ -19,6 +19,6 @@
      <EmbeddedResource Include="assets/icon/*.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../RecompOne/RecompOne.Runtime/RecompOne.Runtime.csproj" UndefineProperties="OutputType" />
+    <ProjectReference Include="RecompOne/RecompOne.Runtime/RecompOne.Runtime.csproj" UndefineProperties="OutputType" />
   </ItemGroup>
 </Project>

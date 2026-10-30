@@ -20,19 +20,16 @@ if (Array.Find(asm.GetManifestResourceNames(), n => n.EndsWith(".MediEvilRecomp.
 }
 
 
-RecompOne.Runtime.Runtime.Defaults(cfg =>
-{
-    cfg.Default("BetterRendering", true);
-});
-RecompOne.Runtime.Pgxp.Pgxp.Supported = false;
 RecompOne.Runtime.Hle.NativeGeometry.Enabled = false;
 
 Dispatcher.Tolerant = true;
 
 TerrainPatch.Register();
+WaterMaterialPatch.Register();
 WidescreenPatch.Register();
-WidescreenSettings.Register();
+QualityOfLifeMenu.Register();
 AutoUpdater.Register();
+RecompOne.Runtime.Hub.ModHub.Configure("BlackLabelHQ/MediEvilRecompModHub");
 
 RecompOne.Runtime.Runtime.Run(() => Entry.Run(new PSMemory(0x00400000), args.Length > 0 ? args[0] : null, title));
 return 0;

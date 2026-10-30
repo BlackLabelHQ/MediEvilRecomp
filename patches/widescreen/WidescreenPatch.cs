@@ -7,11 +7,17 @@ namespace Recompiled;
 
 public static class WidescreenPatch
 {
-    public static bool OriginalAspect;
-    public static float StageAspect = 16f / 9f;
+    public static bool OriginalAspect => WidescreenOptions.OriginalAspect;
+    public static float StageAspect => WidescreenOptions.Aspect;
     static uint _screenFadePacket;
 
-    public static void Register() => Event.AddListener<RuntimeReadyEvent>(OnRuntimeReady);
+    public static void Register()
+    {
+        Event.AddListener<RuntimeReadyEvent>(_ => Apply());
+        WidescreenOptions.Aspect.Changed += _ => Apply();
+        WidescreenOptions.OriginalAspect.Changed += _ => Apply();
+        WidescreenSettings.Register();
+    }
 
     public static void BeginScreenFadeRender(CpuContext c, IMemory m)
     {
@@ -42,20 +48,11 @@ public static class WidescreenPatch
         m.WriteU32(address, packed);
     }
 
-    static void OnRuntimeReady(RuntimeReadyEvent e)
-    {
-        var view = RecompOne.Runtime.Runtime.View;
-        StageAspect = view.GetFloat("WidescreenAspect", 16f / 9f);
-        OriginalAspect = view.GetBool("WidescreenOriginalAspect", false);
-        Display.TargetAspect = StageAspect;
-        Apply();
-    }
-
     public static void Refresh() => Apply();
 
     static void Apply()
     {
-        StageAspect = Display.TargetAspect;
+        Display.TargetAspect = StageAspect;
         Display.SourceAspect = 4f / 3f;
         Display.OutputAspect = 4f / 3f;
         Display.WideAspect = OriginalAspect ? 0f : StageAspect;

@@ -70,8 +70,7 @@ public static class TerrainPatch
         {
             _betterRendering = value;
             RecompOne.Runtime.Hle.NativeGeometry.Enabled = false;
-            TerrainFloatProjection.Reset();
-            EntityFloatProjection.Reset();
+            RecompOne.Runtime.Hle.NativeProjection.Reset();
             RecompOne.Runtime.Hle.NativeGeometry.DepthBuffer = value;
             RecompOne.Runtime.Hle.NativeGeometry.Enabled = value;
         }
@@ -101,6 +100,8 @@ public static class TerrainPatch
     static uint _originalOt0;
     static uint _originalOt1;
     static int _lastDistance;
+    static uint _originalFogTable;
+    static ushort _originalFogEntries;
 
     public const int BaseSubdivOtz = 4096;
 
@@ -110,11 +111,11 @@ public static class TerrainPatch
     {
         Event.AddListener<RuntimeReadyEvent>(_ =>
         {
-            DrawDistanceScale = Math.Clamp(RecompOne.Runtime.Runtime.View.GetFloat("DrawDistanceScale", 1f), 1f, 3f);
-            NoTriangleSubdivision = RecompOne.Runtime.Runtime.View.GetBool("BetterRendering",
-                RecompOne.Runtime.Runtime.View.GetBool("NoTriangleSubdivision",
-                    RecompOne.Runtime.Runtime.View.GetBool("BetterTerrain", false)));
+            DrawDistanceScale = RenderOptions.DrawDistance;
+            NoTriangleSubdivision = RenderOptions.BetterRendering;
         });
+        RenderOptions.DrawDistance.Changed += value => DrawDistanceScale = value;
+        RenderOptions.BetterRendering.Changed += value => NoTriangleSubdivision = value;
         Event.AddListener<OverlayLoadedEvent>(_ => TerrainCapture.Forget());
     }
     
@@ -189,8 +190,11 @@ public static class TerrainPatch
         if (work != old0 && work != old1) return;
         if (old0 != ot0 || m.ReadU16(viewport + VpOtSize) != size)
         {
+            int oldSize = m.ReadU16(viewport + VpOtSize);
+            uint next = work == old0 ? ot0 : ot1;
             Blank(m, ot0, (uint)size);
             Blank(m, ot1, (uint)size);
+            Migrate(m, work, oldSize, next, size);
             m.WriteU32(viewport + VpOt0, ot0);
             m.WriteU32(viewport + VpOt1, ot1);
             m.WriteU32(viewport + VpWorkOt, work == old0 ? ot0 : ot1);
@@ -231,6 +235,32 @@ public static class TerrainPatch
         return (uint)Math.Min(65535, Math.Ceiling(distance * DrawDistanceScale));
     }
 
+    static void Migrate(IMemory m, uint from, int fromSize, uint to, int toSize)
+    {
+        if (from == to || fromSize <= 0 || toSize <= 0) return;
+
+        for (int i = 0; i < fromSize; i++)
+        {
+            uint stop = i == 0 ? 0x00FFFFFFu : (from + (uint)(i - 1) * 4u) & 0x00FFFFFFu;
+            uint head = m.ReadU32(from + (uint)i * 4u) & 0x00FFFFFFu;
+            if (head == stop) continue;
+
+            uint last = head;
+            for (int guard = 0; guard < 0x10000; guard++)
+            {
+                uint link = m.ReadU32(0x80000000u | last) & 0x00FFFFFFu;
+                if (link == stop || link == 0x00FFFFFFu) break;
+                last = link;
+            }
+
+            uint slot = to + (uint)Math.Min(i, toSize - 1) * 4u;
+            uint entry = m.ReadU32(slot);
+            uint tail = m.ReadU32(0x80000000u | last);
+            m.WriteU32(0x80000000u | last, (tail & 0xFF000000u) | (entry & 0x00FFFFFFu));
+            m.WriteU32(slot, (entry & 0xFF000000u) | head);
+        }
+    }
+
     static void Blank(IMemory m, uint ot, uint size)
     {
         m.WriteU32(ot, 0x00FFFFFFu);
@@ -242,11 +272,51 @@ public static class TerrainPatch
         int entries = distance >> FogShift;
         if (entries <= 0) return;
 
+        uint table = m.ReadU32(FogTablePtr);
+        if (table != FogBase)
+        {
+            _originalFogTable = table;
+            _originalFogEntries = m.ReadU16(FogEntries);
+            CopyFog(m, table, _originalFogEntries, entries);
+        }
+
         m.WriteU32(FogTablePtr, FogBase);
         m.WriteU16(FogEntries, (ushort)entries);
 
         uint pad = FogBase + (uint)entries * 2u;
         for (int i = 0; i < FogPadEntries; i++) m.WriteU16(pad + (uint)i * 2u, FogFull);
+    }
+
+    static void CopyFog(IMemory m, uint source, int count, int entries)
+    {
+        if (!MediEvil.Game.IsRam(source) || count <= 0) return;
+
+        ushort last = FogFull;
+        for (int i = 0; i < count && i < entries; i++)
+        {
+            last = m.ReadU16(source + (uint)i * 2u);
+            m.WriteU16(FogBase + (uint)i * 2u, last);
+        }
+
+        for (int i = count; i < entries; i++) m.WriteU16(FogBase + (uint)i * 2u, last);
+    }
+
+    public static void ReleaseTerrain(CpuContext c, IMemory m)
+    {
+        TerrainCapture.Forget();
+    }
+
+    public static void ReleaseFog(CpuContext c, IMemory m)
+    {
+        if (m.ReadU32(FogTablePtr) == FogBase && _originalFogTable != 0u)
+        {
+            m.WriteU32(FogTablePtr, _originalFogTable);
+            m.WriteU16(FogEntries, _originalFogEntries);
+        }
+
+        _originalFogTable = 0u;
+        _baseDistance = 0;
+        _lastDistance = 0;
     }
 
     static int Log2(int value)

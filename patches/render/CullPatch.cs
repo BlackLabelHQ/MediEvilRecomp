@@ -204,7 +204,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.T1 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.T2));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T2 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.T0 = mem.ReadU16((c.T0 + 0x6u));
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
@@ -256,9 +256,9 @@ public static class CullPatch
         mem.WriteU32((c.A0 + 0x14u), c.T2);
        
         mem.WriteU32((c.A0 + 0x20u), c.T3);
-        TerrainFloatProjection.Store(12, c.A0 + 0x8u, c.T1);
-        TerrainFloatProjection.Store(13, c.A0 + 0x14u, c.T2);
-        TerrainFloatProjection.Store(14, c.A0 + 0x20u, c.T3);
+        RecompOne.Runtime.Hle.NativeProjection.Store(12, c.A0 + 0x8u, c.T1);
+        RecompOne.Runtime.Hle.NativeProjection.Store(13, c.A0 + 0x14u, c.T2);
+        RecompOne.Runtime.Hle.NativeProjection.Store(14, c.A0 + 0x20u, c.T3);
        
         c.T0 = RecompOne.Runtime.Gte.Read(17);
        
@@ -687,7 +687,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T2 + 0x4u)));
         c.T4 = mem.ReadU32(c.T3);
         c.T5 = mem.ReadU32((c.T3 + 0x4u));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.T0 = mem.ReadU16((c.T0 + 0x6u));
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
@@ -708,7 +708,7 @@ public static class CullPatch
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
        
-        TerrainFloatProjection.Rtps(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
         if (c.At != 0u) {
@@ -863,10 +863,10 @@ public static class CullPatch
         mem.WriteU32((c.A0 + 0x20u), c.T4);
        
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
-        TerrainFloatProjection.StoreFirst(c.A0 + 0x8u, c.T1);
-        TerrainFloatProjection.Store(12, c.A0 + 0x14u, c.T3);
-        TerrainFloatProjection.Store(13, c.A0 + 0x20u, c.T4);
-        TerrainFloatProjection.Store(14, c.A0 + 0x2Cu, c.T6);
+        RecompOne.Runtime.Hle.NativeProjection.StoreFirst(c.A0 + 0x8u, c.T1);
+        RecompOne.Runtime.Hle.NativeProjection.Store(12, c.A0 + 0x14u, c.T3);
+        RecompOne.Runtime.Hle.NativeProjection.Store(13, c.A0 + 0x20u, c.T4);
+        RecompOne.Runtime.Hle.NativeProjection.Store(14, c.A0 + 0x2Cu, c.T6);
        
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
@@ -1290,7 +1290,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.T1 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.T2));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T2 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.T0 = mem.ReadU16((c.T0 + 0x6u));
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
@@ -1344,9 +1344,9 @@ public static class CullPatch
         mem.WriteU32((c.A0 + 0x14u), c.T2);
        
         mem.WriteU32((c.A0 + 0x20u), c.T3);
-        TerrainFloatProjection.Store(12, c.A0 + 0x8u, c.T1);
-        TerrainFloatProjection.Store(13, c.A0 + 0x14u, c.T2);
-        TerrainFloatProjection.Store(14, c.A0 + 0x20u, c.T3);
+        RecompOne.Runtime.Hle.NativeProjection.Store(12, c.A0 + 0x8u, c.T1);
+        RecompOne.Runtime.Hle.NativeProjection.Store(13, c.A0 + 0x14u, c.T2);
+        RecompOne.Runtime.Hle.NativeProjection.Store(14, c.A0 + 0x20u, c.T3);
        
         c.T0 = RecompOne.Runtime.Gte.Read(17);
        
@@ -1783,7 +1783,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T2 + 0x4u)));
         c.T4 = mem.ReadU32(c.T3);
         c.T5 = mem.ReadU32((c.T3 + 0x4u));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.T0 = mem.ReadU16((c.T0 + 0x6u));
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
@@ -1804,7 +1804,7 @@ public static class CullPatch
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
        
-        TerrainFloatProjection.Rtps(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
         if (c.At != 0u) {
@@ -1963,10 +1963,10 @@ public static class CullPatch
         mem.WriteU32((c.A0 + 0x20u), c.T4);
        
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
-        TerrainFloatProjection.StoreFirst(c.A0 + 0x8u, c.T1);
-        TerrainFloatProjection.Store(12, c.A0 + 0x14u, c.T3);
-        TerrainFloatProjection.Store(13, c.A0 + 0x20u, c.T4);
-        TerrainFloatProjection.Store(14, c.A0 + 0x2Cu, c.T6);
+        RecompOne.Runtime.Hle.NativeProjection.StoreFirst(c.A0 + 0x8u, c.T1);
+        RecompOne.Runtime.Hle.NativeProjection.Store(12, c.A0 + 0x14u, c.T3);
+        RecompOne.Runtime.Hle.NativeProjection.Store(13, c.A0 + 0x20u, c.T4);
+        RecompOne.Runtime.Hle.NativeProjection.Store(14, c.A0 + 0x2Cu, c.T6);
        
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
@@ -2371,7 +2371,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T2 + 0x4u)));
         c.T4 = mem.ReadU32(c.T3);
         c.T5 = mem.ReadU32((c.T3 + 0x4u));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.T0 = mem.ReadU16((c.T0 + 0x6u));
         c.T1 = mem.ReadU16((c.T1 + 0x6u));
         c.T2 = mem.ReadU16((c.T2 + 0x6u));
@@ -2392,7 +2392,7 @@ public static class CullPatch
         c.T5 = c.T5 | CullMaskX;
         c.T0 = RecompOne.Runtime.Gte.Read(24);
        
-        TerrainFloatProjection.Rtps(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtps(12, false);
         c.T2 = mem.ReadU32((c.SP + 0x58u));
         c.At = (int)c.V1 < (int)c.A0 ? 1u : 0u;
         if (c.At != 0u) {
@@ -2551,10 +2551,10 @@ public static class CullPatch
         mem.WriteU32((c.A0 + 0x20u), c.T4);
        
         mem.WriteU32((c.A0 + 0x2Cu), c.T6);
-        TerrainFloatProjection.StoreFirst(c.A0 + 0x8u, c.T1);
-        TerrainFloatProjection.Store(12, c.A0 + 0x14u, c.T3);
-        TerrainFloatProjection.Store(13, c.A0 + 0x20u, c.T4);
-        TerrainFloatProjection.Store(14, c.A0 + 0x2Cu, c.T6);
+        RecompOne.Runtime.Hle.NativeProjection.StoreFirst(c.A0 + 0x8u, c.T1);
+        RecompOne.Runtime.Hle.NativeProjection.Store(12, c.A0 + 0x14u, c.T3);
+        RecompOne.Runtime.Hle.NativeProjection.Store(13, c.A0 + 0x20u, c.T4);
+        RecompOne.Runtime.Hle.NativeProjection.Store(14, c.A0 + 0x2Cu, c.T6);
        
         c.T1 = mem.ReadU32((c.SP + 0x5Cu));
         c.T9 = c.T9 | 0x0004u;
@@ -3109,7 +3109,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.V1 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.V0 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.V1 = mem.ReadU32(c.T3);
         c.V0 = 0x00000006u;
         if (c.V1 != c.V0) {
@@ -3161,13 +3161,13 @@ public static class CullPatch
         mem.WriteU32((c.SP + 0x24u), c.V0);
        
         c.S5 = mem.ReadU32((c.SP + 0x18u));
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.S5; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.S5; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
         c.V0 = (uint)(short)mem.ReadU16(c.T1);
         c.V0 = c.V0 << 3;
         c.V0 = c.T2 + c.V0;
         RecompOne.Runtime.Gte.Write(0, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(1, mem.ReadU32((c.V0 + 0x4u)));
-        TerrainFloatProjection.Rtps(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtps(12, false);
         c.V0 = 0x00000001u;
         if (c.T8 != c.V0) {
             c.V0 = 0x00000006u;
@@ -3380,9 +3380,9 @@ public static class CullPatch
         c.S5 = mem.ReadU32((c.SP + 0x1Cu));
         c.S6 = mem.ReadU32((c.SP + 0x20u));
         c.S4 = mem.ReadU32((c.SP + 0x24u));
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.S5; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
-        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.S6; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(13, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
-        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.S4; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(14, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.S5; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.S6; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
+        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.S4; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(14, _ad, _sw, (mem.ReadU32(c.S1 + 0x4u) & 1u) != 0); }
         c.V0 = mem.ReadU32((c.SP + 0x18u));
         c.V0 = mem.ReadU32(c.V0);
         c.V0 = CullBias(c.V0) & c.T4;
@@ -3771,7 +3771,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.A2 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.A1));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.A1 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.V0 = c.SP + 0x50u;
         mem.WriteU32(c.V0, RecompOne.Runtime.Gte.Read(19));
         c.A0 = 0x1F800000u;
@@ -3792,9 +3792,9 @@ public static class CullPatch
         if (c.V0 != 0u) {
             goto L80025BB0;
         }
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A3; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw); }
-        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A2; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(13, _ad, _sw); }
-        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.A1; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(14, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A3; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A2; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.A1; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(14, _ad, _sw); }
         c.V0 = (uint)(short)mem.ReadU16((c.SP + 0x2Au));
         c.V1 = (uint)(short)mem.ReadU16((c.SP + 0x1Au));
         c.V0 = c.V0 - c.V1;
@@ -4200,13 +4200,13 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.V1 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.V0));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.V0 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.A1 = c.SP + 0x18u;
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A1; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A1; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw); }
         c.A0 = c.SP + 0x20u;
-        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(13, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, _ad, _sw); }
         c.V0 = c.SP + 0x28u;
-        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.V0; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(14, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(14); var _ad = c.V0; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(14, _ad, _sw); }
         c.V1 = 0xFF000000u;
         c.V0 = mem.ReadU32((c.SP + 0x18u));
         c.V1 = c.V1 | CullMaskX;
@@ -4242,9 +4242,9 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.T7 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.T8));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.T8 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A1; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw); }
-        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(13, _ad, _sw); }
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.A1; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, _ad, _sw); }
         c.V0 = mem.ReadU32((c.SP + 0x18u));
         c.V0 = CullBias(c.V0) & c.V1;
         if (c.V0 == 0u) {
@@ -4720,7 +4720,7 @@ public static class CullPatch
         RecompOne.Runtime.Gte.Write(3, mem.ReadU32((c.S3 + 0x4u)));
         RecompOne.Runtime.Gte.Write(4, mem.ReadU32(c.S3));
         RecompOne.Runtime.Gte.Write(5, mem.ReadU32((c.S3 + 0x4u)));
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.V0 = c.S0 << 2;
         c.V0 = c.T2 + c.V0;
         c.V0 = mem.ReadU32(c.V0);
@@ -4733,8 +4733,8 @@ public static class CullPatch
         mem.WriteU32((c.A0 - 0x4u), c.V0);
        
         c.V0 = c.T3 + 0x8u;
-        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.V0; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(12, _ad, _sw); }
-        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); TerrainFloatProjection.Store(13, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); var _ad = c.V0; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, _ad, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); var _ad = c.A0; mem.WriteU32(_ad, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, _ad, _sw); }
         c.A0 = c.A0 + 0x14u;
         c.T3 = c.T3 + 0x14u;
         c.S5 = c.S5 + 0x8u;
@@ -4818,11 +4818,11 @@ public static class CullPatch
         { var _lw = mem.ReadU32((c.A0 + 0x4u)); RecompOne.Runtime.Gte.Write(5, _lw); }
         c.A0 = c.A0 + 0x8u;
         L8009A560: ;
-        TerrainFloatProjection.Rtpt(12, false);
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
         c.A2 = c.SP + 0u;
-        { var _sw = RecompOne.Runtime.Gte.Read(12); mem.WriteU32(c.SP, _sw); TerrainFloatProjection.Store(12, c.SP, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(12); mem.WriteU32(c.SP, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, c.SP, _sw); }
         c.V0 = c.SP + 0x4u;
-        { var _sw = RecompOne.Runtime.Gte.Read(13); mem.WriteU32(c.V0, _sw); TerrainFloatProjection.Store(13, c.V0, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); mem.WriteU32(c.V0, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, c.V0, _sw); }
         if (c.T2 != 0u) {
             c.V0 = c.SP + 0x8u;
             goto L8009A58C;
@@ -4831,7 +4831,7 @@ public static class CullPatch
         { var _sw = RecompOne.Runtime.Gte.Read(19); mem.WriteU32(c.A1, _sw); }
         c.V0 = c.SP + 0x8u;
         L8009A58C: ;
-        { var _sw = RecompOne.Runtime.Gte.Read(14); mem.WriteU32(c.V0, _sw); TerrainFloatProjection.Store(14, c.V0, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(14); mem.WriteU32(c.V0, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(14, c.V0, _sw); }
         c.V1 = 0x00000002u;
         c.T1 = 0x1F800000u;
         c.T1 = mem.ReadU16((c.T1 + 0x98u));
@@ -4921,10 +4921,10 @@ public static class CullPatch
         { var _lw = mem.ReadU32((c.A0 + 0x4u)); RecompOne.Runtime.Gte.Write(5, _lw); }
         c.A0 = c.A0 + 0x8u;
         L8009A668: ;
-        TerrainFloatProjection.Rtpt(12, false);
-        { var _sw = RecompOne.Runtime.Gte.Read(12); mem.WriteU32(c.V1, _sw); TerrainFloatProjection.Store(12, c.V1, _sw); }
+        RecompOne.Runtime.Hle.NativeProjection.Rtpt(12, false);
+        { var _sw = RecompOne.Runtime.Gte.Read(12); mem.WriteU32(c.V1, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(12, c.V1, _sw); }
         c.V1 = c.V1 + 0x4u;
-        { var _sw = RecompOne.Runtime.Gte.Read(13); mem.WriteU32(c.V1, _sw); TerrainFloatProjection.Store(13, c.V1, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(13); mem.WriteU32(c.V1, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(13, c.V1, _sw); }
         if (c.A2 != 0u) {
             c.V1 = c.V1 + 0x4u;
             goto L8009A694;
@@ -4934,7 +4934,7 @@ public static class CullPatch
         c.V0 = c.A2 + 0u;
         goto L8009A6A0;
         L8009A694: ;
-        { var _sw = RecompOne.Runtime.Gte.Read(14); mem.WriteU32(c.V1, _sw); TerrainFloatProjection.Store(14, c.V1, _sw); }
+        { var _sw = RecompOne.Runtime.Gte.Read(14); mem.WriteU32(c.V1, _sw); RecompOne.Runtime.Hle.NativeProjection.Store(14, c.V1, _sw); }
         c.V1 = c.V1 + 0x4u;
         c.V0 = c.A2 + 0u;
         L8009A6A0: ;
@@ -9989,6 +9989,7 @@ public static class CullPatch
         c.S6 = c.SP + 0x30u;
         L800A18D4: ;
         RecompOne.Runtime.Interrupts.Poll(c, m);
+        RecompOne.Runtime.InterpGroups.Part(mem.ReadU16((c.SP + 0xC8u)));
         c.T2 = mem.ReadU32((c.SP + 0xA4u));
         if (c.T2 == 0u) {
             goto L800A1930;

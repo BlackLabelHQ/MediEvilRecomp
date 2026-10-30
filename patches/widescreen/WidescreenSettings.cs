@@ -1,8 +1,22 @@
 using ImGuiNET;
-using RecompOne.Runtime.Hle;
+using RecompOne.Runtime.Config;
 using RecompOne.Runtime.Host.Window;
 
 namespace Recompiled;
+
+public static class WidescreenOptions
+{
+    public static readonly Option<float> Aspect = Options.Float("widescreen.aspect", 16f / 9f)
+        .Normalized(static v => Math.Clamp(v, 1f, 3f));
+    public static readonly Option<bool> OriginalAspect = Options.Bool("widescreen.original_aspect");
+}
+
+public static class RenderOptions
+{
+    public static readonly Option<float> DrawDistance = Options.Float("render.draw_distance", 1f)
+        .Normalized(static v => Math.Clamp(v, 1f, 3f));
+    public static readonly Option<bool> BetterRendering = Options.Bool("render.better_rendering", true);
+}
 
 public static class WidescreenSettings
 {
@@ -16,22 +30,22 @@ public static class WidescreenSettings
     
     public static void Register()
     {
-        SettingsRegistry.Extend("display", Draw);
+        SettingsPages.Page(SettingsPages.Display)
+            .Add("widescreen", DrawWidescreen, 150)
+            .Add("rendering", DrawRendering, 160);
     }
     
-    static void Draw()
+    static void DrawWidescreen()
     {
-        ImGui.Spacing();
-        
-        float aspect = RecompOne.Runtime.Runtime.View.GetFloat("WidescreenAspect", 16f / 9f);
-        bool original = WidescreenPatch.OriginalAspect;
+        float aspect = WidescreenOptions.Aspect;
+        bool original = WidescreenOptions.OriginalAspect;
         int selected = MatchPreset(aspect);
         string label = original ? Localization.T("widescreen.original") : selected >= 0 ? _presets[selected].Label : Localization.T("widescreen.custom");
         
         ImGui.TextUnformatted(Localization.T("widescreen.aspect"));
         if (ImGui.BeginCombo("##aspect-preset", label))
         {
-            if (ImGui.Selectable(Localization.T("widescreen.original"), original)) ApplyOriginal(true);
+            if (ImGui.Selectable(Localization.T("widescreen.original"), original)) WidescreenOptions.OriginalAspect.Value = true;
             for (int i = 0; i < _presets.Length; i++)
                 if (ImGui.Selectable(_presets[i].Label, !original && selected == i))
                     Apply(_presets[i].Value);
@@ -45,37 +59,20 @@ public static class WidescreenSettings
         if (ImGui.SliderFloat("##aspect-custom", ref custom, 1.0f, 2.5f, "%.3f : 1"))
             Apply(custom);
         if (original) ImGui.EndDisabled();
-        
-        ImGui.Spacing();
-        ImGui.Separator();
-        ImGui.Spacing();
-        
+    }
+
+    static void DrawRendering()
+    {
         ImGui.TextUnformatted(Localization.T("render.draw_distance"));
-        float distance = TerrainPatch.DrawDistanceScale;
+        float distance = RenderOptions.DrawDistance;
         if (ImGui.SliderFloat("##draw-distance", ref distance, 1.0f, 3.0f, "%.2fx"))
-        {
-            TerrainPatch.DrawDistanceScale = distance;
-            RecompOne.Runtime.Runtime.View.SetFloat("DrawDistanceScale", distance);
-            RecompOne.Runtime.Runtime.SaveView();
-        }
-        
-        ImGui.PushStyleColor(ImGuiCol.Text, ImGui.GetStyle().Colors[(int)ImGuiCol.TextDisabled]);
-        ImGui.TextWrapped(Localization.T("render.draw_distance_hint"));
-        ImGui.PopStyleColor();
+            RenderOptions.DrawDistance.Value = distance;
+        SettingsWidgets.Note("render.draw_distance_hint");
         
         ImGui.Spacing();
         
-        bool betterRendering = TerrainPatch.NoTriangleSubdivision;
-        if (ImGui.Checkbox(Localization.T("render.better_terrain"), ref betterRendering))
-        {
-            TerrainPatch.NoTriangleSubdivision = betterRendering;
-            RecompOne.Runtime.Runtime.View.SetBool("BetterRendering", betterRendering);
-            RecompOne.Runtime.Runtime.SaveView();
-        }
-        
-        ImGui.PushStyleColor(ImGuiCol.Text, ImGui.GetStyle().Colors[(int)ImGuiCol.TextDisabled]);
-        ImGui.TextWrapped(Localization.T("render.better_terrain_hint"));
-        ImGui.PopStyleColor();
+        SettingsWidgets.Toggle(RenderOptions.BetterRendering, "render.better_terrain");
+        SettingsWidgets.Note("render.better_terrain_hint");
     }
     
     static int MatchPreset(float aspect)
@@ -85,25 +82,9 @@ public static class WidescreenSettings
         return -1;
     }
     
-    static void ApplyOriginal(bool original)
-    {
-        WidescreenPatch.OriginalAspect = original;
-        RecompOne.Runtime.Runtime.View.SetBool("WidescreenOriginalAspect", original);
-        WidescreenPatch.Refresh();
-        RecompOne.Runtime.Runtime.SaveView();
-    }
-    
     static void Apply(float aspect)
     {
-        aspect = Math.Clamp(aspect, 1.0f, 3.0f);
-        
-        WidescreenPatch.OriginalAspect = false;
-        RecompOne.Runtime.Runtime.View.SetBool("WidescreenOriginalAspect", false);
-        
-        RecompOne.Runtime.Runtime.View.SetFloat("WidescreenAspect", aspect);
-        Display.TargetAspect = aspect;
-        WidescreenPatch.StageAspect = aspect;
-        WidescreenPatch.Refresh();
-        RecompOne.Runtime.Runtime.SaveView();
+        WidescreenOptions.Aspect.Value = aspect;
+        WidescreenOptions.OriginalAspect.Value = false;
     }
 }

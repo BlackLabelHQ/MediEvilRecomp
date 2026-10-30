@@ -11,3 +11,6 @@ interface.ini
 debug_dump/
 mods/.cache
 recordings/
+shaders/
+packs/
+.modhub/

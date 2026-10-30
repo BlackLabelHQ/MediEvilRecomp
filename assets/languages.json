@@ -217,6 +217,61 @@
             "en": "Uses smooth terrain rendering with floating point precision and depth buffering.",
             "pt-BR": "Usa renderizacao suave do terreno com precisao em ponto flutuante e buffer de profundidade.",
             "es-419": "Usa renderizado suave del terreno con precision de punto flotante y buffer de profundidad."
+        },
+        "menu.misc": {
+            "en": "Misc",
+            "pt-BR": "Diversos",
+            "es-419": "Varios"
+        },
+        "panel.qol": {
+            "en": "Quality of Life",
+            "pt-BR": "Qualidade de vida",
+            "es-419": "Calidad de vida"
+        },
+        "qol.camera": {
+            "en": "Camera",
+            "pt-BR": "Câmera",
+            "es-419": "Cámara"
+        },
+        "qol.camera_control": {
+            "en": "Right stick camera",
+            "pt-BR": "Câmera no analógico direito",
+            "es-419": "Cámara con el stick derecho"
+        },
+        "qol.camera_control.hint": {
+            "en": "Orbit the camera around Dan with the right analog stick.",
+            "pt-BR": "Gira a câmera em volta do Dan com o analógico direito.",
+            "es-419": "Gira la cámara alrededor de Dan con el stick derecho."
+        },
+        "qol.camera_recenter": {
+            "en": "Auto recenter",
+            "pt-BR": "Recentralizar automaticamente",
+            "es-419": "Recentrar automáticamente"
+        },
+        "qol.camera_recenter.hint": {
+            "en": "After walking for a moment without touching the right stick the camera goes back to its normal position.",
+            "pt-BR": "Depois de andar um pouco sem tocar no analógico direito a câmera volta para a posição normal.",
+            "es-419": "Tras caminhar un momento sin tocar el stick derecho la cámara vuelve a su posición normal."
+        },
+        "qol.invert_camera_x": {
+            "en": "Invert horizontal",
+            "pt-BR": "Inverter horizontal",
+            "es-419": "Invertir horizontal"
+        },
+        "qol.invert_camera_x.hint": {
+            "en": "Reverses left and right on the right stick.",
+            "pt-BR": "Inverte esquerda e direita no analógico direito.",
+            "es-419": "Invierte izquierda y derecha en el stick derecho."
+        },
+        "qol.invert_camera_y": {
+            "en": "Invert vertical",
+            "pt-BR": "Inverter vertical",
+            "es-419": "Invertir vertical"
+        },
+        "qol.invert_camera_y.hint": {
+            "en": "Reverses up and down on the right stick.",
+            "pt-BR": "Inverte cima e baixo no analógico direito.",
+            "es-419": "Invierte arriba y abajo en el stick derecho."
         }
     }
 }

@@ -145,8 +145,9 @@ jobs:
 
       - name: Build release notes
         run: |
-          if [ -s CHANGELOG.md ]; then
-            tail -n +2 CHANGELOG.md > release_notes.md
+          notes=$(ls changelog.md CHANGELOG.md 2>/dev/null | head -n 1)
+          if [ -n "$notes" ] && [ -s "$notes" ]; then
+            cp "$notes" release_notes.md
           else
             printf 'MediEvilRecomp %s\n' "$GITHUB_REF_NAME" > release_notes.md
           fi

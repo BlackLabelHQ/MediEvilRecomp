@@ -23,8 +23,8 @@ public static class AutoUpdater //should be generic enough to use on other recom
     const string ApiUrl = "https://api.github.com/repos/" + Repo + "/releases/latest";
     const string ApplyArg = "--apply-update";
     const string UserAgent = "SymphonyRecomp-AutoUpdater";
-    const string EnabledKey = "AutoUpdateEnabled";
-    const string SkipTagKey = "AutoUpdateSkipTag";
+    static readonly Option<bool> CheckOnStartup = Options.Bool("updates.check_on_startup", true);
+    static readonly Option<string> SkippedTag = Options.String("updates.skipped_tag");
 
     internal enum Phase { Idle, Checking, Available, Downloading, Applying, Failed }
 
@@ -100,12 +100,8 @@ public static class AutoUpdater //should be generic enough to use on other recom
             .Text(StatusLine)
             .Separator()
             .Check("menu.updates.on_startup",
-                () => ConfigManager.View.GetBool(EnabledKey, true),
-                enabled =>
-                {
-                    ConfigManager.View.SetBool(EnabledKey, enabled);
-                    ConfigManager.SaveView(PanelManager.Panels);
-                })
+                () => CheckOnStartup,
+                enabled => CheckOnStartup.Value = enabled)
             .Item("menu.updates.check_now", CheckNow)
                 .Enabled(() => _phase is Phase.Idle or Phase.Available)
             .Item("menu.updates.releases_page", () => OpenUrl(ReleasesUrl));
@@ -116,7 +112,7 @@ public static class AutoUpdater //should be generic enough to use on other recom
             return;
         }
 
-        if (!ConfigManager.View.GetBool(EnabledKey, true))
+        if (!CheckOnStartup)
         {
             Log($"running {CurrentTag}, update check disabled in settings");
             return;
@@ -150,7 +146,7 @@ public static class AutoUpdater //should be generic enough to use on other recom
                 return;
             }
 
-            if (tag == ConfigManager.View.GetString(SkipTagKey))
+            if (tag == SkippedTag.Value)
             {
                 Log($"{tag} is available but is skipped, staying on {CurrentTag}");
                 _phase = Phase.Idle;
@@ -269,7 +265,7 @@ public static class AutoUpdater //should be generic enough to use on other recom
             return;
         }
 
-        ConfigManager.View.SetString(SkipTagKey, "");
+        SkippedTag.Value = "";
         _dismissed = false;
         _phase = Phase.Checking;
         Log("manual update check requested");
@@ -360,8 +356,7 @@ public static class AutoUpdater //should be generic enough to use on other recom
                 if (Row(1, 3, Localization.T("update.not_now"))) DismissForSession();
                 if (Row(2, 3, Localization.T("update.skip", _latestTag)))
                 {
-                    ConfigManager.View.SetString(SkipTagKey, _latestTag);
-                    ConfigManager.SaveView(PanelManager.Panels);
+                    SkippedTag.Value = _latestTag;
                     Log($"{_latestTag} skipped, it will not be offered again");
                     DismissForSession();
                 }
@@ -605,7 +600,7 @@ public sealed class UpdatePopup : Popup
         if (AutoUpdater.CurrentPhase is AutoUpdater.Phase.Downloading or AutoUpdater.Phase.Applying)
             footer += ImGui.GetFrameHeightWithSpacing();
 
-        ImGui.BeginChild("##notes", new Vector2(0, -footer), ImGuiChildFlags.Border);
+        ImGui.BeginChild("##notes", new Vector2(0, -footer), ImGuiChildFlags.Borders);
         AutoUpdater.DrawNotes();
         ImGui.EndChild();
 

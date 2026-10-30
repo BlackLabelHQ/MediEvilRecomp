@@ -1,19 +1,29 @@
-# 
+# v1.0.0
+We produly present the first "final" version of a blacklabelhq recomp!, this includes various fixes that bring the game to a standard we fell confortable to label as 1.0! a lot of work was put into this, i hope you enjoy!
 
-v0.2b* is not a massive update, just something that i wanted to fix way before the first release but havent had time! the rendering now should be fairly decent looking!
-
-thanks for the support on the initial release! i hope you guys enjoy it!
+heads up: the settings system was rewritten, so your settings from previous versions are reset to the defaults
 
 # Changes
-- ditched pgxp renderer in favor of a ""native"" rendering patch to use float, depth buffer and correct textures (the power of recomp patches!)
-- fixed overworld map not rendering properly on 16:9
-- fixed an issue with the clear buffer not covering 16:9
-- added a "better rendering" option to improve the terrain/entity rendering and camera, interpolation is also improved
-- added automatic updater
-- included shadermod
+- added camera control on the right analog stick
+- fixed analog handling
+- added support for slang/libretro shader presets through ShaderMod
+- added the Mod Hub (Mods > Explore Mod Hub) to browse and install mods, asset packs, and shaders, including the "dans-curse" shader
+- added an in-game Asset Pack Editor to create and edit packs
+- improved interpolation
+- fixed transitions in widescreen
+- fixed a one frame flicker at the start of fades when the draw distance is increased
+- fixed a crash when leaving a level
+- fixed a crash with high draw distance
+- fixed skipped FMVs showing garbage until the next scene
+- fixed fmvs auto-skipping
+- fixed slightly incorrect position on audio playback
+- added true 24bit color option
+- added option to control the display of the dithering
+- improved stability overhaul
+- removed Mr. Apple's evil cousin: Mr. BadApple
 
 # Dependencies
 
 You're required to install [dotnet 10 runtime](https://dotnet.microsoft.com/pt-br/download/dotnet/10.0) to run the recomp, otherwise the game will not open, ideally also make sure to install [OpenAL](https://www.openal.org/downloads/), as of the current version no further dependencies are required
 
-you can find instructions downloading dotnet 10 for linux systems that dont have it on their packages [here](https://wiki.archlinux.org/title/.NET), or you can run "run.sh" wich will install dotent if not available and execute sotn for you
+you can find instructions downloading dotnet 10 for linux systems that dont have it on their packages [here](https://wiki.archlinux.org/title/.NET), or you can run "run.sh" wich will install dotnet if not available and execute medievil for you

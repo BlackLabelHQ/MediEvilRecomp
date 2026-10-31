@@ -4,8 +4,8 @@ namespace Recompiled;
 
 public static class QualityOfLifeOptions
 {
-    public static readonly Option<bool> CameraControl = Options.Bool("qol.camera_control", true);
-    public static readonly Option<bool> CameraRecenter = Options.Bool("qol.camera_recenter", true);
+    public static readonly Option<bool> CameraControl = Options.Bool("qol.camera_control");
+    public static readonly Option<bool> CameraRecenter = Options.Bool("qol.camera_recenter");
     public static readonly Option<bool> InvertCameraX = Options.Bool("qol.invert_camera_x");
     public static readonly Option<bool> InvertCameraY = Options.Bool("qol.invert_camera_y");
 

@@ -9,7 +9,7 @@ Be aware that this Recomp is still in beta, things WILL break and some of the fe
 
 Before we get started on the README - This project is a "RE"comp. It is NOT a "DE"comp.
 
-Please note this is an Open BETA and this is NOT the final version! This Recomp was made by human hands, no AI is involved in writing this code!
+This Recomp was made by human hands, no AI is involved in writing this code!
 
 We value human work, PRs made with AI will be closed.
 

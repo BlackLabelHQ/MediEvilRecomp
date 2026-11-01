@@ -5,168 +5,192 @@
             "pt-BR": "Atualizações",
             "es-419": "Actualizaciones",
             "ja-jp": "アップデイト",
-            "cn-zh": "版本更新"
+            "cn-zh": "版本更新",
+            "fr-fr": "Mises à jour"
         },
         "menu.updates.on_startup": {
             "en": "Check on Startup",
             "pt-BR": "Verificar ao Iniciar",
             "es-419": "Buscar al Iniciar",
             "ja-jp": "起動時に更新を確認する",
-            "cn-zh": "在启动时询问更新"
+            "cn-zh": "在启动时询问更新",
+            "fr-fr": "Vérifier au démarrage"
         },
         "menu.updates.check_now": {
             "en": "Check for Updates Now",
             "pt-BR": "Verificar Atualizações Agora",
             "es-419": "Buscar Actualizaciones Ahora",
             "ja-jp": "今すぐ更新を確認する",
-            "cn-zh": "现在检查更新"
+            "cn-zh": "现在检查更新",
+            "fr-fr": "Vérifier maintenant"
         },
         "menu.updates.releases_page": {
             "en": "Open Releases Page",
             "pt-BR": "Abrir Página de Versões",
             "es-419": "Abrir Página de Versiones",
             "ja-jp": "リリース・ページを開く",
-            "cn-zh": "打开发布页"
+            "cn-zh": "打开发布页",
+            "fr-fr": "Ouvrir la page des versions"
         },
         "update.title": {
             "en": "Update",
             "pt-BR": "Atualização",
             "es-419": "Actualización",
             "ja-jp": "アップデート",
-            "cn-zh": "版本更新"
+            "cn-zh": "版本更新",
+            "fr-fr": "Mise à jour"
         },
         "update.status.checking": {
             "en": "Checking for updates...",
             "pt-BR": "Verificando atualizações...",
             "es-419": "Buscando actualizaciones...",
             "ja-jp": "更新を確認しています...",
-            "cn-zh": "正在检查更新..."
+            "cn-zh": "正在检查更新...",
+            "fr-fr": "Recherche de mises à jour..."
         },
         "update.status.available": {
             "en": "{0} available",
             "pt-BR": "{0} disponível",
             "es-419": "{0} disponible",
             "ja-jp": "{0} 利用可能",
-            "cn-zh": "目前有更新"
+            "cn-zh": "目前有更新",
+            "fr-fr": "{0} disponible"
         },
         "update.status.downloading": {
             "en": "Downloading {0}...",
             "pt-BR": "Baixando {0}...",
             "es-419": "Descargando {0}...",
             "ja-jp": "{0} をダウンロード中...",
-            "cn-zh": "更新文件下载中..."
+            "cn-zh": "更新文件下载中...",
+            "fr-fr": "Téléchargement {0}..."
         },
         "update.status.applying": {
             "en": "Restarting to update...",
             "pt-BR": "Reiniciando para atualizar...",
             "es-419": "Reiniciando para actualizar...",
             "ja-jp": "更新のために再起動しています...",
-            "cn-zh": "重新启动以加载更新..."
+            "cn-zh": "重新启动以加载更新...",
+            "fr-fr": "Redémarrage pour mise à jour..."
         },
         "update.status.failed": {
             "en": "Last update attempt failed",
             "pt-BR": "A última tentativa de atualização falhou",
             "es-419": "El último intento de actualización falló",
             "ja-jp": "前回の更新の試行が失敗しました。",
-            "cn-zh": "最近一次的更新失败了。"
+            "cn-zh": "最近一次的更新失败了。",
+            "fr-fr": "La dernière tentative de mise à jour à échoué"
         },
         "update.status.dev": {
             "en": "Development Build",
             "pt-BR": "Build de Desenvolvimento",
             "es-419": "Build de Desarrollo",
             "ja-jp": "DEVのビルド",
-            "cn-zh": "正在检查更新..."
+            "cn-zh": "正在检查更新...",
+            "fr-fr": "Build de développement"
         },
         "update.status.running": {
             "en": "Running {0}",
             "pt-BR": "Executando {0}",
             "es-419": "Ejecutando {0}",
             "ja-jp": "{0} を実行中",
-            "cn-zh": "{0} 在运行中"
+            "cn-zh": "{0} 在运行中",
+            "fr-fr": "Execution {0}"
         },
         "update.headline.available": {
             "en": "{0} is available",
             "pt-BR": "{0} está disponível",
             "es-419": "{0} está disponible",
             "ja-jp": "{0}が利用可能です",
-            "cn-zh": "{0} 使用可能"
+            "cn-zh": "{0} 使用可能",
+            "fr-fr": "{0} est disponible"
         },
         "update.headline.downloading": {
             "en": "Downloading {0}",
             "pt-BR": "Baixando {0}",
             "es-419": "Descargando {0}",
             "ja-jp": "{0} をダウンロード中",
-            "cn-zh": "{0} 在下载中"
+            "cn-zh": "{0} 在下载中",
+            "fr-fr": "Téléchargement {0}"
         },
         "update.headline.installing": {
             "en": "Installing {0}",
             "pt-BR": "Instalando {0}",
             "es-419": "Instalando {0}",
             "ja-jp": "{0} をインストールしています",
-            "cn-zh": "{0} 已安装"
+            "cn-zh": "{0} 已安装",
+            "fr-fr": "Installation {0}"
         },
         "update.headline.failed": {
             "en": "Update failed",
             "pt-BR": "A atualização falhou",
             "es-419": "La actualización falló",
             "ja-jp": "更新に失敗しました",
-            "cn-zh": "更新失败了"
+            "cn-zh": "更新失败了",
+            "fr-fr": "Echec de la mise à jour"
         },
         "update.current": {
             "en": "current {0}",
             "pt-BR": "atual {0}",
             "es-419": "actual {0}",
             "ja-jp": "現在の {0}",
-            "cn-zh": "现在的 {0} "
+            "cn-zh": "现在的 {0} ",
+            "fr-fr": "Actuel {0}"
         },
         "update.not_writable": {
             "en": "This folder is not writable, so the update cannot be installed automatically. Download it manually or move the game somewhere you can write to.",
             "pt-BR": "Esta pasta não permite escrita, então a atualização não pode ser instalada automaticamente. Baixe manualmente ou mova o jogo para um local onde você possa escrever.",
             "es-419": "Esta carpeta no permite escritura, así que la actualización no se puede instalar automáticamente. Descárgala manualmente o mueve el juego a un lugar donde puedas escribir.",
             "ja-jp": "このフォルダには書き込み権限がないため、アップデートを自動的にインストールできません。手動でダウンロードするか、書き込み可能な場所にゲームを移動してください。",
-            "cn-zh": "当前的目录没有修改权限，所以更新文件无法自动安装。请手动下载新版本的文件或将文件移动到有修改权限的路径再操作。"
+            "cn-zh": "当前的目录没有修改权限，所以更新文件无法自动安装。请手动下载新版本的文件或将文件移动到有修改权限的路径再操作。",
+            "fr-fr": "Impossible d'écrire dans ce dossier, la mise à jour ne peut pas être installée manuellement. Téléchargez la manuellement ou déplacer le jeu dans un dossier ou vous pouvez écrire."
         },
         "update.no_notes": {
             "en": "This release ships no notes.",
             "pt-BR": "Esta versão não tem notas.",
             "es-419": "Esta versión no trae notas.",
             "ja-jp": "このリリースにはリリースノートは含まれていません。",
-            "cn-zh": "此版本不附带任何说明。 "
+            "cn-zh": "此版本不附带任何说明。 ",
+            "fr-fr": "Cete version vient sans notes"
         },
         "update.install": {
             "en": "Install",
             "pt-BR": "Instalar",
             "es-419": "Instalar",
             "ja-jp": "インストール",
-            "cn-zh": "安装 "
+            "cn-zh": "安装 ",
+            "fr-fr": "Installer"
         },
         "update.not_now": {
             "en": "Not now",
             "pt-BR": "Agora não",
             "es-419": "Ahora no",
             "ja-jp": "今じゃない",
-            "cn-zh": "现在略过"
+            "cn-zh": "现在略过",
+            "fr-fr": "Pas maintenant"
         },
         "update.skip": {
             "en": "Skip {0}",
             "pt-BR": "Pular {0}",
             "es-419": "Omitir {0}",
             "ja-jp": "{0}をスキップ",
-            "cn-zh": "跳过 {0}"
+            "cn-zh": "跳过 {0}",
+            "fr-fr": "Passer {0}"
         },
         "update.retry": {
             "en": "Retry",
             "pt-BR": "Tentar de novo",
             "es-419": "Reintentar",
             "ja-jp": "リトライ",
-            "cn-zh": "重试"
+            "cn-zh": "重试",
+            "fr-fr": "Réessayer"
         },
         "update.releases_page": {
             "en": "Releases page",
             "pt-BR": "Página de versões",
             "es-419": "Página de versiones",
             "ja-jp": "リリース・ページ",
-            "cn-zh": "发布页面"
+            "cn-zh": "发布页面",
+            "fr-fr": "Page des releases
         },
         "update.restarting": {
             "en": "restarting",
@@ -180,98 +204,117 @@
             "pt-BR": "O jogo vai reabrir em instantes",
             "es-419": "El juego se volverá a abrir en un momento",
             "ja-jp": "まもなくゲームが再開されます",
-            "cn-zh": "游戏正在重新启动"
+            "cn-zh": "游戏正在重新启动",
+            "fr-fr": "Le jeu va se rouvrir dans un instant"
         },
 
         "widescreen.aspect": {
             "en": "Aspect ratio",
             "pt-BR": "Proporção de tela",
-            "es-419": "Relación de aspecto"
+            "es-419": "Relación de aspecto",
+            "fr-fr": "Ratio d'écran"
         },
         "widescreen.original": {
             "en": "Original",
             "pt-BR": "Original",
-            "es-419": "Original"
+            "es-419": "Original",
+            "fr-fr": "Original"
         },
         "widescreen.custom": {
             "en": "Custom",
             "pt-BR": "Personalizada",
-            "es-419": "Personalizado"
+            "es-419": "Personalizado",
+            "fr-fr": "Personnalisé"
         },
         "render.draw_distance": {
             "en": "Draw distance",
             "pt-BR": "Distancia de desenho",
-            "es-419": "Distancia de dibujado"
+            "es-419": "Distancia de dibujado",
+            "fr-fr": "Distance d'affichage"
         },
         "render.draw_distance_hint": {
             "en": "Increases the terrain view distance",
             "pt-BR": "Aumenta a distancia de visao do terreno",
-            "es-419": "Aumenta la distancia de vision del terreno"
+            "es-419": "Aumenta la distancia de vision del terreno",
+            "fr-fr": "Augmente la distance d'affichage"
         },
         "render.better_terrain": {
             "en": "Better rendering",
             "pt-BR": "Melhor renderizacao",
-            "es-419": "Mejor renderizado"
+            "es-419": "Mejor renderizado",
+            "fr-fr": "Meilleur rendu"
         },
         "render.better_terrain_hint": {
             "en": "Uses smooth terrain rendering with floating point precision and depth buffering.",
             "pt-BR": "Usa renderizacao suave do terreno com precisao em ponto flutuante e buffer de profundidade.",
-            "es-419": "Usa renderizado suave del terreno con precision de punto flotante y buffer de profundidad."
+            "es-419": "Usa renderizado suave del terreno con precision de punto flotante y buffer de profundidad.",
+            "fr-fr": "Améliore le rendu du terrain en utilisant un rendu à virgule flottante."
         },
         "menu.misc": {
             "en": "Misc",
             "pt-BR": "Diversos",
-            "es-419": "Varios"
+            "es-419": "Varios",
+            "fr-fr": "Divers"
         },
         "panel.qol": {
             "en": "Quality of Life",
             "pt-BR": "Qualidade de vida",
-            "es-419": "Calidad de vida"
+            "es-419": "Calidad de vida",
+            "fr-fr": "Options de confort"
         },
         "qol.camera": {
             "en": "Camera",
             "pt-BR": "Câmera",
-            "es-419": "Cámara"
+            "es-419": "Cámara",
+            "fr-fr": "Caméra"
         },
         "qol.camera_control": {
             "en": "Right stick camera",
             "pt-BR": "Câmera no analógico direito",
-            "es-419": "Cámara con el stick derecho"
+            "es-419": "Cámara con el stick derecho",
+            "fr-fr": "Caméra sur le stick droit"
         },
         "qol.camera_control.hint": {
             "en": "Orbit the camera around Dan with the right analog stick.",
             "pt-BR": "Gira a câmera em volta do Dan com o analógico direito.",
-            "es-419": "Gira la cámara alrededor de Dan con el stick derecho."
+            "es-419": "Gira la cámara alrededor de Dan con el stick derecho.",
+            "fr-fr": "Permet de faire tourner la caméra autour de Daniel avec le stick droit."
         },
         "qol.camera_recenter": {
             "en": "Auto recenter",
             "pt-BR": "Recentralizar automaticamente",
-            "es-419": "Recentrar automáticamente"
+            "es-419": "Recentrar automáticamente",
+            "fr-fr": "Recentrer automatiquement"
         },
         "qol.camera_recenter.hint": {
             "en": "After walking for a moment without touching the right stick the camera goes back to its normal position.",
             "pt-BR": "Depois de andar um pouco sem tocar no analógico direito a câmera volta para a posição normal.",
-            "es-419": "Tras caminhar un momento sin tocar el stick derecho la cámara vuelve a su posición normal."
+            "es-419": "Tras caminhar un momento sin tocar el stick derecho la cámara vuelve a su posición normal.",
+            "fr-fr": "La caméra retourne automatiquement à sa position normale après avoir marché un moment sans toucher le stick droit."
         },
         "qol.invert_camera_x": {
             "en": "Invert horizontal",
             "pt-BR": "Inverter horizontal",
-            "es-419": "Invertir horizontal"
+            "es-419": "Invertir horizontal",
+            "fr-fr": "Inversion horizontale"
         },
         "qol.invert_camera_x.hint": {
             "en": "Reverses left and right on the right stick.",
             "pt-BR": "Inverte esquerda e direita no analógico direito.",
-            "es-419": "Invierte izquierda y derecha en el stick derecho."
+            "es-419": "Invierte izquierda y derecha en el stick derecho.",
+            "fr-fr": "Inverse la gauche et la droite sur le stick droit."
         },
         "qol.invert_camera_y": {
             "en": "Invert vertical",
             "pt-BR": "Inverter vertical",
-            "es-419": "Invertir vertical"
+            "es-419": "Invertir vertical",
+            "fr-fr": "Inversion verticale"
         },
         "qol.invert_camera_y.hint": {
             "en": "Reverses up and down on the right stick.",
             "pt-BR": "Inverte cima e baixo no analógico direito.",
-            "es-419": "Invierte arriba y abajo en el stick derecho."
+            "es-419": "Invierte arriba y abajo en el stick derecho.",
+            "fr-fr": "Inverse le haut et le bas sur le stick droit."
         }
     }
 }

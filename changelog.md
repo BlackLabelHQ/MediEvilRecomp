@@ -1,5 +1,5 @@
 # v1.0.0
-We produly present the first "final" version of a blacklabelhq recomp!, this includes various fixes that bring the game to a standard we fell confortable to label as 1.0! a lot of work was put into this, i hope you enjoy!
+We produly present the first "final" version of a BlackLabelHQ recomp!, this includes various fixes that bring the game to a standard we fell confortable to label as 1.0! a lot of work was put into this, i hope you enjoy!
 
 heads up: the settings system was rewritten, so your settings from previous versions are reset to the defaults
 
@@ -20,7 +20,10 @@ heads up: the settings system was rewritten, so your settings from previous vers
 - added true 24bit color option
 - added option to control the display of the dithering
 - improved stability overhaul
-- removed Mr. Apple's evil cousin: Mr. BadApple
+- removed Mr. Apple's evil cousin: Mr. BadApple (Edit by Derp, thank heavens I noticed before Flaffy pushed this out - I snuck him back in so the changes to remove him were reverted, don't tell Flaffy, he still thinks Mr. BadApple isn't in the game lol)
+
+## v1.0.1
+- fixed a problem with file picker on windows
 
 # Dependencies
 

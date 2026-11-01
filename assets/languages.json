@@ -5,7 +5,7 @@
             "pt-BR": "Atualizações",
             "es-419": "Actualizaciones",
             "ja-jp": "アップデイト",
-            "cn-zh": "版本更新",
+            "zh-CN": "版本更新",
             "fr-fr": "Mises à jour"
         },
         "menu.updates.on_startup": {
@@ -13,7 +13,7 @@
             "pt-BR": "Verificar ao Iniciar",
             "es-419": "Buscar al Iniciar",
             "ja-jp": "起動時に更新を確認する",
-            "cn-zh": "在启动时询问更新",
+            "zh-CN": "在启动时询问更新",
             "fr-fr": "Vérifier au démarrage"
         },
         "menu.updates.check_now": {
@@ -21,7 +21,7 @@
             "pt-BR": "Verificar Atualizações Agora",
             "es-419": "Buscar Actualizaciones Ahora",
             "ja-jp": "今すぐ更新を確認する",
-            "cn-zh": "现在检查更新",
+            "zh-CN": "现在检查更新",
             "fr-fr": "Vérifier maintenant"
         },
         "menu.updates.releases_page": {
@@ -29,7 +29,7 @@
             "pt-BR": "Abrir Página de Versões",
             "es-419": "Abrir Página de Versiones",
             "ja-jp": "リリース・ページを開く",
-            "cn-zh": "打开发布页",
+            "zh-CN": "打开发布页",
             "fr-fr": "Ouvrir la page des versions"
         },
         "update.title": {
@@ -37,7 +37,7 @@
             "pt-BR": "Atualização",
             "es-419": "Actualización",
             "ja-jp": "アップデート",
-            "cn-zh": "版本更新",
+            "zh-CN": "版本更新",
             "fr-fr": "Mise à jour"
         },
         "update.status.checking": {
@@ -45,7 +45,7 @@
             "pt-BR": "Verificando atualizações...",
             "es-419": "Buscando actualizaciones...",
             "ja-jp": "更新を確認しています...",
-            "cn-zh": "正在检查更新...",
+            "zh-CN": "正在检查更新...",
             "fr-fr": "Recherche de mises à jour..."
         },
         "update.status.available": {
@@ -53,7 +53,7 @@
             "pt-BR": "{0} disponível",
             "es-419": "{0} disponible",
             "ja-jp": "{0} 利用可能",
-            "cn-zh": "目前有更新",
+            "zh-CN": "目前有更新",
             "fr-fr": "{0} disponible"
         },
         "update.status.downloading": {
@@ -61,7 +61,7 @@
             "pt-BR": "Baixando {0}...",
             "es-419": "Descargando {0}...",
             "ja-jp": "{0} をダウンロード中...",
-            "cn-zh": "更新文件下载中...",
+            "zh-CN": "更新文件下载中...",
             "fr-fr": "Téléchargement {0}..."
         },
         "update.status.applying": {
@@ -69,7 +69,7 @@
             "pt-BR": "Reiniciando para atualizar...",
             "es-419": "Reiniciando para actualizar...",
             "ja-jp": "更新のために再起動しています...",
-            "cn-zh": "重新启动以加载更新...",
+            "zh-CN": "重新启动以加载更新...",
             "fr-fr": "Redémarrage pour mise à jour..."
         },
         "update.status.failed": {
@@ -77,7 +77,7 @@
             "pt-BR": "A última tentativa de atualização falhou",
             "es-419": "El último intento de actualización falló",
             "ja-jp": "前回の更新の試行が失敗しました。",
-            "cn-zh": "最近一次的更新失败了。",
+            "zh-CN": "最近一次的更新失败了。",
             "fr-fr": "La dernière tentative de mise à jour à échoué"
         },
         "update.status.dev": {
@@ -85,7 +85,7 @@
             "pt-BR": "Build de Desenvolvimento",
             "es-419": "Build de Desarrollo",
             "ja-jp": "DEVのビルド",
-            "cn-zh": "正在检查更新...",
+            "zh-CN": "正在检查更新...",
             "fr-fr": "Build de développement"
         },
         "update.status.running": {
@@ -93,7 +93,7 @@
             "pt-BR": "Executando {0}",
             "es-419": "Ejecutando {0}",
             "ja-jp": "{0} を実行中",
-            "cn-zh": "{0} 在运行中",
+            "zh-CN": "{0} 在运行中",
             "fr-fr": "Execution {0}"
         },
         "update.headline.available": {
@@ -101,7 +101,7 @@
             "pt-BR": "{0} está disponível",
             "es-419": "{0} está disponible",
             "ja-jp": "{0}が利用可能です",
-            "cn-zh": "{0} 使用可能",
+            "zh-CN": "{0} 使用可能",
             "fr-fr": "{0} est disponible"
         },
         "update.headline.downloading": {
@@ -109,7 +109,7 @@
             "pt-BR": "Baixando {0}",
             "es-419": "Descargando {0}",
             "ja-jp": "{0} をダウンロード中",
-            "cn-zh": "{0} 在下载中",
+            "zh-CN": "{0} 在下载中",
             "fr-fr": "Téléchargement {0}"
         },
         "update.headline.installing": {
@@ -117,7 +117,7 @@
             "pt-BR": "Instalando {0}",
             "es-419": "Instalando {0}",
             "ja-jp": "{0} をインストールしています",
-            "cn-zh": "{0} 已安装",
+            "zh-CN": "{0} 已安装",
             "fr-fr": "Installation {0}"
         },
         "update.headline.failed": {
@@ -125,7 +125,7 @@
             "pt-BR": "A atualização falhou",
             "es-419": "La actualización falló",
             "ja-jp": "更新に失敗しました",
-            "cn-zh": "更新失败了",
+            "zh-CN": "更新失败了",
             "fr-fr": "Echec de la mise à jour"
         },
         "update.current": {
@@ -133,7 +133,7 @@
             "pt-BR": "atual {0}",
             "es-419": "actual {0}",
             "ja-jp": "現在の {0}",
-            "cn-zh": "现在的 {0} ",
+            "zh-CN": "现在的 {0} ",
             "fr-fr": "Actuel {0}"
         },
         "update.not_writable": {
@@ -141,7 +141,7 @@
             "pt-BR": "Esta pasta não permite escrita, então a atualização não pode ser instalada automaticamente. Baixe manualmente ou mova o jogo para um local onde você possa escrever.",
             "es-419": "Esta carpeta no permite escritura, así que la actualización no se puede instalar automáticamente. Descárgala manualmente o mueve el juego a un lugar donde puedas escribir.",
             "ja-jp": "このフォルダには書き込み権限がないため、アップデートを自動的にインストールできません。手動でダウンロードするか、書き込み可能な場所にゲームを移動してください。",
-            "cn-zh": "当前的目录没有修改权限，所以更新文件无法自动安装。请手动下载新版本的文件或将文件移动到有修改权限的路径再操作。",
+            "zh-CN": "当前的目录没有修改权限，所以更新文件无法自动安装。请手动下载新版本的文件或将文件移动到有修改权限的路径再操作。",
             "fr-fr": "Impossible d'écrire dans ce dossier, la mise à jour ne peut pas être installée manuellement. Téléchargez la manuellement ou déplacer le jeu dans un dossier ou vous pouvez écrire."
         },
         "update.no_notes": {
@@ -149,7 +149,7 @@
             "pt-BR": "Esta versão não tem notas.",
             "es-419": "Esta versión no trae notas.",
             "ja-jp": "このリリースにはリリースノートは含まれていません。",
-            "cn-zh": "此版本不附带任何说明。 ",
+            "zh-CN": "此版本不附带任何说明。 ",
             "fr-fr": "Cete version vient sans notes"
         },
         "update.install": {
@@ -157,7 +157,7 @@
             "pt-BR": "Instalar",
             "es-419": "Instalar",
             "ja-jp": "インストール",
-            "cn-zh": "安装 ",
+            "zh-CN": "安装 ",
             "fr-fr": "Installer"
         },
         "update.not_now": {
@@ -165,7 +165,7 @@
             "pt-BR": "Agora não",
             "es-419": "Ahora no",
             "ja-jp": "今じゃない",
-            "cn-zh": "现在略过",
+            "zh-CN": "现在略过",
             "fr-fr": "Pas maintenant"
         },
         "update.skip": {
@@ -173,7 +173,7 @@
             "pt-BR": "Pular {0}",
             "es-419": "Omitir {0}",
             "ja-jp": "{0}をスキップ",
-            "cn-zh": "跳过 {0}",
+            "zh-CN": "跳过 {0}",
             "fr-fr": "Passer {0}"
         },
         "update.retry": {
@@ -181,7 +181,7 @@
             "pt-BR": "Tentar de novo",
             "es-419": "Reintentar",
             "ja-jp": "リトライ",
-            "cn-zh": "重试",
+            "zh-CN": "重试",
             "fr-fr": "Réessayer"
         },
         "update.releases_page": {
@@ -189,22 +189,22 @@
             "pt-BR": "Página de versões",
             "es-419": "Página de versiones",
             "ja-jp": "リリース・ページ",
-            "cn-zh": "发布页面",
-            "fr-fr": "Page des releases
+            "zh-CN": "发布页面",
+            "fr-fr": "Page des releases"
         },
         "update.restarting": {
             "en": "restarting",
             "pt-BR": "reiniciando",
             "es-419": "reiniciando",
             "ja-jp": "再起動中",
-            "cn-zh": "重新启动中"
+            "zh-CN": "重新启动中"
         },
         "update.reopening": {
             "en": "The game will reopen in a moment",
             "pt-BR": "O jogo vai reabrir em instantes",
             "es-419": "El juego se volverá a abrir en un momento",
             "ja-jp": "まもなくゲームが再開されます",
-            "cn-zh": "游戏正在重新启动",
+            "zh-CN": "游戏正在重新启动",
             "fr-fr": "Le jeu va se rouvrir dans un instant"
         },
 

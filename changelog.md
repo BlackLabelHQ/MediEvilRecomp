@@ -34,7 +34,7 @@ heads up: the settings system was rewritten, so your settings from previous vers
 ## v1.0.3
 - fixed a problem with audio replace handling
 - fixed a problem with vram gpu write bbox count being wrong which causes the asset pack to get some textures incorrectly
-- added option to disable camera colision
+- added option to disable camera colision on orbital camera
 
 # Dependencies
 

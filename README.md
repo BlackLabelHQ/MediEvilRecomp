@@ -26,8 +26,6 @@ You can join our Discord or open an issue on this GitHub! Again, you'll join the
 
 # Special Notes Section
 
-This version is currently in BETA stages. You may experience disastrous game breaking bugs! Every effort has been done so that this will not happen but you should be warned regardless. Stable version 1.0 has YET to be released!
-
 The goal of this project is to help bring the game to modern computers without some of the limitations of older consoles. This was accomplished through both recompilation means and some decompilation efforts.
 
 # Instructions To Build From Source

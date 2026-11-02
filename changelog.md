@@ -25,6 +25,12 @@ heads up: the settings system was rewritten, so your settings from previous vers
 ## v1.0.1
 - fixed a problem with file picker on windows
 
+## v1.0.2
+- fixed a problem with file picker on wayland caused by the fix for windows (bruh)
+- added autohide for top bar
+- added autohide mouse after 5 seconds
+- fixed a problem where when entering a level with FMV the asset pack would not properly load
+
 # Dependencies
 
 You're required to install [dotnet 10 runtime](https://dotnet.microsoft.com/pt-br/download/dotnet/10.0) to run the recomp, otherwise the game will not open, ideally also make sure to install [OpenAL](https://www.openal.org/downloads/), as of the current version no further dependencies are required

@@ -3,6 +3,7 @@
 
 
 The MediEvil Recomp is proudly brought to you by the BlackLabelHQ team!
+
 This recomp is currently markes as "Final" it doesnt mean it wont have updates, it just means that all the core functionalities are considered "finished".
 
 # Please Read This

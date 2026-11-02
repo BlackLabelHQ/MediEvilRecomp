@@ -138,7 +138,7 @@ public static class CameraControlPatch
     {
         var full = Distance(ox, oy, oz);
         var target = 1f;
-        if (full >= 1f && !Trace(c, m, fx, fy, fz, gx, gy, gz, out _))
+        if (!QualityOfLife.NoCameraCollision && full >= 1f && !Trace(c, m, fx, fy, fz, gx, gy, gz, out _))
         {
             if (Trace(c, m, fx, fy, fz, ox, oy, oz, out var reach))
                 target = Math.Clamp(reach - WallMargin, MathF.Min(MinDistance, full), full) / full;

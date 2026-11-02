@@ -315,6 +315,11 @@
             "pt-BR": "Inverte cima e baixo no analógico direito.",
             "es-419": "Invierte arriba y abajo en el stick derecho.",
             "fr-fr": "Inverse le haut et le bas sur le stick droit."
+        },
+        "qol.no_camera_collision": {
+            "en": "Disable camera collision",
+            "pt-BR": "Desativar colisão da câmera",
+            "es-419": "Desactivar colisión de la cámara"
         }
     }
 }

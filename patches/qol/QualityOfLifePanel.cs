@@ -29,6 +29,7 @@ public sealed class QualityOfLifePanel : IPanel
         Toggle(QualityOfLifeOptions.CameraRecenter, "qol.camera_recenter");
         Toggle(QualityOfLifeOptions.InvertCameraX, "qol.invert_camera_x");
         Toggle(QualityOfLifeOptions.InvertCameraY, "qol.invert_camera_y");
+        SettingsWidgets.Toggle(QualityOfLifeOptions.NoCameraCollision, "qol.no_camera_collision");
         if (!QualityOfLife.CameraControl) ImGui.EndDisabled();
 
         IsOpen = open;

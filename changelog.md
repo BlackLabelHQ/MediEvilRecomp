@@ -31,6 +31,11 @@ heads up: the settings system was rewritten, so your settings from previous vers
 - added autohide mouse after 5 seconds
 - fixed a problem where when entering a level with FMV the asset pack would not properly load
 
+## v1.0.3
+- fixed a problem with audio replace handling
+- fixed a problem with vram gpu write bbox count being wrong which causes the asset pack to get some textures incorrectly
+- added option to disable camera colision
+
 # Dependencies
 
 You're required to install [dotnet 10 runtime](https://dotnet.microsoft.com/pt-br/download/dotnet/10.0) to run the recomp, otherwise the game will not open, ideally also make sure to install [OpenAL](https://www.openal.org/downloads/), as of the current version no further dependencies are required

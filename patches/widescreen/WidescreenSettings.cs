@@ -1,6 +1,6 @@
-using ImGuiNET;
+using Hexa.NET.ImGui;
 using RecompOne.Runtime.Config;
-using RecompOne.Runtime.Host.Window;
+using RecompOne.UI;
 
 namespace Recompiled;
 
@@ -42,30 +42,28 @@ public static class WidescreenSettings
         int selected = MatchPreset(aspect);
         string label = original ? Localization.T("widescreen.original") : selected >= 0 ? _presets[selected].Label : Localization.T("widescreen.custom");
         
-        ImGui.TextUnformatted(Localization.T("widescreen.aspect"));
-        if (ImGui.BeginCombo("##aspect-preset", label))
+        string[] items = [Localization.T("widescreen.original"), .. _presets.Select(static p => p.Label), Localization.T("widescreen.custom")];
+        int index = original ? 0 : selected >= 0 ? selected + 1 : items.Length - 1;
+        
+        Ui.Text(Localization.T("widescreen.aspect"));
+        if (Ui.Combo("##aspect-preset", label, items, ref index))
         {
-            if (ImGui.Selectable(Localization.T("widescreen.original"), original)) WidescreenOptions.OriginalAspect.Value = true;
-            for (int i = 0; i < _presets.Length; i++)
-                if (ImGui.Selectable(_presets[i].Label, !original && selected == i))
-                    Apply(_presets[i].Value);
-            if (ImGui.Selectable(Localization.T("widescreen.custom"), !original && selected < 0))
-                Apply(aspect);
-            ImGui.EndCombo();
+            if (index == 0) WidescreenOptions.OriginalAspect.Value = true;
+            else Apply(index <= _presets.Length ? _presets[index - 1].Value : aspect);
         }
         
         if (original) ImGui.BeginDisabled();
         float custom = aspect;
-        if (ImGui.SliderFloat("##aspect-custom", ref custom, 1.0f, 2.5f, "%.3f : 1"))
+        if (Ui.Slider("##aspect-custom", ref custom, 1.0f, 2.5f, "%.3f : 1"))
             Apply(custom);
         if (original) ImGui.EndDisabled();
     }
 
     static void DrawRendering()
     {
-        ImGui.TextUnformatted(Localization.T("render.draw_distance"));
+        Ui.Text(Localization.T("render.draw_distance"));
         float distance = RenderOptions.DrawDistance;
-        if (ImGui.SliderFloat("##draw-distance", ref distance, 1.0f, 3.0f, "%.2fx"))
+        if (Ui.Slider("##draw-distance", ref distance, 1.0f, 3.0f, "%.2fx"))
             RenderOptions.DrawDistance.Value = distance;
         SettingsWidgets.Note("render.draw_distance_hint");
         

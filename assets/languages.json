@@ -112,7 +112,8 @@
         "qol.no_camera_collision": {
             "en": "Disable camera collision",
             "pt-BR": "Desativar colisão da câmera",
-            "es-419": "Desactivar colisión de la cámara"
+            "es-419": "Desactivar colisión de la cámara",
+            "fr-fr": "Désactiver les collisions de la caméra"
         }
     }
 }
